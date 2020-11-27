@@ -24,14 +24,14 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	public enum SuperPacmanCellType {
 		
 		NONE(0),  // never used as real content
-		WALL ( -16777216), //black
+		WALL (-16777216), //black
 		FREE_WITH_DIAMOND(-1),  //white
 		FREE_WITH_BLINKY (-65536), //red
-		FREE_WITH_PINKY ( -157237), //pink
-		FREE_WITH_INKY ( -16724737),  //cyan
+		FREE_WITH_PINKY (-157237), //pink
+		FREE_WITH_INKY (-16724737),  //cyan
 		FREE_WITH_CHERRY (-36752),  //light red
-		FREE_WITH_BONUS ( -16478723), //light blue
-		FREE_EMPTY ( -6118750); // sort of gray
+		FREE_WITH_BONUS (-16478723), //light blue
+		FREE_EMPTY (-6118750); // sort of gray
 		
 		final int type;
 		
@@ -105,9 +105,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 			return false;
 		}
 		
+
 		
 	}
-	
-
-
 }
