@@ -13,7 +13,9 @@ public class SuperPacman extends RPG {
 		return "Super Pac-Man";
 	}
 	
-	public 
+	public void update(float deltaTime) {
+		super.update(deltaTime);
+	}
 
 	
 }
