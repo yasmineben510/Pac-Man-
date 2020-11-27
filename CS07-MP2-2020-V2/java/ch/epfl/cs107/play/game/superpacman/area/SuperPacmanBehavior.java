@@ -41,12 +41,8 @@ public class SuperPacmanBehavior extends AreaBehavior{
 			// TODO Auto-generated constructor stub
 		}
 
-		public boolean canEnter() {
-			if(hasNonTraversableContent()) {
-				return true; // si la cellule contient un acteur non traversable
-			} else {
-				return false; 
-			}
+		public boolean canEnter() { // true si la cellule contient un acteur non traversable
+			return this.hasNonTraversableContent();
 		}
 
 		@Override
