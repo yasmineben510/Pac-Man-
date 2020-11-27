@@ -48,17 +48,27 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	    }
 	}
 	
+	public void registerActors(Area area) {
+		
+		for (int x = 0; x<getWidth(); ++x) {
+			for (int y =0; y<getHeight(); ++y) {
+				getCell(x, y);
+			}
+		}
+	}
+	
+	
+	
 	public class SuperPacmanCell extends AreaBehavior.Cell { 
 		
-		private SuperPacmanCellType cell;
-		
+		private SuperPacmanCellType type;
 		
 		// les murs sont des acteurs
 		// La seule chose qui peut entraver le déplacement sur la grille est un acteur
 		
-		protected SuperPacmanCell(int x, int y) {
+		protected SuperPacmanCell(int x, int y, SuperPacmanCellType type) {
 			super(x, y);
-			// TODO Auto-generated constructor stub
+			this.type=type;
 		}
 
 		public boolean canEnter() { // true si la cellule contient un acteur non traversable
@@ -98,8 +108,6 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		
 	}
 	
-	public void registerActors(Area area) {
-		
-	}
+
 
 }
