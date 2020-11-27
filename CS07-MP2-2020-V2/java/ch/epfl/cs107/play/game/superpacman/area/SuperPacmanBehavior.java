@@ -2,6 +2,8 @@ package ch.epfl.cs107.play.game.superpacman.area;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
+import ch.epfl.cs107.play.game.areagame.actor.Interactable;
+import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior.Tuto2CellType;
 import ch.epfl.cs107.play.window.Window;
 
@@ -30,16 +32,51 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		}
 	}
 	
-	public class SuperPacmanCell { 
+	public class SuperPacmanCell extends AreaBehavior.Cell { 
 		// les murs sont des acteurs
 		// La seule chose qui peut entraver le déplacement sur la grille est un acteur
 		
-		public canEnter() {
-			if() {
+		protected SuperPacmanCell(int x, int y) {
+			super(x, y);
+			// TODO Auto-generated constructor stub
+		}
+
+		public boolean canEnter() {
+			if(hasNonTraversableContent()) {
 				return true; // si la cellule contient un acteur non traversable
 			} else {
-				false; 
+				return false; 
 			}
+		}
+
+		@Override
+		public boolean isCellInteractable() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean isViewInteractable() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public void acceptInteraction(AreaInteractionVisitor v) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		protected boolean canLeave(Interactable entity) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		protected boolean canEnter(Interactable entity) {
+			// TODO Auto-generated method stub
+			return false;
 		}
 		
 		
