@@ -12,6 +12,8 @@ public class SuperPacman extends RPG {
 		// TODO Auto-generated method stub
 		return "Super Pac-Man";
 	}
+	
+	public 
 
 	
 }

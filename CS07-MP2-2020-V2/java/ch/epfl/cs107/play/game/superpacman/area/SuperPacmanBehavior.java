@@ -12,7 +12,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	}
 	
 	public enum SuperPacmanCellType{
-		bonjour
+		
 		NONE(0),  // never used as real content
 		WALL ( -16777216), //black
 		FREE_WITH_DIAMOND(-1),  //white
