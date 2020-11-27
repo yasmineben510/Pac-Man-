@@ -4,6 +4,7 @@ import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.tutos.Tuto2Behavior.Tuto2Cell;
 import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior.Tuto2CellType;
 import ch.epfl.cs107.play.window.Window;
 
@@ -11,9 +12,16 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	
 	public SuperPacmanBehavior(Window window, String name) {
 		super(window, name);
+		SuperPacmanCell cell;
+		for (int x = 0; x<getWidth(); ++x) {
+			for (int y =0; y<getHeight(); ++y) {
+				cell = new SuperPacmanCell(x,y,SuperPacmanCellType.toType(getRGB(getHeight()-1-y, x)));
+				setCell(x, y, cell);
+			}
+	  }
 	}
 	
-	public enum SuperPacmanCellType{
+	public enum SuperPacmanCellType {
 		
 		NONE(0),  // never used as real content
 		WALL (-16777216), //black
@@ -30,9 +38,21 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		SuperPacmanCellType(int type){
 			this.type = type;
 		}
+		
+		public static SuperPacmanCellType toType(int type){
+			for(SuperPacmanCellType ict : SuperPacmanCellType.values()){
+				if(ict.type == type)
+				return ict;
+			}
+			return NONE;
+	    }
 	}
 	
 	public class SuperPacmanCell extends AreaBehavior.Cell { 
+		
+		private SuperPacmanCellType cell;
+		
+		
 		// les murs sont des acteurs
 		// La seule chose qui peut entraver le déplacement sur la grille est un acteur
 		
