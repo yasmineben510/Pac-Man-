@@ -63,6 +63,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	    }
 	}
 	
+<<<<<<< Updated upstream
 	public void registerActors(Area area) {
 		SuperPacmanCellType type;
 		for (int x = 0; x<getWidth(); ++x) {
@@ -70,6 +71,18 @@ public class SuperPacmanBehavior extends AreaBehavior{
 			  if (getCellType(x,y)==SuperPacmanCellType.WALL) {
 				  
 			  }
+=======
+	public void registerActors(Area area) {  
+		
+		SuperPacmanCellType ict;
+		
+		for (int x = 0; x<getWidth(); ++x) {
+			for (int y =0; y<getHeight(); ++y) {
+				getCell(x, y);
+				if(ict.type == -16777216) {
+					
+				}
+>>>>>>> Stashed changes
 			}
 		}
 	}
