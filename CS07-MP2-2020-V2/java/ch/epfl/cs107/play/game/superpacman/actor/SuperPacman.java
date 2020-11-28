@@ -33,6 +33,8 @@ public class SuperPacman extends RPG {
 
 	}
 
+	/// SuperPacman implements playable
+	
 	@Override
 	public boolean begin(Window window, FileSystem fileSystem) {
 
@@ -42,7 +44,7 @@ public class SuperPacman extends RPG {
 			createAreas();
 			areaIndex = 0;
 			Area area = setCurrentArea(areas[areaIndex], true);
-			player = new SuperPacmanPlayer(area, Orientation.RIGHT, startingPositions[areaIndex]);
+			player = new SuperPacmanPlayer(area, Orientation.RIGHT, startingPositions[areaIndex],"superpacman/bonus");
 			area.registerActor(player);
 			area.setViewCandidate(player);
 			return true;
@@ -67,8 +69,6 @@ public class SuperPacman extends RPG {
 
 		player.strengthen();
 	}
-
-
 	
 	// Returns the title of the game
 	

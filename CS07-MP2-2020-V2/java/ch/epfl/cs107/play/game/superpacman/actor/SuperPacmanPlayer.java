@@ -22,7 +22,6 @@ public class SuperPacmanPlayer extends Player{
 	
 	private float hp;
 	private TextGraphics message;
-	private SuperPacman Superpacman;
 	private Sprite sprite;
 	/// Animation duration in frame number
     private final static int ANIMATION_DURATION = 8;
@@ -32,13 +31,13 @@ public class SuperPacmanPlayer extends Player{
 	 * 
 	 */
     
-	public SuperPacmanPlayer(Area owner, Orientation orientation, DiscreteCoordinates coordinates) {
+	public SuperPacmanPlayer(Area owner, Orientation orientation, DiscreteCoordinates coordinates, String spriteName) {
 		super(owner, orientation, coordinates);
 		this.hp = 10;
 		message = new TextGraphics(Integer.toString((int)hp), 0.4f, Color.BLUE);
 		message.setParent(this);
 		message.setAnchor(new Vector(-0.3f, 0.1f));
-		sprite = new Sprite("Superpacman/bonus", 1.f, 1.f,this);
+		sprite = new Sprite(spriteName, 1.f, 1.f,this);
 
 		resetMotion();
 	}
