@@ -6,6 +6,8 @@ import java.awt.GraphicsEnvironment;
 import ch.epfl.cs107.play.game.Game;
 import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
+import ch.epfl.cs107.play.game.superpacman.actor.SuperPacman;
+import ch.epfl.cs107.play.game.superpacman.actor.SuperPacmanPlayer;
 import ch.epfl.cs107.play.game.tutos.Tuto2;
 import ch.epfl.cs107.play.game.tutos.Tuto1;
 
@@ -40,7 +42,7 @@ public class Play {
        
         //final Game game = new SuperPacman();
 
-		final AreaGame game = new Tuto2();
+		final AreaGame game = new SuperPacman();
 		
 		
 		// Use Swing display

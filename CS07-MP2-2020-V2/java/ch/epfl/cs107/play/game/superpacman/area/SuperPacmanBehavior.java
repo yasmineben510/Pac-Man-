@@ -77,7 +77,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	}
 	
 	/**
-	 * Contruct the neighborhood of an actor
+	 * Construct the neighborhood of an actor
 	 * Indicate if it contains an actor of the same type in his neighborhood
 	 * @param x (int): x-coordinate of this cell
      * @param y (int): y-coordinate of this cell
