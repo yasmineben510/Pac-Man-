@@ -63,7 +63,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	    }
 	}
 	
-<<<<<<< Updated upstream
+
 	public void registerActors(Area area) {
 		SuperPacmanCellType type;
 		for (int x = 0; x<getWidth(); ++x) {
@@ -71,18 +71,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 			  if (getCellType(x,y)==SuperPacmanCellType.WALL) {
 				  
 			  }
-=======
-	public void registerActors(Area area) {  
-		
-		SuperPacmanCellType ict;
-		
-		for (int x = 0; x<getWidth(); ++x) {
-			for (int y =0; y<getHeight(); ++y) {
-				getCell(x, y);
-				if(ict.type == -16777216) {
-					
-				}
->>>>>>> Stashed changes
+
 			}
 		}
 	}
@@ -100,10 +89,18 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		
 		DiscreteCoordinates cellPosition = new DiscreteCoordinates(x, y);
 
-		List<DiscreteCoordinates> neighbors = cellPosition.getNeighbours();
-		if (getCellType() == SuperPacmanCellType.WALL) {
-		     //cells near the position x, y (true = a wall, false = not a wall) (default : false)
-		    
+		List<DiscreteCoordinates> neighborPosition = cellPosition.getNeighbours();
+		if (getCellType(neighborPosition.get(0).x,neighborPosition.get(0).y) == SuperPacmanCellType.WALL) {
+		     neighborhood[1][0]=true;
+		}
+		if (getCellType(neighborPosition.get(1).x,neighborPosition.get(0).y) == SuperPacmanCellType.WALL) {
+		     neighborhood[0][1]=true;
+		}
+		if (getCellType(neighborPosition.get(2).x,neighborPosition.get(0).y) == SuperPacmanCellType.WALL) {
+		     neighborhood[1][2]=true;
+		}
+		if (getCellType(neighborPosition.get(3).x,neighborPosition.get(0).y) == SuperPacmanCellType.WALL) {
+		     neighborhood[2][1]=true;
 		}
 		return neighborhood;
 	}
