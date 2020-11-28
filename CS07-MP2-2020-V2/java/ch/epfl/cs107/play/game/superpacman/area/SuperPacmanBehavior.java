@@ -49,10 +49,10 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	}
 	
 	public void registerActors(Area area) {
-		
+		SuperPacmanCellType type;
 		for (int x = 0; x<getWidth(); ++x) {
 			for (int y =0; y<getHeight(); ++y) {
-				getCell(x, y);
+			   type = SuperPacmanCellType.toType(getRGB(getHeight()-1-y, x));
 			}
 		}
 	}
@@ -63,16 +63,21 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		
 		private SuperPacmanCellType type;
 		
-		// les murs sont des acteurs
-		// La seule chose qui peut entraver le déplacement sur la grille est un acteur
-		
+		/**
+		 *  Constructor for SuperPacmanCell
+		 *  @param x (int) : x coordinate of the cell
+		 *  @param y (int) : y coordinate of the cell
+		 *  @param type (SuperPacmanCellType): the enum type of the cell
+		*/
 		protected SuperPacmanCell(int x, int y, SuperPacmanCellType type) {
 			super(x, y);
 			this.type=type;
 		}
+        
 
-		public boolean canEnter() { // true si la cellule contient un acteur non traversable
-			return this.hasNonTraversableContent();
+		@Override
+		public boolean canEnter(Interactable entity) { 
+			return !this.hasNonTraversableContent();
 		}
 
 		@Override
@@ -99,11 +104,6 @@ public class SuperPacmanBehavior extends AreaBehavior{
 			return false;
 		}
 
-		@Override
-		protected boolean canEnter(Interactable entity) {
-			// TODO Auto-generated method stub
-			return false;
-		}
 		
 
 		
