@@ -1,15 +1,23 @@
 package ch.epfl.cs107.play.game.superpacman.area;
 
+import java.util.List;
+
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.tutos.Tuto2Behavior.Tuto2Cell;
 import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior.Tuto2CellType;
+import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 
 public class SuperPacmanBehavior extends AreaBehavior{
 	
+	/**
+	 * Default SuperPacmanBehavior Constructor  
+	 * @param window (Window): graphic context, not null
+	 * @param name (String): name of the behavior image, not null
+	 */
 	public SuperPacmanBehavior(Window window, String name) {
 		super(window, name);
 		SuperPacmanCell cell;
@@ -21,6 +29,10 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	  }
 	}
 	
+	/**
+	 * Enum type SuperPacmanCellType
+	 * Associate to each cell of the area its type depending on its color
+	 */
 	public enum SuperPacmanCellType {
 		
 		NONE(0),  // never used as real content
@@ -34,7 +46,10 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		FREE_EMPTY (-6118750); // sort of gray
 		
 		final int type;
-		
+		/**
+		 * Default constructor for the enum type SuperPacmanCellType
+		 * @param type (int) the RGB color of the cell that will be associated to a SuperPacmanCellType
+		 */
 		SuperPacmanCellType(int type){
 			this.type = type;
 		}
@@ -52,13 +67,51 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		SuperPacmanCellType type;
 		for (int x = 0; x<getWidth(); ++x) {
 			for (int y =0; y<getHeight(); ++y) {
-			   type = SuperPacmanCellType.toType(getRGB(getHeight()-1-y, x));
+			  if (getCellType(x,y)==SuperPacmanCellType.WALL) {
+				  
+			  }
 			}
 		}
 	}
 	
+	/**
+	 * Contruct the neighborhood of an actor
+	 * Indicate if it contains an actor of the same type in his neighborhood
+	 * @param x (int): x-coordinate of this cell
+     * @param y (int): y-coordinate of this cell
+	 * @return (boolean[][]): matrix 3x3 
+	 */
+	private boolean[][] neighborhood(int x, int y){
+	    
+		boolean[] [] neighborhood = new boolean[3] [3];
+		
+		DiscreteCoordinates cellPosition = new DiscreteCoordinates(x, y);
+
+		List<DiscreteCoordinates> neighbors = cellPosition.getNeighbours();
+		if (getCellType() == SuperPacmanCellType.WALL) {
+		     //cells near the position x, y (true = a wall, false = not a wall) (default : false)
+		    
+		}
+		return neighborhood;
+	}
+		
 	
 	
+	
+	/**
+	 * Getter for the type of a SuperPacmanCell cell
+	 * @param x (int): x-coordinate of this cell
+     * @param y (int): y-coordinate of this cell
+	 * @return (SuperPacmanCellType ): The type of the SuperPacmanCell cell
+	 */
+	private SuperPacmanCellType getCellType(int x, int y) {
+		return ((SuperPacmanCell)getCell(x,y)).type;
+	}
+	
+	/**
+	 * Class SuperPacmanCell extends AreaBehavior.Cell
+	 * Instance for the SuperPacmanCellType of the SuperPacmanBehavior
+	 */
 	public class SuperPacmanCell extends AreaBehavior.Cell { 
 		
 		private SuperPacmanCellType type;
