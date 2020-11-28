@@ -6,6 +6,7 @@ import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.superpacman.actor.Wall;
 import ch.epfl.cs107.play.game.tutos.Tuto2Behavior.Tuto2Cell;
 import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior.Tuto2CellType;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -63,25 +64,29 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	    }
 	}
 	
-
-	public void registerActors(Area area) {
-		SuperPacmanCellType type;
+    /**
+	 * Register an actor depending on the SuperPacmanCell cell's type in the area
+     * @param area (Area) : the area in which the actor will be registered
+     */
+	protected void registerActors(Area area) {
+		boolean[][] neighborhood;
 		for (int x = 0; x<getWidth(); ++x) {
 			for (int y =0; y<getHeight(); ++y) {
 			  if (getCellType(x,y)==SuperPacmanCellType.WALL) {
-				  
+				  DiscreteCoordinates position = new DiscreteCoordinates(x, y);
+				  neighborhood = getNeighborhood(x, y);
+				  area.registerActor(new Wall(area,position,neighborhood));
 			  }
-
-			}
+		   }
 		}
 	}
 	
 	/**
-	 * Construct the neighborhood of an actor
-	 * Indicate if it contains an actor of the same type in his neighborhood
+	 * Construct the neighborhood of an actor WALL
+	 * Indicate if it contains an actor of the type WALL in his neighborhood
 	 * @param x (int): x-coordinate of this cell
      * @param y (int): y-coordinate of this cell
-	 * @return (boolean[][]): matrix 3x3 
+	 * @return (boolean[][]): matrix 3x3, false by default
 	 */
 	private boolean[][] getNeighborhood(int x, int y){
 	    
@@ -167,9 +172,6 @@ public class SuperPacmanBehavior extends AreaBehavior{
 			// TODO Auto-generated method stub
 			return false;
 		}
-
-		
-
 		
 	}
 }
