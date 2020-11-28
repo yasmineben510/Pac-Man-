@@ -9,7 +9,6 @@ public class SuperPacman extends RPG {
 	
 	@Override
 	public String getTitle() {
-		// TODO Auto-generated method stub
 		return "Super Pac-Man";
 	}
 	

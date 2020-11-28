@@ -83,9 +83,10 @@ public class SuperPacmanBehavior extends AreaBehavior{
      * @param y (int): y-coordinate of this cell
 	 * @return (boolean[][]): matrix 3x3 
 	 */
-	private boolean[][] neighborhood(int x, int y){
+	private boolean[][] getNeighborhood(int x, int y){
 	    
 		boolean[] [] neighborhood = new boolean[3] [3];
+		neighborhood [1][1]=true;
 		
 		DiscreteCoordinates cellPosition = new DiscreteCoordinates(x, y);
 
