@@ -3,6 +3,9 @@ package ch.epfl.cs107.play.game.superpacman.actor;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.rpg.RPG;
+import ch.epfl.cs107.play.game.superpacman.area.Level0;
+import ch.epfl.cs107.play.game.superpacman.area.Level1;
+import ch.epfl.cs107.play.game.superpacman.area.Level2;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.game.tutosSolution.actor.GhostPlayer;
 import ch.epfl.cs107.play.game.tutosSolution.area.tuto2.Ferme;
@@ -10,6 +13,7 @@ import ch.epfl.cs107.play.game.tutosSolution.area.tuto2.Village;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
+
 
 public class SuperPacman extends RPG {
 	
@@ -28,8 +32,10 @@ public class SuperPacman extends RPG {
 	 */
 	private void createAreas(){
 
-		addArea(new Ferme());
-		addArea(new Village());
+		addArea(new Level0());
+		addArea(new Level1());
+		addArea(new Level2());
+
 
 	}
 
@@ -44,7 +50,7 @@ public class SuperPacman extends RPG {
 			createAreas();
 			areaIndex = 0;
 			Area area = setCurrentArea(areas[areaIndex], true);
-			player = new SuperPacmanPlayer(area, Orientation.RIGHT, startingPositions[areaIndex],"superpacman/bonus");
+			player = new SuperPacmanPlayer(area, Orientation.RIGHT, area.getPlayerSpawnPosition(),"superpacman/bonus");
 			area.registerActor(player);
 			area.setViewCandidate(player);
 			return true;

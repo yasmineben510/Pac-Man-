@@ -14,7 +14,9 @@ public abstract class SuperPacmanArea extends Area{
      * called by begin method
      * Note it set the Behavior as needed !
      */
-    protected abstract void createArea();
+    protected void createArea() {
+    	behavior.registerActors(this);
+    }
 	
     /// SuperPacmanArea extends Area
     

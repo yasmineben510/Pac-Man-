@@ -59,13 +59,11 @@ public class Tuto2Behavior extends AreaBehavior {
 
 		@Override
 		public boolean isCellInteractable() {
-			// TODO Auto-generated method stub
 			return true;
 		}
 
 		@Override
 		public boolean isViewInteractable() {
-			// TODO Auto-generated method stub
 			return false;
 		}
 

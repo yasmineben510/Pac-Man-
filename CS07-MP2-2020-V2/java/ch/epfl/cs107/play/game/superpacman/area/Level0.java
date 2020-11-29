@@ -1,5 +1,7 @@
 package ch.epfl.cs107.play.game.superpacman.area;
 
+import ch.epfl.cs107.play.game.areagame.actor.Background;
+import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 public class Level0 extends SuperPacmanArea {
@@ -11,12 +13,16 @@ public class Level0 extends SuperPacmanArea {
 		return "Superpacman/Level0";
 	}
 	
-    public static DiscreteCoordinates getPlayerSpawnPosition() {
+    @Override
+    public  DiscreteCoordinates getPlayerSpawnPosition() {
 		return PLAYER_SPAWN_POSITION;
 	}
 
 	protected void createArea() {
-		
+    	super.createArea();
+		// Base
+        registerActor(new Background(this));
+        registerActor(new Foreground(this));
 	}
 	
 	
