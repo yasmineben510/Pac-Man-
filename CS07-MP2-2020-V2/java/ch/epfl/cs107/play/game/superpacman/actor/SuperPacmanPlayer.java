@@ -24,7 +24,7 @@ public class SuperPacmanPlayer extends Player{
 	private TextGraphics message;
 	private Sprite sprite;
 	/// Animation duration in frame number
-    private final static int ANIMATION_DURATION = 8;
+    private final static int ANIMATION_DURATION = 6;
     
 	/**
 	 * Demo actor
