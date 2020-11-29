@@ -94,7 +94,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		boolean[] [] neighborhood = new boolean[3] [3];
 		neighborhood [1][1]=true;
 		
-		DiscreteCoordinates cellPosition = new DiscreteCoordinates(x, y);
+		/*DiscreteCoordinates cellPosition = new DiscreteCoordinates(x, y);
 
 		List<DiscreteCoordinates> neighborPosition = cellPosition.getNeighbours();
 		if (getCellType(neighborPosition.get(0).x,neighborPosition.get(0).y).equals(SuperPacmanCellType.WALL) ) {
@@ -108,7 +108,35 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		}
 		if (getCellType(neighborPosition.get(3).x,neighborPosition.get(3).y).equals(SuperPacmanCellType.WALL)) {
 		     neighborhood[1][2]=true;
+		}*/
+		
+		
+		if (getCellType(x-1,y).equals(SuperPacmanCellType.WALL) ) {
+		    neighborhood[0][1]=true;
 		}
+		if (getCellType(x,y+1).equals(SuperPacmanCellType.WALL)) {
+		    neighborhood[1][0]=true;
+		}
+		if (getCellType(x+1,y).equals(SuperPacmanCellType.WALL) ){
+		    neighborhood[2][1]=true;
+		}
+		if (getCellType(x,y-1).equals(SuperPacmanCellType.WALL)) {
+		    neighborhood[1][2]=true;
+		}
+		
+		if (getCellType(x-1,y+1).equals(SuperPacmanCellType.WALL)) {
+		    neighborhood[0][0]=true;
+		}
+		if (getCellType(x+1,y+1).equals(SuperPacmanCellType.WALL)) {
+		    neighborhood[2][2]=true;
+		}
+		if (getCellType(x-1,y-1).equals(SuperPacmanCellType.WALL)) {
+		    neighborhood[0][2]=true;
+		}
+		if (getCellType(x+1,y-1).equals(SuperPacmanCellType.WALL)) {
+		    neighborhood[2][2]=true;
+		}
+		
 		return neighborhood;
 	}
 		

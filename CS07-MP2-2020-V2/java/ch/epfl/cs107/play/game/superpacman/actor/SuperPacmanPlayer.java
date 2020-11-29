@@ -25,6 +25,7 @@ public class SuperPacmanPlayer extends Player{
 	private Sprite sprite;
 	/// Animation duration in frame number
     private final static int ANIMATION_DURATION = 6;
+    private Orientation desiredOrientation;
     
 	/**
 	 * Demo actor
@@ -50,27 +51,40 @@ public class SuperPacmanPlayer extends Player{
 			}
 			if (hp < 0) hp = 0.f;
 			Keyboard keyboard= getOwnerArea().getKeyboard();
-	        moveOrientate(Orientation.LEFT, keyboard.get(Keyboard.LEFT));
-	        moveOrientate(Orientation.UP, keyboard.get(Keyboard.UP));
-	        moveOrientate(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
-	        moveOrientate(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
-	            
+			if (keyboard.get(Keyboard.LEFT).isDown()) desiredOrientation = Orientation.LEFT;
+			if (keyboard.get(Keyboard.UP).isDown()) desiredOrientation = Orientation.UP;
+			if (keyboard.get(Keyboard.RIGHT).isDown()) desiredOrientation = Orientation.RIGHT;
+			if (keyboard.get(Keyboard.DOWN).isDown()) desiredOrientation = Orientation.DOWN;
+
+			if (!isDisplacementOccurs() && getOwnerArea().canEnterAreaCells(this, Collections.singletonList(getCurrentMainCellCoordinates()
+					                                                             .jump(desiredOrientation.toVector())))) {
+				orientate(desiredOrientation);
+				move(6);
+			} 
 	        super.update(deltaTime);
-	       
+	     
 	    }
 
+	 
+	 
+	 
 	    /**
 	     * Orientate or Move this player in the given orientation if the given button is down
 	     * @param orientation (Orientation): given orientation, not null
 	     * @param b (Button): button corresponding to the given orientation, not null
 	     */
-	    private void moveOrientate(Orientation orientation, Button b){
+	/*    private void moveOrientate(Orientation orientation, Button b){
 	    
 	        if(b.isDown()) {
 	            if(getOrientation() == orientation) move(ANIMATION_DURATION);
 	            else orientate(orientation);
 	        }
-	    }
+	    }*/
+	    
+	    
+	    
+	    
+	    
 	    /**
 	     * Leave an area by unregister this player
 	     */
@@ -105,7 +119,7 @@ public class SuperPacmanPlayer extends Player{
 		hp = 10;
 	}
 
-	///Ghost implements Interactable
+	///SuperPacman implements Interactable
 
 	@Override
 	public boolean takeCellSpace() {
@@ -128,23 +142,21 @@ public class SuperPacmanPlayer extends Player{
 
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
+		
 	}
 
 	@Override
 	public List<DiscreteCoordinates> getFieldOfViewCells() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean wantsCellInteraction() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean wantsViewInteraction() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

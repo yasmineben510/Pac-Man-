@@ -47,7 +47,7 @@ public abstract class RPG extends AreaGame {
     @Override
     public void update(float deltaTime) {
 
-        // Implementation of the teleport
+       // Implementation of the teleport
        if(player.isPassingADoor()){
             Door door = player.passedDoor();
             player.leaveArea();
