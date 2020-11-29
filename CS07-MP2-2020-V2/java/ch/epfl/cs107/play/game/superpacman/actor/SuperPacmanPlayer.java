@@ -56,11 +56,11 @@ public class SuperPacmanPlayer extends Player{
 			if (keyboard.get(Keyboard.RIGHT).isDown()) desiredOrientation = Orientation.RIGHT;
 			if (keyboard.get(Keyboard.DOWN).isDown()) desiredOrientation = Orientation.DOWN;
 
-			if (!isDisplacementOccurs() && getOwnerArea().canEnterAreaCells(this, Collections.singletonList(getCurrentMainCellCoordinates()
-					                                                             .jump(desiredOrientation.toVector())))) {
+			List <DiscreteCoordinates> nextCells = Collections.singletonList(getCurrentMainCellCoordinates().jump(desiredOrientation.toVector()));			
+              if (!isDisplacementOccurs() && getOwnerArea().canEnterAreaCells(this, nextCells)) {
 				orientate(desiredOrientation);
-				move(6);
 			} 
+			move(6);
 	        super.update(deltaTime);
 	     
 	    }

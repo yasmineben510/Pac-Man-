@@ -111,6 +111,8 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		}*/
 		
 		
+		//x et y de neughborhood inverses:
+		
 		if (getCellType(x-1,y).equals(SuperPacmanCellType.WALL) ) {
 		    neighborhood[0][1]=true;
 		}
@@ -128,7 +130,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		    neighborhood[0][0]=true;
 		}
 		if (getCellType(x+1,y+1).equals(SuperPacmanCellType.WALL)) {
-		    neighborhood[2][2]=true;
+		    neighborhood[2][0]=true;
 		}
 		if (getCellType(x-1,y-1).equals(SuperPacmanCellType.WALL)) {
 		    neighborhood[0][2]=true;
@@ -136,6 +138,8 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		if (getCellType(x+1,y-1).equals(SuperPacmanCellType.WALL)) {
 		    neighborhood[2][2]=true;
 		}
+		
+
 		
 		return neighborhood;
 	}
