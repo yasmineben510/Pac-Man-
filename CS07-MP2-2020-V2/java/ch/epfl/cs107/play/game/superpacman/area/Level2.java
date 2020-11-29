@@ -16,7 +16,7 @@ public class Level2 extends SuperPacmanArea {
 	}
 	
 	public String getTitle() {
-		return "Superpacman/Level2";
+		return "superpacman/Level2";
 	}
 	
     protected void createArea() {

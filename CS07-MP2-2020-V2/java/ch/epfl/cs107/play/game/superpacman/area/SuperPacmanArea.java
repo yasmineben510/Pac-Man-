@@ -3,11 +3,19 @@ package ch.epfl.cs107.play.game.superpacman.area;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior;
 import ch.epfl.cs107.play.io.FileSystem;
+import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 
 public abstract class SuperPacmanArea extends Area{
 
 	private SuperPacmanBehavior behavior;
+	
+    /**
+     * Default getter for the final DiscreteCoordinates of the sub_areas
+     * @return null
+     * Note: Needs to be override
+     */
+	 public abstract DiscreteCoordinates getPlayerSpawnPosition();
 	
 	/**
      * Create the area by adding it all actors
@@ -27,7 +35,7 @@ public abstract class SuperPacmanArea extends Area{
 
 	@Override
 	public float getCameraScaleFactor() {
-		return 15.f;
+		return 19.f;
 	}
 	
 	/// SuperPacmanArea implements playable

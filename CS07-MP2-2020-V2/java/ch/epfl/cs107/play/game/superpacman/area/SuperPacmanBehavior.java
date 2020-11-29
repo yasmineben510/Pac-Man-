@@ -2,12 +2,12 @@ package ch.epfl.cs107.play.game.superpacman.area;
 
 import java.util.List;
 
+
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.superpacman.actor.Wall;
-import ch.epfl.cs107.play.game.tutos.Tuto2Behavior.Tuto2Cell;
 import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior.Tuto2CellType;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
@@ -47,6 +47,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		FREE_EMPTY (-6118750); // sort of gray
 		
 		final int type;
+		
 		/**
 		 * Default constructor for the enum type SuperPacmanCellType
 		 * @param type (int) the RGB color of the cell that will be associated to a SuperPacmanCellType
@@ -72,7 +73,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		boolean[][] neighborhood;
 		for (int x = 0; x<getWidth(); ++x) {
 			for (int y =0; y<getHeight(); ++y) {
-			  if (getCellType(x,y)==SuperPacmanCellType.WALL) {
+			  if (getCellType(x,y).equals(SuperPacmanCellType.WALL)) {
 				  DiscreteCoordinates position = new DiscreteCoordinates(x, y);
 				  neighborhood = getNeighborhood(x, y);
 				  area.registerActor(new Wall(area,position,neighborhood));
@@ -96,17 +97,17 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		DiscreteCoordinates cellPosition = new DiscreteCoordinates(x, y);
 
 		List<DiscreteCoordinates> neighborPosition = cellPosition.getNeighbours();
-		if (getCellType(neighborPosition.get(0).x,neighborPosition.get(0).y) == SuperPacmanCellType.WALL) {
-		     neighborhood[1][0]=true;
-		}
-		if (getCellType(neighborPosition.get(1).x,neighborPosition.get(0).y) == SuperPacmanCellType.WALL) {
+		if (getCellType(neighborPosition.get(0).x,neighborPosition.get(0).y).equals(SuperPacmanCellType.WALL) ) {
 		     neighborhood[0][1]=true;
 		}
-		if (getCellType(neighborPosition.get(2).x,neighborPosition.get(0).y) == SuperPacmanCellType.WALL) {
-		     neighborhood[1][2]=true;
+		if (getCellType(neighborPosition.get(1).x,neighborPosition.get(1).y).equals(SuperPacmanCellType.WALL)) {
+		     neighborhood[1][0]=true;
 		}
-		if (getCellType(neighborPosition.get(3).x,neighborPosition.get(0).y) == SuperPacmanCellType.WALL) {
+		if (getCellType(neighborPosition.get(2).x,neighborPosition.get(2).y).equals(SuperPacmanCellType.WALL) ){
 		     neighborhood[2][1]=true;
+		}
+		if (getCellType(neighborPosition.get(3).x,neighborPosition.get(3).y).equals(SuperPacmanCellType.WALL)) {
+		     neighborhood[1][2]=true;
 		}
 		return neighborhood;
 	}
@@ -121,6 +122,9 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	 * @return (SuperPacmanCellType ): The type of the SuperPacmanCell cell
 	 */
 	private SuperPacmanCellType getCellType(int x, int y) {
+		if (x < 0 || y < 0 || x>= getWidth() || y >= getHeight()) {
+			return SuperPacmanCellType.NONE;
+		}else 
 		return ((SuperPacmanCell)getCell(x,y)).type;
 	}
 	

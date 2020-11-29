@@ -1,8 +1,9 @@
-package ch.epfl.cs107.play.game.superpacman.actor;
+package ch.epfl.cs107.play.game.superpacman;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.rpg.RPG;
+import ch.epfl.cs107.play.game.superpacman.actor.SuperPacmanPlayer;
 import ch.epfl.cs107.play.game.superpacman.area.Level0;
 import ch.epfl.cs107.play.game.superpacman.area.Level1;
 import ch.epfl.cs107.play.game.superpacman.area.Level2;
@@ -22,7 +23,7 @@ public class SuperPacman extends RPG {
 
 
 	private SuperPacmanPlayer player;
-	private final String[] areas = {"Superpacman/Level0", "Superpacman/Level","Superpacman/Level2"};
+	private final String[] areas = {"superpacman/Level0", "superpacman/Level1","superpacman/Level2"};
 	private final DiscreteCoordinates[] startingPositions = {new DiscreteCoordinates(2,10), 
 															 new DiscreteCoordinates(5,15)};
 
@@ -50,7 +51,7 @@ public class SuperPacman extends RPG {
 			createAreas();
 			areaIndex = 0;
 			Area area = setCurrentArea(areas[areaIndex], true);
-			player = new SuperPacmanPlayer(area, Orientation.RIGHT, area.getPlayerSpawnPosition(),"superpacman/bonus");
+			player = new SuperPacmanPlayer(area, Orientation.RIGHT, ((SuperPacmanArea)area).getPlayerSpawnPosition(),"superpacman/bonus");
 			area.registerActor(player);
 			area.setViewCandidate(player);
 			return true;

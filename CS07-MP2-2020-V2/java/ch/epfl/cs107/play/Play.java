@@ -4,13 +4,8 @@ import java.awt.GraphicsEnvironment;
 
 
 import ch.epfl.cs107.play.game.Game;
-import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
-import ch.epfl.cs107.play.game.superpacman.actor.SuperPacman;
-import ch.epfl.cs107.play.game.superpacman.actor.SuperPacmanPlayer;
-import ch.epfl.cs107.play.game.tutos.Tuto2;
-import ch.epfl.cs107.play.game.tutos.Tuto1;
-
+import ch.epfl.cs107.play.game.superpacman.SuperPacman;
 import ch.epfl.cs107.play.io.DefaultFileSystem;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.io.ResourceFileSystem;
@@ -40,11 +35,9 @@ public class Play {
         // Create a demo game :
 		// (it is expected that at the beginning, the provided file does not compile)
        
-        //final Game game = new SuperPacman();
+        final Game game = new SuperPacman();
+		
 
-		final AreaGame game = new SuperPacman();
-		
-		
 		// Use Swing display
 		final Window window = new SwingWindow(game.getTitle(), fileSystem, 550, 550);
 		window.registerFonts(ResourcePath.FONTS);

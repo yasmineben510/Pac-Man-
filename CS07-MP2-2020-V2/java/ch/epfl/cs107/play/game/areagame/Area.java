@@ -44,15 +44,7 @@ public abstract class Area implements Playable {
 	/// - start indicate if area already begins, paused indicate if we display the pause menu
 	private boolean started;
 
-     /**
-      * Default getter for the final DiscreteCoordinates of the sub_areas
-      * @return null
-      * Note: Needs to be override
-      */
-	 public DiscreteCoordinates getPlayerSpawnPosition() {
-        System.out.println("bug getSpawnPosition Area superclass is called");
-        return null;
-		}
+
 	
 	
 	/** @return (float): camera scale factor, assume it is the same in x and y direction */

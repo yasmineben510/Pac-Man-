@@ -13,8 +13,7 @@ public interface Playable extends Updatable{
      * @param fileSystem (FileSystem): given file system. Not null
      * @return (boolean): whether the game was successfully started
      */
-    
-	boolean begin(Window window, FileSystem fileSystem);
+    boolean begin(Window window, FileSystem fileSystem);
 
     /** Cleans up things, called even if initialisation failed.
      * Note: Need to be Override

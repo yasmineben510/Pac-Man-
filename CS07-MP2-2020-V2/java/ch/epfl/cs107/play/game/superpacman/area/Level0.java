@@ -6,11 +6,11 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 public class Level0 extends SuperPacmanArea {
 	
-	public final static DiscreteCoordinates PLAYER_SPAWN_POSITION = new DiscreteCoordinates(10, 1);
+	public final  DiscreteCoordinates PLAYER_SPAWN_POSITION = new DiscreteCoordinates(10, 1);
 	/// SuperPacman's initial position
 	
 	public String getTitle() {
-		return "Superpacman/Level0";
+		return "superpacman/Level0";
 	}
 	
     @Override
