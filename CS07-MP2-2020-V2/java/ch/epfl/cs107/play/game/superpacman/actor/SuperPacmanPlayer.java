@@ -41,6 +41,7 @@ public class SuperPacmanPlayer extends Player{
 		message.setParent(this);
 		message.setAnchor(new Vector(-0.3f, 0.1f));
 		sprite = new Sprite(spriteName, 1.f, 1.f,this);
+		desiredOrientation=orientation;
 
 		resetMotion();
 	}
@@ -52,26 +53,26 @@ public class SuperPacmanPlayer extends Player{
 				message.setText(Integer.toString((int)hp));
 			}
 		 if (hp < 0) hp = 0.f;
-			Keyboard keyboard= getOwnerArea().getKeyboard();
+		/*	Keyboard keyboard= getOwnerArea().getKeyboard();
 	        moveOrientate(Orientation.LEFT, keyboard.get(Keyboard.LEFT));
 	        moveOrientate(Orientation.UP, keyboard.get(Keyboard.UP));
 	        moveOrientate(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
 	        moveOrientate(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
 			
+			*/
 			
 			
-			
-		//	Keyboard keyboard= getOwnerArea().getKeyboard();
+			Keyboard keyboard= getOwnerArea().getKeyboard();
 			if (keyboard.get(Keyboard.LEFT).isDown()) desiredOrientation = Orientation.LEFT;
 			if (keyboard.get(Keyboard.UP).isDown()) desiredOrientation = Orientation.UP;
 			if (keyboard.get(Keyboard.RIGHT).isDown()) desiredOrientation = Orientation.RIGHT;
 			if (keyboard.get(Keyboard.DOWN).isDown()) desiredOrientation = Orientation.DOWN;
 
-		//	List <DiscreteCoordinates> nextCells = Collections.singletonList(getCurrentMainCellCoordinates().jump(desiredOrientation.toVector()));			
+		List <DiscreteCoordinates> nextCells = Collections.singletonList(getCurrentMainCellCoordinates().jump(desiredOrientation.toVector()));			
              if (!isDisplacementOccurs()) {
-            	 // if(getOwnerArea().canEnterAreaCells(this, nextCells)) {
-				  //  orientate(desiredOrientation);
-			     // } 
+            	 if(getOwnerArea().canEnterAreaCells(this, nextCells)) {
+				    orientate(desiredOrientation);
+			      } 
                  move(6);
            }
 	        super.update(deltaTime);
@@ -86,7 +87,7 @@ public class SuperPacmanPlayer extends Player{
 	     * @param orientation (Orientation): given orientation, not null
 	     * @param b (Button): button corresponding to the given orientation, not null
 	     */
-	   private void moveOrientate(Orientation orientation, Button b){
+	/*   private void moveOrientate(Orientation orientation, Button b){
 	    
 	        if(b.isDown()) {
 	            if(getOrientation() == orientation) move(ANIMATION_DURATION);
@@ -94,7 +95,7 @@ public class SuperPacmanPlayer extends Player{
 	        }
 	    }
 	    
-	    
+	    */
 	    
 	    
 	    
