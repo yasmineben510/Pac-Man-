@@ -1,6 +1,8 @@
 package ch.epfl.cs107.play.game.superpacman.actor;
 
+
 import java.awt.Color;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -49,18 +51,29 @@ public class SuperPacmanPlayer extends Player{
 				hp -=deltaTime;
 				message.setText(Integer.toString((int)hp));
 			}
-			if (hp < 0) hp = 0.f;
+		 if (hp < 0) hp = 0.f;
 			Keyboard keyboard= getOwnerArea().getKeyboard();
+	        moveOrientate(Orientation.LEFT, keyboard.get(Keyboard.LEFT));
+	        moveOrientate(Orientation.UP, keyboard.get(Keyboard.UP));
+	        moveOrientate(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
+	        moveOrientate(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
+			
+			
+			
+			
+		//	Keyboard keyboard= getOwnerArea().getKeyboard();
 			if (keyboard.get(Keyboard.LEFT).isDown()) desiredOrientation = Orientation.LEFT;
 			if (keyboard.get(Keyboard.UP).isDown()) desiredOrientation = Orientation.UP;
 			if (keyboard.get(Keyboard.RIGHT).isDown()) desiredOrientation = Orientation.RIGHT;
 			if (keyboard.get(Keyboard.DOWN).isDown()) desiredOrientation = Orientation.DOWN;
 
-			List <DiscreteCoordinates> nextCells = Collections.singletonList(getCurrentMainCellCoordinates().jump(desiredOrientation.toVector()));			
-              if (!isDisplacementOccurs() && getOwnerArea().canEnterAreaCells(this, nextCells)) {
-				orientate(desiredOrientation);
-			} 
-			move(6);
+		//	List <DiscreteCoordinates> nextCells = Collections.singletonList(getCurrentMainCellCoordinates().jump(desiredOrientation.toVector()));			
+             if (!isDisplacementOccurs()) {
+            	 // if(getOwnerArea().canEnterAreaCells(this, nextCells)) {
+				  //  orientate(desiredOrientation);
+			     // } 
+                 move(6);
+           }
 	        super.update(deltaTime);
 	     
 	    }
@@ -73,13 +86,13 @@ public class SuperPacmanPlayer extends Player{
 	     * @param orientation (Orientation): given orientation, not null
 	     * @param b (Button): button corresponding to the given orientation, not null
 	     */
-	/*    private void moveOrientate(Orientation orientation, Button b){
+	   private void moveOrientate(Orientation orientation, Button b){
 	    
 	        if(b.isDown()) {
 	            if(getOrientation() == orientation) move(ANIMATION_DURATION);
 	            else orientate(orientation);
 	        }
-	    }*/
+	    }
 	    
 	    
 	    

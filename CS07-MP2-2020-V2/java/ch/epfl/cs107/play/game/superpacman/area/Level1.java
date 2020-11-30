@@ -22,9 +22,7 @@ public class Level1 extends SuperPacmanArea {
 
 	protected void createArea() {
     	super.createArea();
-		// Base
-        registerActor(new Background(this));
-        registerActor(new Foreground(this));
 	}
+
 
 }

@@ -35,7 +35,7 @@ public abstract class SuperPacmanArea extends Area{
 
 	@Override
 	public float getCameraScaleFactor() {
-		return 19.f;
+		return 20.f;
 	}
 	
 	/// SuperPacmanArea implements playable
