@@ -82,6 +82,8 @@ public abstract class MovableAreaEntity extends AreaEntity {
 
             if(getOwnerArea().enterAreaCells(this, enteringCells) && getOwnerArea().leaveAreaCells(this, leavingCells)){
 
+            	
+            	
             	leftCells = leavingCells;
             	enteredCells = enteringCells;
             	
@@ -97,7 +99,7 @@ public abstract class MovableAreaEntity extends AreaEntity {
                 
                 return true;
             }
-        }
+    	}
         return false;
     }
     
