@@ -125,7 +125,6 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		if (getCellType(x,y-1).equals(SuperPacmanCellType.WALL)) {
 		    neighborhood[1][2]=true;
 		}
-		
 		if (getCellType(x-1,y+1).equals(SuperPacmanCellType.WALL)) {
 		    neighborhood[0][0]=true;
 		}
@@ -138,8 +137,6 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		if (getCellType(x+1,y-1).equals(SuperPacmanCellType.WALL)) {
 		    neighborhood[2][2]=true;
 		}
-		
-
 		
 		return neighborhood;
 	}

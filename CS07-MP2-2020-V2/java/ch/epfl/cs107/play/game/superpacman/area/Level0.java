@@ -1,8 +1,12 @@
 package ch.epfl.cs107.play.game.superpacman.area;
 
+
 import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Foreground;
+import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.signal.logic.Logic;
 
 public class Level0 extends SuperPacmanArea {
 	
@@ -20,6 +24,10 @@ public class Level0 extends SuperPacmanArea {
 
 	protected void createArea() {
     	super.createArea();
+    	DiscreteCoordinates position = new DiscreteCoordinates(5,9);
+    	DiscreteCoordinates otherCells = new DiscreteCoordinates(6,9);
+    	Door door = new Door("superpacman/Level1",PLAYER_SPAWN_POSITION,Logic.TRUE,this,Orientation.UP,position,otherCells);
+    	registerActor(door);
 		
 	}
 	

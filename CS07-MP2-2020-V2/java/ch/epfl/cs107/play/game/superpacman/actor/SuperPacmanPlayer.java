@@ -171,11 +171,11 @@ public class SuperPacmanPlayer extends Player{
 
 	@Override
 	public void interactWith(Interactable other) {
-		// TODO Auto-generated method stub
+        SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
+		other.acceptInteraction(handler);
+        }
 		
-	}
 	
-	@SuppressWarnings("unused")
 	private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
 	   
 		/**
@@ -188,5 +188,5 @@ public class SuperPacmanPlayer extends Player{
 
 	}
 
-
 }
+
