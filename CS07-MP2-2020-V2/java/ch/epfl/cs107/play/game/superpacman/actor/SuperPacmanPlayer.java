@@ -53,14 +53,6 @@ public class SuperPacmanPlayer extends Player{
 				message.setText(Integer.toString((int)hp));
 			}
 		 if (hp < 0) hp = 0.f;
-		/*	Keyboard keyboard= getOwnerArea().getKeyboard();
-	        moveOrientate(Orientation.LEFT, keyboard.get(Keyboard.LEFT));
-	        moveOrientate(Orientation.UP, keyboard.get(Keyboard.UP));
-	        moveOrientate(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
-	        moveOrientate(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
-			
-			*/
-			
 			
 			Keyboard keyboard= getOwnerArea().getKeyboard();
 			if (keyboard.get(Keyboard.LEFT).isDown()) desiredOrientation = Orientation.LEFT;
