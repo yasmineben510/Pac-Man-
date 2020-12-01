@@ -12,7 +12,9 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
+import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Button;
@@ -149,7 +151,7 @@ public class SuperPacmanPlayer extends Player{
 
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
-		
+		((SuperPacmanInteractionVisitor)v).interactWith(this);
 	}
 
 	@Override
@@ -171,6 +173,20 @@ public class SuperPacmanPlayer extends Player{
 	public void interactWith(Interactable other) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	
+	@SuppressWarnings("unused")
+	private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
+	   
+		/**
+	     * Simulate and interaction between RPG Interactor and a Door
+	     * @param door (Door), not null
+	     */
+	    public void interactWith(Door door){
+	        // by default the interaction is empty
+	    }
+
 	}
 
 }
