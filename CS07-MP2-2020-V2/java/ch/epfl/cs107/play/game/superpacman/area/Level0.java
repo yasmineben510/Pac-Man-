@@ -8,6 +8,7 @@ import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
+
 public class Level0 extends SuperPacmanArea {
 	
 	public final  DiscreteCoordinates PLAYER_SPAWN_POSITION = new DiscreteCoordinates(10, 1);
@@ -26,7 +27,9 @@ public class Level0 extends SuperPacmanArea {
     	super.createArea();
     	DiscreteCoordinates position = new DiscreteCoordinates(5,9);
     	DiscreteCoordinates otherCells = new DiscreteCoordinates(6,9);
-    	Door door = new Door("superpacman/Level1",PLAYER_SPAWN_POSITION,Logic.TRUE,this,Orientation.UP,position,otherCells);
+    	DiscreteCoordinates pos = new DiscreteCoordinates(15,6);
+
+    	Door door = new Door("superpacman/Level1",pos,Logic.TRUE,this,Orientation.UP,position,otherCells);
     	registerActor(door);
 		
 	}

@@ -23,7 +23,8 @@ import ch.epfl.cs107.play.window.Keyboard;
 
 public class SuperPacmanPlayer extends Player{
 	
-	
+	SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
+	 
 	private float hp;
 	private TextGraphics message;
 	private Sprite sprite;
@@ -171,7 +172,6 @@ public class SuperPacmanPlayer extends Player{
 
 	@Override
 	public void interactWith(Interactable other) {
-        SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
 		other.acceptInteraction(handler);
         }
 		
