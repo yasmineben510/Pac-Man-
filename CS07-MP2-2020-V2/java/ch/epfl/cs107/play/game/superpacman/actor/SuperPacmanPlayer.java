@@ -175,18 +175,18 @@ public class SuperPacmanPlayer extends Player{
 		
 	}
 	
-	
 	@SuppressWarnings("unused")
 	private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
 	   
 		/**
-	     * Simulate and interaction between RPG Interactor and a Door
+	     * Simulate an interaction between SuperPacmanPlayer and a Door
 	     * @param door (Door), not null
 	     */
 	    public void interactWith(Door door){
-	        // by default the interaction is empty
+	    	setIsPassingADoor(door);
 	    }
 
 	}
+
 
 }
