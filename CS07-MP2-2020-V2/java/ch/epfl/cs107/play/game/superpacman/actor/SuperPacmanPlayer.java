@@ -8,12 +8,14 @@ import java.util.List;
 
 import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.areagame.actor.Animation;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
+import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
@@ -31,6 +33,7 @@ public class SuperPacmanPlayer extends Player{
 	/// Animation duration in frame number
     private final static int ANIMATION_DURATION = 6;
     private Orientation desiredOrientation;
+    private Animation[] animations;
     
 	/**
 	 * Demo actor
@@ -45,6 +48,17 @@ public class SuperPacmanPlayer extends Player{
 		message.setAnchor(new Vector(-0.3f, 0.1f));
 		sprite = new Sprite(spriteName, 1.f, 1.f,this);
 		desiredOrientation=orientation;
+		
+		
+		Sprite[][] sprites = RPGSprite.extractSprites("superpacman/pacman", 4, 1, 1, this, 64, 64,
+                new Orientation[] {Orientation.DOWN, Orientation.LEFT, Orientation.UP, Orientation.RIGHT});
+        animations = Animation.createAnimations(ANIMATION_DURATION / 4, sprites);
+        
+        if(Orientation.LEFT) {
+        	
+        }
+        
+        
 
 		resetMotion();
 	}
