@@ -78,7 +78,6 @@ public class SuperPacmanPlayer extends Player{
 				    orientate(desiredOrientation);
 			      } 
                  move(ANIMATION_DURATION/2);
-                 
            }
 	    
 	    if(isDisplacementOccurs()) {

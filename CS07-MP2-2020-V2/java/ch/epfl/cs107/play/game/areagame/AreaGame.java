@@ -57,7 +57,6 @@ abstract public class AreaGame implements Game {
 				currentArea.resume(window, fileSystem);
 			}
 		}
-
 		return currentArea;
 	}
 
