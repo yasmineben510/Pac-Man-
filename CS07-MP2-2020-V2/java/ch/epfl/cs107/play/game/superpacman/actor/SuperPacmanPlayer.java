@@ -46,7 +46,7 @@ public class SuperPacmanPlayer extends Player{
 		message = new TextGraphics(Integer.toString((int)hp), 0.4f, Color.BLUE);
 		message.setParent(this);
 		message.setAnchor(new Vector(-0.3f, 0.1f));
-		sprite = new Sprite(spriteName, 1.f, 1.f,this);
+//		sprite = new Sprite(spriteName, 1.f, 1.f,this);
 		desiredOrientation=orientation;
 		
 		
@@ -54,12 +54,6 @@ public class SuperPacmanPlayer extends Player{
                 new Orientation[] {Orientation.DOWN, Orientation.LEFT, Orientation.UP, Orientation.RIGHT});
         animations = Animation.createAnimations(ANIMATION_DURATION / 4, sprites);
         
-        if(Orientation.LEFT) {
-        	
-        }
-        
-        
-
 		resetMotion();
 	}
 	 
@@ -85,8 +79,23 @@ public class SuperPacmanPlayer extends Player{
                  move(ANIMATION_DURATION/2);
                  
            }
+	    
+	    if(isDisplacementOccurs()) {
+	    	if(desiredOrientation.equals(Orientation.LEFT)) {
+	        	sprite.draw((Canvas)(animations[Orientation.LEFT.ordinal()]));
+	        }
+	    	if(desiredOrientation.equals(Orientation.RIGHT)) {
+	        	sprite.draw((Canvas)(animations[Orientation.RIGHT.ordinal()]));
+	        }
+	    	if(desiredOrientation.equals(Orientation.UP)) {
+	        	(animations[Orientation.UP.ordinal()]).draw(canvas);;
+	        }
+	    	if(desiredOrientation.equals(Orientation.DOWN)) {
+	        	draw((Canvas)(animations[Orientation.DOWN.ordinal()]));
+	        }
+	    }
+	    
 	    super.update(deltaTime);
-	     
 	    }
 
 	 
