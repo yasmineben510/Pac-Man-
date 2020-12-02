@@ -54,9 +54,6 @@ public class SuperPacman extends RPG {
 			player = new SuperPacmanPlayer(area, Orientation.RIGHT, ((SuperPacmanArea)area).getPlayerSpawnPosition(),"superpacman/bonus");
 			initPlayer(player);
 			
-			//area.registerActor(player);
-			//area.setViewCandidate(player);
-			
 			return true;
 		}
 		return false;

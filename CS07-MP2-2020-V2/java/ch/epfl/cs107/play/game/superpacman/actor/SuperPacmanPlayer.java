@@ -34,6 +34,7 @@ public class SuperPacmanPlayer extends Player{
     private final static int ANIMATION_DURATION = 6;
     private Orientation desiredOrientation;
     private Animation[] animations;
+    private Animation currentAnimation;
     
 	/**
 	 * Demo actor
@@ -46,7 +47,6 @@ public class SuperPacmanPlayer extends Player{
 		message = new TextGraphics(Integer.toString((int)hp), 0.4f, Color.BLUE);
 		message.setParent(this);
 		message.setAnchor(new Vector(-0.3f, 0.1f));
-//		sprite = new Sprite(spriteName, 1.f, 1.f,this);
 		desiredOrientation=orientation;
 		
 		
@@ -54,6 +54,7 @@ public class SuperPacmanPlayer extends Player{
                 new Orientation[] {Orientation.DOWN, Orientation.LEFT, Orientation.UP, Orientation.RIGHT});
         animations = Animation.createAnimations(ANIMATION_DURATION / 4, sprites);
         
+        currentAnimation = animations[Orientation.RIGHT.ordinal()];
 		resetMotion();
 	}
 	 
@@ -82,18 +83,19 @@ public class SuperPacmanPlayer extends Player{
 	    
 	    if(isDisplacementOccurs()) {
 	    	if(desiredOrientation.equals(Orientation.LEFT)) {
-	        	sprite.draw((Canvas)(animations[Orientation.LEFT.ordinal()]));
+	    	     currentAnimation = animations[Orientation.LEFT.ordinal()];
 	        }
 	    	if(desiredOrientation.equals(Orientation.RIGHT)) {
-	        	sprite.draw((Canvas)(animations[Orientation.RIGHT.ordinal()]));
+	    	     currentAnimation = animations[Orientation.RIGHT.ordinal()];
 	        }
 	    	if(desiredOrientation.equals(Orientation.UP)) {
-	        	(animations[Orientation.UP.ordinal()]).draw(canvas);;
+	    	     currentAnimation = animations[Orientation.UP.ordinal()];
 	        }
 	    	if(desiredOrientation.equals(Orientation.DOWN)) {
-	        	draw((Canvas)(animations[Orientation.DOWN.ordinal()]));
+	    	     currentAnimation = animations[Orientation.DOWN.ordinal()];
 	        }
-	    }
+	    	currentAnimation.update(deltaTime);
+	    } else resetMotion();
 	    
 	    super.update(deltaTime);
 	    }
@@ -140,8 +142,8 @@ public class SuperPacmanPlayer extends Player{
     
 	@Override
 	public void draw(Canvas canvas) {
-		sprite.draw(canvas);	
 		message.draw(canvas);
+		currentAnimation.draw(canvas);
 	}
 
 	public boolean isWeak() {
