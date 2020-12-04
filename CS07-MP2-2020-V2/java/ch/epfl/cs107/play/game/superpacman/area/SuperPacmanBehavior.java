@@ -81,8 +81,8 @@ public class SuperPacmanBehavior extends AreaBehavior{
 				  neighborhood = getNeighborhood(x, y);
 				  area.registerActor(new Wall(area,position,neighborhood));
 			  }
-			  if(getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_BONUS)) {
-//				  area.registerActor(new Bonus();
+			  else {
+				  area.registerActor(new Bonus(position));
 			  }
 		   }
 		}

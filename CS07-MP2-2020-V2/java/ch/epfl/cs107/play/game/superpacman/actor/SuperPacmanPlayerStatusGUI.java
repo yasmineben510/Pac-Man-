@@ -27,7 +27,6 @@ public class SuperPacmanPlayerStatusGUI implements Graphics{
 	 * Sets the value of the player's score.
 	 * @param score (int): value of the player's score.
 	 */
-	
 	public void setScore(int score) {
 		this.score = score;
 	}
