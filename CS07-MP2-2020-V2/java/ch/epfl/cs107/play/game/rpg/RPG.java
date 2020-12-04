@@ -53,7 +53,6 @@ public abstract class RPG extends AreaGame {
             player.leaveArea();
             Area area = setCurrentArea(door.getDestination(), false);
             player.enterArea(area, door.getOtherSideCoordinates());
-            
         } 
         super.update(deltaTime);
         

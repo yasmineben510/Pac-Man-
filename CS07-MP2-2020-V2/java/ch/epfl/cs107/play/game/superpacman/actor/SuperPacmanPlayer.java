@@ -29,7 +29,6 @@ public class SuperPacmanPlayer extends Player{
 	 
 	private float hp;
 	private TextGraphics message;
-	private Sprite sprite;
 	/// Animation duration in frame number
     private final static int ANIMATION_DURATION = 6;
     private Orientation desiredOrientation;
@@ -43,7 +42,7 @@ public class SuperPacmanPlayer extends Player{
 	 * 
 	 */
     
-	public SuperPacmanPlayer(Area owner, Orientation orientation, DiscreteCoordinates coordinates, String spriteName, int PtsVie, int Score) {
+	public SuperPacmanPlayer(Area owner, Orientation orientation, DiscreteCoordinates coordinates, String spriteName /*int PtsVie, int Score*/) {
 		super(owner, orientation, coordinates);
 		this.hp = 10;
 		message = new TextGraphics(Integer.toString((int)hp), 0.4f, Color.BLUE);
@@ -100,46 +99,7 @@ public class SuperPacmanPlayer extends Player{
 	    
 	    super.update(deltaTime);
 	    }
-
-	 
-	 
-	 
-	    /**
-	     * Orientate or Move this player in the given orientation if the given button is down
-	     * @param orientation (Orientation): given orientation, not null
-	     * @param b (Button): button corresponding to the given orientation, not null
-	     */
-	/*   private void moveOrientate(Orientation orientation, Button b){
 	    
-	        if(b.isDown()) {
-	            if(getOrientation() == orientation) move(ANIMATION_DURATION);
-	            else orientate(orientation);
-	        }
-	    }
-	    
-	    */
-	    
-	    
-	    
-	    /**
-	     * Leave an area by unregister this player
-	     */
-	    public void leaveArea(){
-	        getOwnerArea().unregisterActor(this);
-	    }
-
-	    /**
-	     *
-	     * @param area (Area): initial area, not null
-	     * @param position (DiscreteCoordinates): initial position, not null
-	     */
-	    public void enterArea(Area area, DiscreteCoordinates position){
-	        area.registerActor(this);
-	        area.setViewCandidate(this);
-	        setOwnerArea(area);
-	        setCurrentPosition(position.toVector());
-	        resetMotion();
-	    }
     
 	@Override
 	public void draw(Canvas canvas) {

@@ -87,8 +87,6 @@ public class SuperPacman extends RPG {
 	@Override
 	public void update(float deltaTime) {
 		super.update(deltaTime);
-		
-
 	}
 	
 	

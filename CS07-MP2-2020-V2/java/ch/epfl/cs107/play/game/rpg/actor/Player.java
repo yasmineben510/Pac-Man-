@@ -30,7 +30,6 @@ public abstract class Player extends MovableAreaEntity implements Interactor {
      * Leave an area by unregister this player
      */
     public void leaveArea(){
-        System.out.println("unregistered player");
     	getOwnerArea().unregisterActor(this);
     }
 
@@ -40,9 +39,9 @@ public abstract class Player extends MovableAreaEntity implements Interactor {
      * @param position (DiscreteCoordinates): initial position, not null
      */
     public void enterArea(Area area, DiscreteCoordinates position){
+    	System.out.println("enterArea called");
     	area.registerActor(this);
         area.setViewCandidate(this);
-
         setOwnerArea(area);
         setCurrentPosition(position.toVector());
         resetDoorStates();
@@ -55,7 +54,6 @@ public abstract class Player extends MovableAreaEntity implements Interactor {
     private void resetDoorStates(){
         passedDoor = null;
         isPassingADoor = false;
-        System.out.println("resetdoor called");
     }
 
     /// Getter and setter for interaction
@@ -79,7 +77,6 @@ public abstract class Player extends MovableAreaEntity implements Interactor {
      * @return (Door)
      */
     public Door passedDoor(){
-       System.out.println("getter door");
     	return passedDoor;
     }
 }
