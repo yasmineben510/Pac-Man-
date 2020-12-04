@@ -39,7 +39,6 @@ public abstract class Player extends MovableAreaEntity implements Interactor {
      * @param position (DiscreteCoordinates): initial position, not null
      */
     public void enterArea(Area area, DiscreteCoordinates position){
-    	System.out.println("enterArea called");
     	area.registerActor(this);
         area.setViewCandidate(this);
         setOwnerArea(area);
