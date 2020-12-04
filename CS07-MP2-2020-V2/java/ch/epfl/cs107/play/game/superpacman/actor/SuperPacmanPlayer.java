@@ -60,26 +60,26 @@ public class SuperPacmanPlayer extends Player{
 	}
 	 
 	 @Override
-	    public void update(float deltaTime) {
-		 if (hp > 0) {
+	 public void update(float deltaTime) {
+		if (hp > 0) {
 				hp -=deltaTime;
 				message.setText(Integer.toString((int)hp));
-			}
-		 if (hp < 0) hp = 0.f;
+	    }
+     	if (hp < 0) hp = 0.f;
 			
-			Keyboard keyboard= getOwnerArea().getKeyboard();
-			if (keyboard.get(Keyboard.LEFT).isDown()) desiredOrientation = Orientation.LEFT;
-			if (keyboard.get(Keyboard.UP).isDown()) desiredOrientation = Orientation.UP;
-			if (keyboard.get(Keyboard.RIGHT).isDown()) desiredOrientation = Orientation.RIGHT;
-			if (keyboard.get(Keyboard.DOWN).isDown()) desiredOrientation = Orientation.DOWN;
+	    Keyboard keyboard= getOwnerArea().getKeyboard();
+	    if (keyboard.get(Keyboard.LEFT).isDown()) desiredOrientation = Orientation.LEFT;
+	    if (keyboard.get(Keyboard.UP).isDown()) desiredOrientation = Orientation.UP;
+	    if (keyboard.get(Keyboard.RIGHT).isDown()) desiredOrientation = Orientation.RIGHT;
+		if (keyboard.get(Keyboard.DOWN).isDown()) desiredOrientation = Orientation.DOWN;
 
 		List <DiscreteCoordinates> nextCells = Collections.singletonList(getCurrentMainCellCoordinates().jump(desiredOrientation.toVector()));			
-             if (!isDisplacementOccurs()) {
-            	 if(getOwnerArea().canEnterAreaCells(this, nextCells)) {
-				    orientate(desiredOrientation);
-			      } 
-                 move(ANIMATION_DURATION/2);
-           }
+        if (!isDisplacementOccurs()) {
+            if(getOwnerArea().canEnterAreaCells(this, nextCells)) {
+				  orientate(desiredOrientation);
+			    } 
+            move(ANIMATION_DURATION/2);
+        }
 	    
 	    if(isDisplacementOccurs()) {
 	    	if(desiredOrientation.equals(Orientation.LEFT)) {
