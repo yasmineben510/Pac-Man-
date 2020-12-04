@@ -27,14 +27,13 @@ public class SuperPacmanPlayer extends Player{
 	
 	SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
 	 
-	private float hp;
 	private TextGraphics message;
 	/// Animation duration in frame number
     private final static int ANIMATION_DURATION = 6;
     private Orientation desiredOrientation;
     private Animation[] animations;
     private Animation currentAnimation;
-    private static int life = 3;
+    private static int hp = 3;
     private int score = 0;
     private SuperPacmanPlayerStatusGUI statusGUI;
    
@@ -47,7 +46,7 @@ public class SuperPacmanPlayer extends Player{
 	public SuperPacmanPlayer(Area owner, Orientation orientation, DiscreteCoordinates coordinates, String spriteName) {
 		super(owner, orientation, coordinates);
 		desiredOrientation=orientation;
-		statusGUI = new SuperPacmanPlayerStatusGUI(this.score,this.life);
+		statusGUI = new SuperPacmanPlayerStatusGUI(this.score,this.hp);
 		
 		
 		Sprite[][] sprites = RPGSprite.extractSprites("superpacman/pacman", 4, 1, 1, this, 64, 64,
@@ -63,7 +62,7 @@ public class SuperPacmanPlayer extends Player{
 	 @Override
 	 public void update(float deltaTime) {
      	
-		if (life > 5) life = 5;
+		if (hp > 5) hp = 5;
 			
 	    Keyboard keyboard= getOwnerArea().getKeyboard();
 	    if (keyboard.get(Keyboard.LEFT).isDown()) desiredOrientation = Orientation.LEFT;

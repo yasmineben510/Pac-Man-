@@ -15,11 +15,11 @@ public class SuperPacmanPlayerStatusGUI implements Graphics{
 	
 	private final float DEPTH = 1.f;
 	private int score;
-	private int life;
+	private int hp;
 	
-	public SuperPacmanPlayerStatusGUI(int score, int life) {
+	public SuperPacmanPlayerStatusGUI(int score, int hp) {
 		this.score = score;
-		this.life = life;
+		this.hp = hp;
 	}
 	
 	
@@ -34,11 +34,11 @@ public class SuperPacmanPlayerStatusGUI implements Graphics{
 
 
   /**
-   * Sets the value of the player's life. 
-   * @param life (int): value of the player's life
+   * Sets the player's health points. 
+   * @param hp (int): value of the player's health points. 
    */
-	public void setLife(int life) {
-		this.life = life;
+	public void setHp(int hp) {
+		this.hp = hp;
 	}
 
 	@Override
@@ -48,10 +48,10 @@ public class SuperPacmanPlayerStatusGUI implements Graphics{
 		float width = canvas.getScaledWidth();
 		float height = canvas.getScaledHeight();
 		Vector anchor = canvas.getTransform().getOrigin().sub(new Vector(width/2, height/2));
-		ImageGraphics[] lifeGraphic = getLifeGraphic(anchor, height);
+		ImageGraphics[] hpGraphic = getHpGraphic(anchor, height);
 		
-		for(int i = 0; i < lifeGraphic.length; ++i) {
-			lifeGraphic[i].draw(canvas);
+		for(int i = 0; i < hpGraphic.length; ++i) {
+			hpGraphic[i].draw(canvas);
 		}
 		
 		TextGraphics scoreTextValue = new TextGraphics(Integer.toString(score), 1.1f, Color.YELLOW, Color.BLACK, 0.05f, true, false, anchor.add(new Vector(12f, height- 1.375f))); 
@@ -62,19 +62,19 @@ public class SuperPacmanPlayerStatusGUI implements Graphics{
 		
 	}
 	
-	private ImageGraphics[] getLifeGraphic(Vector anchor, float height) {
+	private ImageGraphics[] getHpGraphic(Vector anchor, float height) {
 		
-		ImageGraphics[] lifeGraphic = new ImageGraphics[5];
+		ImageGraphics[] hpGraphic = new ImageGraphics[5];
 		
-		for(int i = 0; i < lifeGraphic.length; ++i) {
+		for(int i = 0; i < hpGraphic.length; ++i) {
 			int j;
-			if(i<life) j = 0;
+			if(i<hp) j = 0;
 			else j = 64;
-			lifeGraphic[i] = new ImageGraphics(ResourcePath.getSprite("superpacman/lifeDisplay"),1, 1, new RegionOfInterest(j, 0, 64, 64),anchor.add(new Vector(i+1, height - 1.375f)), 1, DEPTH);
+			hpGraphic[i] = new ImageGraphics(ResourcePath.getSprite("superpacman/lifeDisplay"),1, 1, new RegionOfInterest(j, 0, 64, 64),anchor.add(new Vector(i+1, height - 1.375f)), 1, DEPTH);
 			
 		}
 		
-		return lifeGraphic;
+		return hpGraphic;
 	}
 
 }
