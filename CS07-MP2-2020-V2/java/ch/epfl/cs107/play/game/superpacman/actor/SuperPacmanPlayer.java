@@ -35,13 +35,15 @@ public class SuperPacmanPlayer extends Player{
     private Orientation desiredOrientation;
     private Animation[] animations;
     private Animation currentAnimation;
+    private int PtsVie;
+    private int score;
     
 	/**
 	 * Demo actor
 	 * 
 	 */
     
-	public SuperPacmanPlayer(Area owner, Orientation orientation, DiscreteCoordinates coordinates, String spriteName) {
+	public SuperPacmanPlayer(Area owner, Orientation orientation, DiscreteCoordinates coordinates, String spriteName, int PtsVie, int Score) {
 		super(owner, orientation, coordinates);
 		this.hp = 10;
 		message = new TextGraphics(Integer.toString((int)hp), 0.4f, Color.BLUE);
