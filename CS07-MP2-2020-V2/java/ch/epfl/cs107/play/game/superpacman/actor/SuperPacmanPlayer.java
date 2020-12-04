@@ -35,7 +35,7 @@ public class SuperPacmanPlayer extends Player{
     private Animation[] animations;
     private Animation currentAnimation;
     protected static int life = 3;
-    private int score = 0;
+    protected int score = 0;
    
     
 	/**
@@ -59,6 +59,8 @@ public class SuperPacmanPlayer extends Player{
         currentAnimation = animations[Orientation.RIGHT.ordinal()];
 		resetMotion();
 	}
+	
+	
 	 
 	 @Override
 	 public void update(float deltaTime) {

@@ -2,17 +2,22 @@ package ch.epfl.cs107.play.game.superpacman.actor;
 
 import ch.epfl.cs107.play.game.actor.Graphics;
 import ch.epfl.cs107.play.game.actor.ImageGraphics;
+import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
 import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
+
 public class SuperPacmanPlayerStatusGUI implements Graphics{
 	
 	private final float DEPTH = 0.f;
+	private SuperPacmanPlayer player;
+	private TextGraphics score;
 
-	public SuperPacmanPlayerStatusGUI() {		
-		
+	public SuperPacmanPlayerStatusGUI(SuperPacmanPlayer player) {		
+		player = player;
+		int score = player.score;
 	}
 	
 	
