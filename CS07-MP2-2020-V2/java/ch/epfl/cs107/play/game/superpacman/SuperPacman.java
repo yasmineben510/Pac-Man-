@@ -74,7 +74,7 @@ public class SuperPacman extends RPG {
 		Area currentArea = setCurrentArea(areas[areaIndex], false);
 		player.enterArea(currentArea, startingPositions[areaIndex]);
 
-		player.strengthen();
+		//player.strengthen();
 	}
 	
 	// Returns the title of the game
