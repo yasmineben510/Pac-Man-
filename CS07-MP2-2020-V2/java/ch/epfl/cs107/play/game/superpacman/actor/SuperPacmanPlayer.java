@@ -79,16 +79,16 @@ public class SuperPacmanPlayer extends Player{
         }
 	    
 	    if(isDisplacementOccurs()) {
-	    	if(desiredOrientation.equals(Orientation.LEFT)) {
+	    	if(getOrientation().equals(Orientation.LEFT)) {
 	    	     currentAnimation = animations[Orientation.LEFT.ordinal()];
 	        }
-	    	if(desiredOrientation.equals(Orientation.RIGHT)) {
+	    	if(getOrientation().equals(Orientation.RIGHT)) {
 	    	     currentAnimation = animations[Orientation.RIGHT.ordinal()];
 	        }
-	    	if(desiredOrientation.equals(Orientation.UP)) {
+	    	if(getOrientation().equals(Orientation.UP)) {
 	    	     currentAnimation = animations[Orientation.UP.ordinal()];
 	        }
-	    	if(desiredOrientation.equals(Orientation.DOWN)) {
+	    	if(getOrientation().equals(Orientation.DOWN)) {
 	    	     currentAnimation = animations[Orientation.DOWN.ordinal()];
 	        }
 	    	currentAnimation.update(deltaTime);
