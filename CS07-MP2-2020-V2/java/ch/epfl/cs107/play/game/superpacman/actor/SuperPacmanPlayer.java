@@ -34,21 +34,24 @@ public class SuperPacmanPlayer extends Player{
     private Orientation desiredOrientation;
     private Animation[] animations;
     private Animation currentAnimation;
-    private int PtsVie;
-    private int score;
+    private int vie;
+   
     
 	/**
 	 * Demo actor
 	 * 
 	 */
     
-	public SuperPacmanPlayer(Area owner, Orientation orientation, DiscreteCoordinates coordinates, String spriteName /*int PtsVie, int Score*/) {
+	public SuperPacmanPlayer(Area owner, Orientation orientation, DiscreteCoordinates coordinates, String spriteName, int life, int score) {
 		super(owner, orientation, coordinates);
 		this.hp = 10;
 		message = new TextGraphics(Integer.toString((int)hp), 0.4f, Color.BLUE);
 		message.setParent(this);
 		message.setAnchor(new Vector(-0.3f, 0.1f));
 		desiredOrientation=orientation;
+		life = 3;
+		score = 0;
+		
 		
 		
 		Sprite[][] sprites = RPGSprite.extractSprites("superpacman/pacman", 4, 1, 1, this, 64, 64,
@@ -66,6 +69,9 @@ public class SuperPacmanPlayer extends Player{
 				message.setText(Integer.toString((int)hp));
 	    }
      	if (hp < 0) hp = 0.f;
+     	
+     	
+		if (vie > 5) vie = 5;
 			
 	    Keyboard keyboard= getOwnerArea().getKeyboard();
 	    if (keyboard.get(Keyboard.LEFT).isDown()) desiredOrientation = Orientation.LEFT;
