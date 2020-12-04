@@ -45,7 +45,7 @@ public class SuperPacmanPlayer extends Player{
     
 	public SuperPacmanPlayer(Area owner, Orientation orientation, DiscreteCoordinates coordinates, String spriteName) {
 		super(owner, orientation, coordinates);
-		this.hp = 10;
+		//this.hp = 10;
 		message = new TextGraphics(Integer.toString((int)hp), 0.4f, Color.BLUE);
 		message.setParent(this);
 		message.setAnchor(new Vector(-0.3f, 0.1f));
@@ -62,12 +62,6 @@ public class SuperPacmanPlayer extends Player{
 	 
 	 @Override
 	 public void update(float deltaTime) {
-		if (hp > 0) {
-				hp -=deltaTime;
-				message.setText(Integer.toString((int)hp));
-	    }
-     	if (hp < 0) hp = 0.f;
-     	
      	
 		if (life > 5) life = 5;
 			
@@ -111,13 +105,13 @@ public class SuperPacmanPlayer extends Player{
 		currentAnimation.draw(canvas);
 	}
 
-	public boolean isWeak() {
+	/*public boolean isWeak() {
 		return (hp <= 0.f);
 	}
 
 	public void strengthen() {
 		hp = 10;
-	}
+	}*/
 
 	///SuperPacman implements Interactable
 
