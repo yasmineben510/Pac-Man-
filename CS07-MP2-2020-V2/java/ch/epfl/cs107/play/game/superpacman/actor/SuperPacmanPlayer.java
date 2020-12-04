@@ -34,8 +34,8 @@ public class SuperPacmanPlayer extends Player{
     private Orientation desiredOrientation;
     private Animation[] animations;
     private Animation currentAnimation;
-    private int life;
-    private int score = 3;
+    protected static int life = 3;
+    private int score = 0;
    
     
 	/**
@@ -50,9 +50,6 @@ public class SuperPacmanPlayer extends Player{
 		message.setParent(this);
 		message.setAnchor(new Vector(-0.3f, 0.1f));
 		desiredOrientation=orientation;
-		this.life = 3;
-		this.score = 0;
-		
 		
 		
 		Sprite[][] sprites = RPGSprite.extractSprites("superpacman/pacman", 4, 1, 1, this, 64, 64,
