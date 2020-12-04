@@ -27,7 +27,6 @@ public class SuperPacmanPlayer extends Player{
 	
 	SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
 	 
-	private TextGraphics message;
 	/// Animation duration in frame number
     private final static int ANIMATION_DURATION = 6;
     private Orientation desiredOrientation;
@@ -37,12 +36,10 @@ public class SuperPacmanPlayer extends Player{
     private int score = 0;
     private SuperPacmanPlayerStatusGUI statusGUI;
    
-    
 	/**
 	 * Demo actor
 	 * 
 	 */
-    
 	public SuperPacmanPlayer(Area owner, Orientation orientation, DiscreteCoordinates coordinates, String spriteName) {
 		super(owner, orientation, coordinates);
 		desiredOrientation=orientation;
@@ -57,8 +54,6 @@ public class SuperPacmanPlayer extends Player{
 		resetMotion();
 	}
 	
-	
-	 
 	 @Override
 	 public void update(float deltaTime) {
      	
@@ -100,20 +95,9 @@ public class SuperPacmanPlayer extends Player{
     
 	@Override
 	public void draw(Canvas canvas) {
-		//message.draw(canvas);
 		currentAnimation.draw(canvas);
 		statusGUI.draw(canvas);
 	}
-
-	/*public boolean isWeak() {
-		return (hp <= 0.f);
-	}
-
-	public void strengthen() {
-		hp = 10;
-	}*/
-
-	///SuperPacman implements Interactable
 
 	@Override
 	public boolean takeCellSpace() {
@@ -159,9 +143,7 @@ public class SuperPacmanPlayer extends Player{
 		other.acceptInteraction(handler);
         }
 		
-	
 	private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
-	   
 		/**
 	     * Simulate an interaction between SuperPacmanPlayer and a Door
 	     * @param door (Door), not null
@@ -169,8 +151,5 @@ public class SuperPacmanPlayer extends Player{
 	    public void interactWith(Door door){
 	    	setIsPassingADoor(door);
 	    }
-
 	}
-
 }
-

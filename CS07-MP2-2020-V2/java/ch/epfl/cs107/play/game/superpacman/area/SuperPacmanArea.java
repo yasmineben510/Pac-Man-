@@ -51,5 +51,4 @@ public abstract class SuperPacmanArea extends Area{
 	        }
 	    return false;
 	}
-
 }

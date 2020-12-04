@@ -7,9 +7,12 @@ import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.superpacman.actor.Bonus;
 import ch.epfl.cs107.play.game.superpacman.actor.Wall;
 import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior.Tuto2CellType;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.Positionable;
+import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Window;
 
 public class SuperPacmanBehavior extends AreaBehavior{
@@ -78,6 +81,9 @@ public class SuperPacmanBehavior extends AreaBehavior{
 				  neighborhood = getNeighborhood(x, y);
 				  area.registerActor(new Wall(area,position,neighborhood));
 			  }
+			  if(getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_BONUS)) {
+//				  area.registerActor(new Bonus();
+			  }
 		   }
 		}
 	}
@@ -93,25 +99,6 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	    
 		boolean[] [] neighborhood = new boolean[3] [3];
 		neighborhood [1][1]=true;
-		
-		/*DiscreteCoordinates cellPosition = new DiscreteCoordinates(x, y);
-
-		List<DiscreteCoordinates> neighborPosition = cellPosition.getNeighbours();
-		if (getCellType(neighborPosition.get(0).x,neighborPosition.get(0).y).equals(SuperPacmanCellType.WALL) ) {
-		     neighborhood[0][1]=true;
-		}
-		if (getCellType(neighborPosition.get(1).x,neighborPosition.get(1).y).equals(SuperPacmanCellType.WALL)) {
-		     neighborhood[1][0]=true;
-		}
-		if (getCellType(neighborPosition.get(2).x,neighborPosition.get(2).y).equals(SuperPacmanCellType.WALL) ){
-		     neighborhood[2][1]=true;
-		}
-		if (getCellType(neighborPosition.get(3).x,neighborPosition.get(3).y).equals(SuperPacmanCellType.WALL)) {
-		     neighborhood[1][2]=true;
-		}*/
-		
-		
-		//x et y de neughborhood inverses:
 		
 		if (getCellType(x-1,y).equals(SuperPacmanCellType.WALL) ) {
 		    neighborhood[0][1]=true;
@@ -141,9 +128,6 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		return neighborhood;
 	}
 		
-	
-	
-	
 	/**
 	 * Getter for the type of a SuperPacmanCell cell
 	 * @param x (int): x-coordinate of this cell
