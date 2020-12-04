@@ -34,9 +34,9 @@ public class SuperPacmanPlayer extends Player{
     private Orientation desiredOrientation;
     private Animation[] animations;
     private Animation currentAnimation;
-    protected static int life = 3;
-    protected int score = 0;
-    private SuperPacmanPlayerStatusGUI gui;
+    private static int life = 3;
+    private int score = 0;
+    private SuperPacmanPlayerStatusGUI statusGUI;
    
     
 	/**
@@ -46,16 +46,13 @@ public class SuperPacmanPlayer extends Player{
     
 	public SuperPacmanPlayer(Area owner, Orientation orientation, DiscreteCoordinates coordinates, String spriteName) {
 		super(owner, orientation, coordinates);
-		//this.hp = 10;
-		//message = new TextGraphics(Integer.toString((int)hp), 0.4f, Color.BLUE);
-		//message.setParent(this);
-		//message.setAnchor(new Vector(-0.3f, 0.1f));
 		desiredOrientation=orientation;
+		statusGUI = new SuperPacmanPlayerStatusGUI(this.score,this.life);
 		
 		
 		Sprite[][] sprites = RPGSprite.extractSprites("superpacman/pacman", 4, 1, 1, this, 64, 64,
                 new Orientation[] {Orientation.DOWN, Orientation.LEFT, Orientation.UP, Orientation.RIGHT});
-        animations = Animation.createAnimations(ANIMATION_DURATION / 4, sprites);
+        animations = Animation.createAnimations(ANIMATION_DURATION / 3, sprites);
         
         currentAnimation = animations[Orientation.RIGHT.ordinal()];
 		resetMotion();
@@ -106,7 +103,7 @@ public class SuperPacmanPlayer extends Player{
 	public void draw(Canvas canvas) {
 		//message.draw(canvas);
 		currentAnimation.draw(canvas);
-		gui.draw(canvas);
+		statusGUI.draw(canvas);
 	}
 
 	/*public boolean isWeak() {
