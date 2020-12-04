@@ -16,7 +16,7 @@ public class SuperPacmanPlayerStatusGUI implements Graphics{
 	private TextGraphics score;
 
 	public SuperPacmanPlayerStatusGUI(SuperPacmanPlayer player) {		
-		player = player;
+		this.player = player;
 		int score = player.score;
 	}
 	

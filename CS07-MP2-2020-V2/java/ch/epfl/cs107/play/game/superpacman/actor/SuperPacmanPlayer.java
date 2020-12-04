@@ -36,6 +36,7 @@ public class SuperPacmanPlayer extends Player{
     private Animation currentAnimation;
     protected static int life = 3;
     protected int score = 0;
+    private SuperPacmanPlayerStatusGUI gui;
    
     
 	/**
@@ -105,6 +106,7 @@ public class SuperPacmanPlayer extends Player{
 	public void draw(Canvas canvas) {
 		//message.draw(canvas);
 		currentAnimation.draw(canvas);
+		gui.draw(canvas);
 	}
 
 	/*public boolean isWeak() {
