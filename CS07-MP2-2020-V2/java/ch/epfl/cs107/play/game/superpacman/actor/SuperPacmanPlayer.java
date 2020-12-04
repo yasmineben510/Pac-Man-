@@ -46,9 +46,9 @@ public class SuperPacmanPlayer extends Player{
 	public SuperPacmanPlayer(Area owner, Orientation orientation, DiscreteCoordinates coordinates, String spriteName) {
 		super(owner, orientation, coordinates);
 		//this.hp = 10;
-		message = new TextGraphics(Integer.toString((int)hp), 0.4f, Color.BLUE);
-		message.setParent(this);
-		message.setAnchor(new Vector(-0.3f, 0.1f));
+		//message = new TextGraphics(Integer.toString((int)hp), 0.4f, Color.BLUE);
+		//message.setParent(this);
+		//message.setAnchor(new Vector(-0.3f, 0.1f));
 		desiredOrientation=orientation;
 		
 		
@@ -101,7 +101,7 @@ public class SuperPacmanPlayer extends Player{
     
 	@Override
 	public void draw(Canvas canvas) {
-		message.draw(canvas);
+		//message.draw(canvas);
 		currentAnimation.draw(canvas);
 	}
 

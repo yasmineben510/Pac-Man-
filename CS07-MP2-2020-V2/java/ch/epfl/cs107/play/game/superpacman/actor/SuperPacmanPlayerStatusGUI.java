@@ -9,12 +9,9 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class SuperPacmanPlayerStatusGUI implements Graphics{
 	
-	
+	private final float DEPTH = 0.f;
 
-	public SuperPacmanPlayerStatusGUI() {
-		
-		
-		
+	public SuperPacmanPlayerStatusGUI() {		
 		
 	}
 	
@@ -25,13 +22,8 @@ public class SuperPacmanPlayerStatusGUI implements Graphics{
 		
 		float width = canvas.getScaledWidth();
 		float height = canvas.getScaledHeight();
-		Vector anchor = canvas.getTransform().getOrigin()
-		.sub(new Vector(width/2, height/2));
-		
-		ImageGraphics life = new
-		ImageGraphics(ResourcePath.getSprite("superpacman/lifeDisplay"),
-				      1.f, 1.f, new RegionOfInterest(m, 0, 64, 64),
-				      anchor.add(new Vector(n, height - 1.375f)), 1, DEPTH);
+		Vector anchor = canvas.getTransform().getOrigin().sub(new Vector(width/2, height/2));
+		ImageGraphics life = new ImageGraphics(ResourcePath.getSprite("superpacman/lifeDisplay"),1.f, 1.f, new RegionOfInterest(0, 0, 64, 64),anchor.add(new Vector(1, height - 1.375f)), 1, DEPTH);
 		life.draw(canvas);
 		
 	}
