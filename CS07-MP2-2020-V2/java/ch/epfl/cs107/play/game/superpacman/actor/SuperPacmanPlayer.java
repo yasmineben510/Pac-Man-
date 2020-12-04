@@ -82,7 +82,7 @@ public class SuperPacmanPlayer extends Player{
             if(getOwnerArea().canEnterAreaCells(this, nextCells)) {
 				  orientate(desiredOrientation);
 			    } 
-            move(ANIMATION_DURATION/2);
+            move(ANIMATION_DURATION);
         }
 	    
 	    if(isDisplacementOccurs()) {
