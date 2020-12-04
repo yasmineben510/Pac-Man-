@@ -17,17 +17,10 @@ public class SuperPacmanPlayerStatusGUI implements Graphics{
 	private int score;
 	private int life;
 	
-
 	public SuperPacmanPlayerStatusGUI(int score, int life) {
 		this.score = score;
 		this.life = life;
-		
-		
-		
-
-	
 	}
-	
 	
 	
 	/**
@@ -47,10 +40,6 @@ public class SuperPacmanPlayerStatusGUI implements Graphics{
 	public void setLife(int life) {
 		this.life = life;
 	}
-
-
-
-
 
 	@Override
 	public void draw(Canvas canvas) {
