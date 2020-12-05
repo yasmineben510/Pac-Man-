@@ -6,6 +6,7 @@ import java.util.List;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
+import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.superpacman.actor.Bonus;
 import ch.epfl.cs107.play.game.superpacman.actor.Wall;
@@ -81,9 +82,9 @@ public class SuperPacmanBehavior extends AreaBehavior{
 				  neighborhood = getNeighborhood(x, y);
 				  area.registerActor(new Wall(area,position,neighborhood));
 			  }
-			  else {
-				  area.registerActor(new Bonus(position));
-			  }
+			 /* else {
+				  area.registerActor(new Bonus(area, position));
+			  }*/
 		   }
 		}
 	}

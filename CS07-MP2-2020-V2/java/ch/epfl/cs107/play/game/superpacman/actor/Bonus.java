@@ -17,8 +17,8 @@ public class Bonus extends AreaEntity implements CollectableAreaEntity{
 	
 	Sprite[] sprites;
 	
-	public Bonus(Area area, Orientation orientation, DiscreteCoordinates position) {
-		super(area,orientation,position);
+	public Bonus(Area area, DiscreteCoordinates position) {
+		super(area,Orientation.DOWN,position);
 		sprites = RPGSprite.extractSprites("superpacman/coin", 4, 1, 1, this , 16, 16);
 	}
 
