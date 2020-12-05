@@ -3,6 +3,7 @@ package ch.epfl.cs107.play.game.superpacman.actor;
 import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.areagame.actor.Animation;
 import ch.epfl.cs107.play.game.areagame.actor.AreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
@@ -15,11 +16,14 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class Bonus extends AreaEntity implements CollectableAreaEntity{
 	
+    private final static int ANIMATION_DURATION = 6;
 	Sprite[] sprites;
+	Animation animation;
 	
 	public Bonus(Area area, DiscreteCoordinates position) {
 		super(area,Orientation.DOWN,position);
 		sprites = RPGSprite.extractSprites("superpacman/coin", 4, 1, 1, this , 16, 16);
+		animation = new Animation(ANIMATION_DURATION,sprites);
 	}
 
 	@Override
@@ -30,7 +34,6 @@ public class Bonus extends AreaEntity implements CollectableAreaEntity{
 
 	@Override
 	public boolean takeCellSpace() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -54,8 +57,7 @@ public class Bonus extends AreaEntity implements CollectableAreaEntity{
 
 	@Override
 	public void draw(Canvas canvas) {
-		// TODO Auto-generated method stub
-		
+		animation.draw(canvas);
 	}
 
 }

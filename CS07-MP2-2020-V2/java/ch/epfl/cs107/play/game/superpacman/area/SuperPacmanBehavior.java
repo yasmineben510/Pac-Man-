@@ -77,14 +77,14 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		boolean[][] neighborhood;
 		for (int x = 0; x<getWidth(); ++x) {
 			for (int y =0; y<getHeight(); ++y) {
+			  DiscreteCoordinates position = new DiscreteCoordinates(x, y);
 			  if (getCellType(x,y).equals(SuperPacmanCellType.WALL)) {
-				  DiscreteCoordinates position = new DiscreteCoordinates(x, y);
 				  neighborhood = getNeighborhood(x, y);
 				  area.registerActor(new Wall(area,position,neighborhood));
 			  }
-			 /* else {
+			  else if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_BONUS)) {
 				  area.registerActor(new Bonus(area, position));
-			  }*/
+		      }
 		   }
 		}
 	}
