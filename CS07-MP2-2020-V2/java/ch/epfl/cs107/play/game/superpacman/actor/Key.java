@@ -6,22 +6,15 @@ import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.AreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.math.Positionable;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class Cherry extends AreaEntity implements CollectableAreaEntity{
-	
-	final int points = 200;
-	
-    Sprite sprites;
-	
-	public Cherry(Area area, Orientation orientation, DiscreteCoordinates position) {
-		super(area,orientation,position);
-//		sprites = RPGSprite.extractSprites("superpacman/cherry", 4, 1, 1, this , 16, 16);
+public class Key extends AreaEntity implements CollectableAreaEntity{
+
+	public Key(Area area, Orientation orientation, DiscreteCoordinates position) {
+		super(area, orientation, position);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

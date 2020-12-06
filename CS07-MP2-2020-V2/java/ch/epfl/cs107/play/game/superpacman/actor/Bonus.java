@@ -12,6 +12,7 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Positionable;
+import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
 public class Bonus extends AreaEntity implements CollectableAreaEntity{
@@ -20,9 +21,9 @@ public class Bonus extends AreaEntity implements CollectableAreaEntity{
 	Sprite[] sprites;
 	Animation animation;
 	
-	public Bonus(Area area, DiscreteCoordinates position) {
+	public Bonus(Area area,DiscreteCoordinates position) {
 		super(area,Orientation.DOWN,position);
-		sprites = RPGSprite.extractSprites("superpacman/coin", 4, 1, 1, this , 16, 16);
+		sprites = RPGSprite.extractSprites("superpacman/coin", 4, 1, 1, this, new Vector(position.x, position.y), 16, 16);
 		animation = new Animation(ANIMATION_DURATION,sprites);
 	}
 
