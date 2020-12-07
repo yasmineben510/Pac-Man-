@@ -10,6 +10,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
+import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Positionable;
 import ch.epfl.cs107.play.math.Vector;
@@ -24,6 +25,10 @@ public class Cherry extends AreaEntity implements CollectableAreaEntity{
 		super(area,Orientation.DOWN,position);
 		sprite = new Sprite("superpacman/cherry", 1,1, this);
 	}
+	
+	/*public void interactWith(Cherry cherry){
+		myScore += cherry.score();
+	}*/
 
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
@@ -50,14 +55,12 @@ public class Cherry extends AreaEntity implements CollectableAreaEntity{
 
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
-		// TODO Auto-generated method stub
-		
+		((SuperPacmanInteractionVisitor)v).interactWith(this);
 	}
 
 	@Override
 	public void draw(Canvas canvas) {
 		sprite.draw(canvas);
-		
 	}
 
 }
