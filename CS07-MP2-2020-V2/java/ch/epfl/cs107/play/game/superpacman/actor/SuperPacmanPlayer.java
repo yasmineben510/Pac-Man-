@@ -9,6 +9,7 @@ import java.util.List;
 import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Animation;
+import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
@@ -147,6 +148,10 @@ public class SuperPacmanPlayer extends Player{
 	public void interactWith(Interactable other) {
 		other.acceptInteraction(handler);
         }
+	
+	public void interactWith(CollectableAreaEntity collectable) {
+		collectable.acceptInteraction(handler);
+	}
 		
 	private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
 		/**
@@ -155,6 +160,10 @@ public class SuperPacmanPlayer extends Player{
 	     */
 	    public void interactWith(Door door){
 	    	setIsPassingADoor(door);
+	    }
+	    
+	    public void interactWith(AutomaticallyCollectableAreaEntity collectable) {
+	    	collectable.setIsCollected(true);
 	    }
 	   
 	}

@@ -2,8 +2,10 @@ package ch.epfl.cs107.play.game.rpg;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaGame;
+import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
+import ch.epfl.cs107.play.game.superpacman.actor.AutomaticallyCollectableAreaEntity;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.window.Window;
 
@@ -16,6 +18,8 @@ public abstract class RPG extends AreaGame {
 
     /// The player is a concept of RPG games
     private Player player;
+    
+    private CollectableAreaEntity collectable;
 
     /**
      * Init the player for the current area and insert it
@@ -54,7 +58,12 @@ public abstract class RPG extends AreaGame {
             Area area = setCurrentArea(door.getDestination(), false);
             player.enterArea(area, door.getOtherSideCoordinates());
         } 
-        super.update(deltaTime);
+       
+       if(collectable.isCollected()) {
+    	  ((AutomaticallyCollectableAreaEntity)collectable).collect();
+       }
+       
+       super.update(deltaTime);
         
     }
 

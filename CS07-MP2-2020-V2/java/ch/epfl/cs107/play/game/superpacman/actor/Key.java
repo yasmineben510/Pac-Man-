@@ -9,46 +9,21 @@ import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.rpg.handler.RPGInteractionVisitor;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class Key extends AreaEntity implements CollectableAreaEntity{
+public class Key extends AutomaticallyCollectableAreaEntity{
 	
 	Sprite sprite;
 
 	public Key(Area area, DiscreteCoordinates position) {
 		super(area, Orientation.DOWN, position);
 		sprite = new Sprite("superpacman/key", 1,1, this);
+		sprite.setDepth(-100.f);
 	}
 
-	@Override
-	public List<DiscreteCoordinates> getCurrentCells() {
-		return Collections.singletonList(getCurrentMainCellCoordinates());
-	}
-
-	@Override
-	public boolean takeCellSpace() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isCellInteractable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isViewInteractable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void acceptInteraction(AreaInteractionVisitor v) {
-		((SuperPacmanInteractionVisitor)v).interactWith(this);
-	}
 
 	@Override
 	public void draw(Canvas canvas) {

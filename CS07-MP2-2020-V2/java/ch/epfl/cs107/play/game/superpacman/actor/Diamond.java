@@ -15,7 +15,7 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Positionable;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class Diamond extends AreaEntity implements CollectableAreaEntity{
+public class Diamond extends AutomaticallyCollectableAreaEntity{
 	
 	final int points = 10;
 	
@@ -25,34 +25,6 @@ public class Diamond extends AreaEntity implements CollectableAreaEntity{
 		super(area,Orientation.DOWN,position);
 		sprite = new Sprite("superpacman/diamond", 1,1, this);
 		sprite.setDepth(-100f);
-	}
-
-	@Override
-	public List<DiscreteCoordinates> getCurrentCells() {
-		return Collections.singletonList(getCurrentMainCellCoordinates());
-	}
-
-	@Override
-	public boolean takeCellSpace() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isCellInteractable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isViewInteractable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void acceptInteraction(AreaInteractionVisitor v) {
-		((SuperPacmanInteractionVisitor)v).interactWith(this);
 	}
 
 	@Override
