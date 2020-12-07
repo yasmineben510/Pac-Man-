@@ -25,11 +25,11 @@ public class Level0 extends SuperPacmanArea {
 
 	protected void createArea() {
     	super.createArea();
-    	DiscreteCoordinates position = new DiscreteCoordinates(5,9);
-    	DiscreteCoordinates otherCells = new DiscreteCoordinates(6,9);
-    	DiscreteCoordinates pos = new DiscreteCoordinates(15,6);
+    	DiscreteCoordinates positionDoor = new DiscreteCoordinates(5,9);
+    	DiscreteCoordinates otherCellsDoor = new DiscreteCoordinates(6,9);
+    	DiscreteCoordinates posDoor = new DiscreteCoordinates(15,6);
 
-    	Door door = new Door("superpacman/Level1",pos,Logic.TRUE,this,Orientation.UP,position,otherCells);
+    	Door door = new Door("superpacman/Level1",posDoor,Logic.TRUE,this,Orientation.UP,positionDoor,otherCellsDoor);
     	registerActor(door);
 		
 	}

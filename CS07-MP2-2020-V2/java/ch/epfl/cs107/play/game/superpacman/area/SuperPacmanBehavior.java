@@ -84,6 +84,8 @@ public class SuperPacmanBehavior extends AreaBehavior{
 			  }
 			  else if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_BONUS)) {
 				  area.registerActor(new Bonus(area, position));
+				  
+				  System.out.println(position);
 		      }
 		   }
 		}

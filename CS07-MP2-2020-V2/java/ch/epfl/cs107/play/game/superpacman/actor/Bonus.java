@@ -1,5 +1,6 @@
 package ch.epfl.cs107.play.game.superpacman.actor;
 
+import java.util.Collections;
 import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
@@ -23,14 +24,13 @@ public class Bonus extends AreaEntity implements CollectableAreaEntity{
 	
 	public Bonus(Area area,DiscreteCoordinates position) {
 		super(area,Orientation.DOWN,position);
-		sprites = RPGSprite.extractSprites("superpacman/coin", 4, 1, 1, this, new Vector(position.x, position.y), 16, 16);
+		sprites = RPGSprite.extractSprites("superpacman/coin", 4, 1, 1, this, 16, 16);
 		animation = new Animation(ANIMATION_DURATION,sprites);
 	}
 
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
-		// TODO Auto-generated method stub
-		return null;
+		return Collections.singletonList(getCurrentMainCellCoordinates());
 	}
 
 	@Override
