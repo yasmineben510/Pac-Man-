@@ -24,6 +24,7 @@ public class Diamond extends AreaEntity implements CollectableAreaEntity{
 	public Diamond(Area area, DiscreteCoordinates position) {
 		super(area,Orientation.DOWN,position);
 		sprite = new Sprite("superpacman/diamond", 1,1, this);
+		sprite.setDepth(-100f);
 	}
 
 	@Override

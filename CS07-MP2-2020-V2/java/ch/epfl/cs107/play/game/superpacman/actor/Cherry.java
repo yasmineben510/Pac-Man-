@@ -24,6 +24,7 @@ public class Cherry extends AreaEntity implements CollectableAreaEntity{
 	public Cherry(Area area, DiscreteCoordinates position) {
 		super(area,Orientation.DOWN,position);
 		sprite = new Sprite("superpacman/cherry", 1,1, this);
+		sprite.setDepth(-100f);
 	}
 	
 	/*public void interactWith(Cherry cherry){
