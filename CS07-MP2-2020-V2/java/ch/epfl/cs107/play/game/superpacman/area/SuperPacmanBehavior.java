@@ -9,6 +9,9 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.superpacman.actor.Bonus;
+import ch.epfl.cs107.play.game.superpacman.actor.Cherry;
+import ch.epfl.cs107.play.game.superpacman.actor.Diamond;
+import ch.epfl.cs107.play.game.superpacman.actor.Key;
 import ch.epfl.cs107.play.game.superpacman.actor.Wall;
 import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior.Tuto2CellType;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -84,8 +87,12 @@ public class SuperPacmanBehavior extends AreaBehavior{
 			  }
 			  else if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_BONUS)) {
 				  area.registerActor(new Bonus(area, position));
-				  
-				  System.out.println(position);
+		      }
+			  else if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_CHERRY)) {
+				  area.registerActor(new Cherry(area, position));
+		      }
+			  else if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_DIAMOND)) {
+				  area.registerActor(new Diamond(area, position));
 		      }
 		   }
 		}

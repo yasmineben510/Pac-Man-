@@ -13,20 +13,21 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Positionable;
+import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
 public class Bonus extends AreaEntity implements CollectableAreaEntity{
 	
     private final static int ANIMATION_DURATION = 6;
-	Sprite[] sprites;
+    private Sprite[] sprites;
 	Animation animation;
 	
 	public Bonus(Area area,DiscreteCoordinates position) {
 		super(area,Orientation.DOWN,position);
-		sprites = RPGSprite.extractSprites("superpacman/coin", 4, 1, 1, this, 16, 16);
-		animation = new Animation(ANIMATION_DURATION,sprites);
-	}
+		sprites = RPGSprite.extractSprites("superpacman/coin", 4, 1, 1,this , 16, 16);
+		animation = new Animation(ANIMATION_DURATION/2,sprites);
+		}
 
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
@@ -54,6 +55,12 @@ public class Bonus extends AreaEntity implements CollectableAreaEntity{
 	public void acceptInteraction(AreaInteractionVisitor v) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public void update(float deltaTime) {
+		animation.update(deltaTime);
+		super.update(deltaTime);
 	}
 
 	@Override

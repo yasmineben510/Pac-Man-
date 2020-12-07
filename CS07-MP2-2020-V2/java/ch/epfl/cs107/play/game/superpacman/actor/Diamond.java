@@ -1,5 +1,6 @@
 package ch.epfl.cs107.play.game.superpacman.actor;
 
+import java.util.Collections;
 import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
@@ -17,17 +18,16 @@ public class Diamond extends AreaEntity implements CollectableAreaEntity{
 	
 	final int points = 10;
 	
-    Sprite sprites;
+    Sprite sprite;
 	
-	public Diamond(Area area, Orientation orientation, DiscreteCoordinates position) {
-		super(area,orientation,position);
-		//sprites = RPGSprite.extractSprites("superpacman/diamond", 4, 1, 1, this , 16, 16);
+	public Diamond(Area area, DiscreteCoordinates position) {
+		super(area,Orientation.DOWN,position);
+		sprite = new Sprite("superpacman/diamond", 1,1, this);
 	}
 
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
-		// TODO Auto-generated method stub
-		return null;
+		return Collections.singletonList(getCurrentMainCellCoordinates());
 	}
 
 	@Override
@@ -56,8 +56,7 @@ public class Diamond extends AreaEntity implements CollectableAreaEntity{
 
 	@Override
 	public void draw(Canvas canvas) {
-		// TODO Auto-generated method stub
-		
+		sprite.draw(canvas);
 	}
 
 }

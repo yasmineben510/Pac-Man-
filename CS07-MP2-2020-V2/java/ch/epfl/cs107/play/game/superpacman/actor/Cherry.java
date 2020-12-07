@@ -1,5 +1,6 @@
 package ch.epfl.cs107.play.game.superpacman.actor;
 
+import java.util.Collections;
 import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
@@ -11,23 +12,22 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Positionable;
+import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
 public class Cherry extends AreaEntity implements CollectableAreaEntity{
 	
 	final int points = 200;
+    Sprite sprite;
 	
-    Sprite sprites;
-	
-	public Cherry(Area area, Orientation orientation, DiscreteCoordinates position) {
-		super(area,orientation,position);
-//		sprites = RPGSprite.extractSprites("superpacman/cherry", 4, 1, 1, this , 16, 16);
+	public Cherry(Area area, DiscreteCoordinates position) {
+		super(area,Orientation.DOWN,position);
+		sprite = new Sprite("superpacman/cherry", 1,1, this);
 	}
 
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
-		// TODO Auto-generated method stub
-		return null;
+		return Collections.singletonList(getCurrentMainCellCoordinates());
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class Cherry extends AreaEntity implements CollectableAreaEntity{
 
 	@Override
 	public void draw(Canvas canvas) {
-		// TODO Auto-generated method stub
+		sprite.draw(canvas);
 		
 	}
 

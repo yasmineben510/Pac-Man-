@@ -28,7 +28,7 @@ public class SuperPacmanPlayer extends Player{
 	SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
 	 
 	/// Animation duration in frame number
-    private final static int ANIMATION_DURATION = 6;
+    private final static int ANIMATION_DURATION = 8;
     private Orientation desiredOrientation;
     private Animation[] animations;
     private Animation currentAnimation;
@@ -51,20 +51,21 @@ public class SuperPacmanPlayer extends Player{
         animations = Animation.createAnimations(ANIMATION_DURATION / 3, sprites);
         
         currentAnimation = animations[Orientation.RIGHT.ordinal()];
-		resetMotion();
+        
+
 	}
 	
 	 @Override
 	 public void update(float deltaTime) {
      	
 		if (hp > 5) hp = 5;
-			
+		
 	    Keyboard keyboard= getOwnerArea().getKeyboard();
 	    if (keyboard.get(Keyboard.LEFT).isDown()) desiredOrientation = Orientation.LEFT;
 	    if (keyboard.get(Keyboard.UP).isDown()) desiredOrientation = Orientation.UP;
 	    if (keyboard.get(Keyboard.RIGHT).isDown()) desiredOrientation = Orientation.RIGHT;
 		if (keyboard.get(Keyboard.DOWN).isDown()) desiredOrientation = Orientation.DOWN;
-
+		
 		List <DiscreteCoordinates> nextCells = Collections.singletonList(getCurrentMainCellCoordinates().jump(desiredOrientation.toVector()));			
         if (!isDisplacementOccurs()) {
             if(getOwnerArea().canEnterAreaCells(this, nextCells)) {
@@ -87,8 +88,12 @@ public class SuperPacmanPlayer extends Player{
 	    	     currentAnimation = animations[Orientation.DOWN.ordinal()];
 	        }
 	    	currentAnimation.update(deltaTime);
-	    } else resetMotion();
+	    } 
 	    
+	    else {
+	    	resetMotion();
+	    	currentAnimation.reset();
+	    }
 	    super.update(deltaTime);
 	    }
 	    

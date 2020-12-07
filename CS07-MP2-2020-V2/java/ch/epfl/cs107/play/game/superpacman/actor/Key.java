@@ -1,26 +1,29 @@
 package ch.epfl.cs107.play.game.superpacman.actor;
 
+import java.util.Collections;
 import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.AreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
 public class Key extends AreaEntity implements CollectableAreaEntity{
+	
+	Sprite sprite;
 
-	public Key(Area area, Orientation orientation, DiscreteCoordinates position) {
-		super(area, orientation, position);
-		// TODO Auto-generated constructor stub
+	public Key(Area area, DiscreteCoordinates position) {
+		super(area, Orientation.DOWN, position);
+		sprite = new Sprite("superpacman/key", 1,1, this);
 	}
 
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
-		// TODO Auto-generated method stub
-		return null;
+		return Collections.singletonList(getCurrentMainCellCoordinates());
 	}
 
 	@Override
@@ -49,8 +52,7 @@ public class Key extends AreaEntity implements CollectableAreaEntity{
 
 	@Override
 	public void draw(Canvas canvas) {
-		// TODO Auto-generated method stub
-		
+		sprite.draw(canvas);
 	}
 
 }
