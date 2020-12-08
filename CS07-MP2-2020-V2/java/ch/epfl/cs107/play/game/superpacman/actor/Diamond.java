@@ -31,5 +31,10 @@ public class Diamond extends AutomaticallyCollectableAreaEntity{
 	public void draw(Canvas canvas) {
 		sprite.draw(canvas);
 	}
+	
+	@Override
+	public int getPoints() {
+		return points;
+	}
 
 }

@@ -60,6 +60,8 @@ public class SuperPacmanPlayer extends Player{
 	 public void update(float deltaTime) {
      	
 		if (hp > 5) hp = 5;
+		statusGUI.setHp(hp);
+		statusGUI.setScore(score);
 		
 	    Keyboard keyboard= getOwnerArea().getKeyboard();
 	    if (keyboard.get(Keyboard.LEFT).isDown()) desiredOrientation = Orientation.LEFT;
@@ -167,7 +169,8 @@ public class SuperPacmanPlayer extends Player{
 
 	    	 if(!collectable.isCollected() && collectable.isWalkedOn()) {
 	       	  collectable.collect();
-	       	  System.out.println("called");
+	       	  score += collectable.getPoints();
+	       	  
 	          }
 	    }
 	   

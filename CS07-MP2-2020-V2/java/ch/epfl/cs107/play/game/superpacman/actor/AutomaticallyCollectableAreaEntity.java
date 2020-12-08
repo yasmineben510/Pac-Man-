@@ -67,5 +67,12 @@ public class AutomaticallyCollectableAreaEntity extends CollectableAreaEntity {
 		this.isWalkedOn = isWalkedOn;
 	}
 
+	/**
+	 * returns the score value of the collectable entity
+	 * Note: need to be override
+	 */
+	public int getPoints() {
+		return 0;
+	}
 
 }
