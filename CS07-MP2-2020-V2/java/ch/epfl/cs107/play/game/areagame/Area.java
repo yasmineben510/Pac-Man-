@@ -276,6 +276,7 @@ public abstract class Area implements Playable {
 		for (Interactor interactor : interactors) {
 			if (interactor.wantsCellInteraction()) {
 				areaBehavior.cellInteractionOf(interactor);
+				
 			}
 			if (interactor.wantsViewInteraction()) {
 				areaBehavior.viewInteractionOf(interactor);

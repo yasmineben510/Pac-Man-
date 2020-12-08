@@ -22,7 +22,7 @@ public class AutomaticallyCollectableAreaEntity extends CollectableAreaEntity {
 	
 	public void collect() {
 		this.getOwnerArea().unregisterActor(this);
-		this.setIsCollected(true);
+		this.setIsCollected(false);
 	}
 
 	@Override
@@ -39,6 +39,18 @@ public class AutomaticallyCollectableAreaEntity extends CollectableAreaEntity {
 	public void draw(Canvas canvas) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean takeCellSpace() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isViewInteractable() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	/**

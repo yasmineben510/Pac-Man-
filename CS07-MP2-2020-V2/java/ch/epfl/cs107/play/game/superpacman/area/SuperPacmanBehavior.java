@@ -77,6 +77,19 @@ public class SuperPacmanBehavior extends AreaBehavior{
      * @param area (Area) : the area in which the actor will be registered
      */
 	protected void registerActors(Area area) {
+	
+		registerWall(area);
+		
+		registerCollectable(area);
+		
+	}
+	
+	
+	/**
+	 * Register the walls
+	 * @param area
+	 */
+	private void registerWall (Area area) {
 		boolean[][] neighborhood;
 		for (int x = 0; x<getWidth(); ++x) {
 			for (int y =0; y<getHeight(); ++y) {
@@ -85,16 +98,32 @@ public class SuperPacmanBehavior extends AreaBehavior{
 				  neighborhood = getNeighborhood(x, y);
 				  area.registerActor(new Wall(area,position,neighborhood));
 			  }
-			  else if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_BONUS)) {
-				  area.registerActor(new Bonus(area, position));
+			}
+		}
+	}
+	
+	
+	/**
+	 * Register the collectable entities
+	 * @param area
+	 */
+	private void registerCollectable(Area area) {
+		for (int x = 0; x<getWidth(); ++x) {
+			for (int y =0; y<getHeight(); ++y) {
+			  DiscreteCoordinates position = new DiscreteCoordinates(x, y);
+		      if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_BONUS)) {
+				  Bonus bonus = new Bonus(area, position);
+			      area.registerActor(bonus);
 		      }
-			  else if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_CHERRY)) {
-				  area.registerActor(new Cherry(area, position));
+	          if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_CHERRY)) {
+	    	      Cherry cherry = new Cherry(area, position);
+		          area.registerActor(cherry);
 		      }
-			  else if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_DIAMOND)) {
-				  area.registerActor(new Diamond(area, position));
+	          if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_DIAMOND)) {
+	    	      Diamond diamond = new Diamond(area, position);
+		          area.registerActor(diamond);
 		      }
-		   }
+			}
 		}
 	}
 	

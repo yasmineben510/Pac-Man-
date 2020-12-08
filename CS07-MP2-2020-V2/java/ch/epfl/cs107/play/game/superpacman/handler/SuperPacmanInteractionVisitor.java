@@ -4,6 +4,7 @@ import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.handler.RPGInteractionVisitor;
+import ch.epfl.cs107.play.game.superpacman.actor.AutomaticallyCollectableAreaEntity;
 import ch.epfl.cs107.play.game.superpacman.actor.SuperPacmanPlayer;
 
 public interface SuperPacmanInteractionVisitor extends RPGInteractionVisitor {
@@ -17,7 +18,7 @@ public interface SuperPacmanInteractionVisitor extends RPGInteractionVisitor {
         // by default the interaction is empty
     }
     
-    default void interactWith(CollectableAreaEntity collectable){
+    default void interactWith(AutomaticallyCollectableAreaEntity collectable){
         // by default the interaction is empty
     }
     

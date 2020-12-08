@@ -19,7 +19,7 @@ public abstract class RPG extends AreaGame {
     /// The player is a concept of RPG games
     private Player player;
     
-    private CollectableAreaEntity collectable;
+   // private CollectableAreaEntity collectable;
 
     /**
      * Init the player for the current area and insert it
@@ -58,10 +58,6 @@ public abstract class RPG extends AreaGame {
             Area area = setCurrentArea(door.getDestination(), false);
             player.enterArea(area, door.getOtherSideCoordinates());
         } 
-       
-       if(collectable.isCollected() && ((AutomaticallyCollectableAreaEntity)collectable).isWalkedOn()) {
-    	  collectable.collect();
-       }
        
        super.update(deltaTime);
         
