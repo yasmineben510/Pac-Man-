@@ -5,6 +5,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
+import ch.epfl.cs107.play.game.superpacman.actor.Gate;
 import ch.epfl.cs107.play.game.superpacman.actor.Key;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
@@ -35,6 +36,12 @@ public class Level0 extends SuperPacmanArea {
     	
     	Key key = new Key(this, new DiscreteCoordinates(3,4));
     	registerActor(key);
+    	
+    	Gate gate1= new Gate(this,Orientation.RIGHT,new DiscreteCoordinates(5, 8),key);
+    	registerActor(gate1);
+    	
+    	Gate gate2= new Gate(this,Orientation.LEFT,new DiscreteCoordinates(6, 8),key);
+    	registerActor(gate2);
 		
 	}
 	

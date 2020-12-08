@@ -18,12 +18,13 @@ public class Gate extends AreaEntity {
 
 	Sprite sprite;
 	Logic signal;
-	public Gate(Area area, Orientation orientation, DiscreteCoordinates position) {
+	public Gate(Area area, Orientation orientation, DiscreteCoordinates position, Logic signal) {
 		super(area, orientation, position);
+		this.signal = signal;
 		if (orientation == Orientation.DOWN || orientation == Orientation.UP ) 
-	        sprite = new Sprite("superpacman/gate",  1, 1, this, new RegionOfInterest(0,0,64,2*64));
+	        sprite = new Sprite("superpacman/gate",  1, 1, this, new RegionOfInterest(0,0,64,64));
 		 else 
-			 sprite = new Sprite("superpacman/gate",  1, 1, this, new RegionOfInterest(0,64,2*64,64));
+			 sprite = new Sprite("superpacman/gate",  1, 1, this, new RegionOfInterest(0,64,64,64));
 		
 	}
 
@@ -34,8 +35,8 @@ public class Gate extends AreaEntity {
 
 	@Override
 	public boolean takeCellSpace() {
-		if (signal.isOn()) return true;
-		else return false;
+		if (signal.isOn()) return false;
+		else return true;
 		
 	}
 
@@ -56,8 +57,7 @@ public class Gate extends AreaEntity {
 
 	@Override
 	public void draw(Canvas canvas) {
-		sprite.draw(canvas);
-
+		if (signal.isOff()) sprite.draw(canvas);
 	}
 
 }

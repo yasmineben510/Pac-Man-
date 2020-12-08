@@ -12,9 +12,10 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.handler.RPGInteractionVisitor;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class Key extends AutomaticallyCollectableAreaEntity{
+public class Key extends AutomaticallyCollectableAreaEntity implements Logic{
 	
 	Sprite sprite;
 
@@ -28,6 +29,26 @@ public class Key extends AutomaticallyCollectableAreaEntity{
 	@Override
 	public void draw(Canvas canvas) {
 		sprite.draw(canvas);
+	}
+
+
+	@Override
+	public boolean isOn() {
+		if (this.isCollected()) return true;
+		else return false;
+	}
+
+
+	@Override
+	public boolean isOff() {
+		if (this.isCollected()) return false;
+		else return true;
+	}
+
+
+	@Override
+	public float getIntensity() {
+		return 0;
 	}
 
 }

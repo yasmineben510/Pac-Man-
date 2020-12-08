@@ -22,7 +22,7 @@ public class AutomaticallyCollectableAreaEntity extends CollectableAreaEntity {
 	
 	public void collect() {
 		this.getOwnerArea().unregisterActor(this);
-		this.setIsCollected(false);
+		this.setIsCollected(true);
 	}
 
 	@Override

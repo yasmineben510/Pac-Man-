@@ -29,7 +29,7 @@ public class SuperPacmanPlayer extends Player{
 	SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
 	 
 	/// Animation duration in frame number
-    private final static int ANIMATION_DURATION = 8;
+    private final static int ANIMATION_DURATION = 6;
     private Orientation desiredOrientation;
     private Animation[] animations;
     private Animation currentAnimation;
@@ -44,7 +44,7 @@ public class SuperPacmanPlayer extends Player{
 	public SuperPacmanPlayer(Area owner, Orientation orientation, DiscreteCoordinates coordinates, String spriteName) {
 		super(owner, orientation, coordinates);
 		desiredOrientation=orientation;
-		statusGUI = new SuperPacmanPlayerStatusGUI(this.score,this.hp);
+		statusGUI = new SuperPacmanPlayerStatusGUI(this.score,hp);
 		
 		
 		Sprite[][] sprites = RPGSprite.extractSprites("superpacman/pacman", 4, 1, 1, this, 64, 64,
@@ -74,7 +74,7 @@ public class SuperPacmanPlayer extends Player{
             if(getOwnerArea().canEnterAreaCells(this, nextCells)) {
 				  orientate(desiredOrientation);
 			    } 
-            move(ANIMATION_DURATION);
+            move(ANIMATION_DURATION/2);
         }
 	    
 	    if(isDisplacementOccurs()) {

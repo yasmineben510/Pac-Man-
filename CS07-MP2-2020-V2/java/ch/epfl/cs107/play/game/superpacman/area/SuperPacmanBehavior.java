@@ -1,5 +1,6 @@
 package ch.epfl.cs107.play.game.superpacman.area;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,6 +21,11 @@ import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Window;
 
 public class SuperPacmanBehavior extends AreaBehavior{
+	
+	
+	private List<Diamond> diamonds = new ArrayList<Diamond>();
+	
+	
 	
 	/**
 	 * Default SuperPacmanBehavior Constructor  
@@ -122,6 +128,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	          if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_DIAMOND)) {
 	    	      Diamond diamond = new Diamond(area, position);
 		          area.registerActor(diamond);
+		          diamonds.add(diamond);
 		      }
 			}
 		}
@@ -180,6 +187,14 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		return ((SuperPacmanCell)getCell(x,y)).type;
 	}
 	
+	
+	
+	protected List<Diamond> getDiamonds() {
+		return diamonds;
+	}
+
+
+
 	/**
 	 * Class SuperPacmanCell extends AreaBehavior.Cell
 	 * Instance for the SuperPacmanCellType of the SuperPacmanBehavior
