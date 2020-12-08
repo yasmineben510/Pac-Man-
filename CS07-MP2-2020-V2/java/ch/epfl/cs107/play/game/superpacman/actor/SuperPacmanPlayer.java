@@ -161,6 +161,11 @@ public class SuperPacmanPlayer extends Player{
 	    	setIsPassingADoor(door);
 	    }
 	    
+	    
+	    /**
+	     * Simulate an interaction between SuperPacmanPlayer and an AutomaticallyCollectableAreaEntity
+	     * @param  collectable (AutomaticallyCollectableAreaEntity) : the AutomaticallyCollectableAreaEntity to collect, not null
+	     */
 	    public void interactWith(AutomaticallyCollectableAreaEntity collectable) {
 	    	 collectable.setIsWalkedOn(true);
 
