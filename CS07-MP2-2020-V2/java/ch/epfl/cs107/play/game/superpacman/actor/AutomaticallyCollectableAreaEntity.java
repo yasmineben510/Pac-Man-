@@ -37,19 +37,16 @@ public class AutomaticallyCollectableAreaEntity extends CollectableAreaEntity {
 
 	@Override
 	public void draw(Canvas canvas) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public boolean takeCellSpace() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean isViewInteractable() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -69,7 +66,7 @@ public class AutomaticallyCollectableAreaEntity extends CollectableAreaEntity {
 
 	/**
 	 * returns the score value of the collectable entity
-	 * Note: need to be override
+	 * Note: needs to be override
 	 */
 	public int getPoints() {
 		return 0;
