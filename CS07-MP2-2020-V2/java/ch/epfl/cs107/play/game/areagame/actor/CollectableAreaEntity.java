@@ -11,7 +11,7 @@ public abstract class CollectableAreaEntity extends AreaEntity {
 
 	
 	
-	// indicate if the collectable is being collected
+	// indicate if the collectable is collected 
 	private boolean isCollected = false;
 	
 	
@@ -29,27 +29,16 @@ public abstract class CollectableAreaEntity extends AreaEntity {
 		this.isCollected=isCollected;
 	}
 	
-	@Override
-	public List<DiscreteCoordinates> getCurrentCells() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean takeCellSpace() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
+	public abstract void collect();
+	
 
 	@Override
 	public boolean isCellInteractable() {
 		return true;
 	}
 
-	@Override
-	public boolean isViewInteractable() {
-		return false;
-	}
+
 
 	
 }

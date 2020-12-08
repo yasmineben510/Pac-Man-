@@ -13,13 +13,16 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class AutomaticallyCollectableAreaEntity extends CollectableAreaEntity {
 
+	private boolean isWalkedOn = false;
+	
+	
 	public AutomaticallyCollectableAreaEntity(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
 	}
 	
 	public void collect() {
 		this.getOwnerArea().unregisterActor(this);
-		this.setIsCollected(false);
+		this.setIsCollected(true);
 	}
 
 	@Override
@@ -36,6 +39,20 @@ public class AutomaticallyCollectableAreaEntity extends CollectableAreaEntity {
 	public void draw(Canvas canvas) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	/**
+	 * @return the isWalkedOn
+	 */
+	public boolean isWalkedOn() {
+		return isWalkedOn;
+	}
+
+	/**
+	 * @param isWalkedOn the isWalkedOn to set
+	 */
+	public void setIsWalkedOn(boolean isWalkedOn) {
+		this.isWalkedOn = isWalkedOn;
 	}
 
 

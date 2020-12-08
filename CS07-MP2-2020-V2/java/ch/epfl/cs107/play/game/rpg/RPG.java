@@ -59,8 +59,8 @@ public abstract class RPG extends AreaGame {
             player.enterArea(area, door.getOtherSideCoordinates());
         } 
        
-       if(collectable.isCollected()) {
-    	  ((AutomaticallyCollectableAreaEntity)collectable).collect();
+       if(collectable.isCollected() && ((AutomaticallyCollectableAreaEntity)collectable).isWalkedOn()) {
+    	  collectable.collect();
        }
        
        super.update(deltaTime);

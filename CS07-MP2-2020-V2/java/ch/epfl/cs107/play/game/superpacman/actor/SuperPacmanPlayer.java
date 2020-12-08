@@ -163,7 +163,7 @@ public class SuperPacmanPlayer extends Player{
 	    }
 	    
 	    public void interactWith(AutomaticallyCollectableAreaEntity collectable) {
-	    	collectable.setIsCollected(true);
+	    	collectable.setIsWalkedOn(true);
 	    }
 	   
 	}
