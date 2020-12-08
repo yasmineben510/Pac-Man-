@@ -151,9 +151,6 @@ public class SuperPacmanPlayer extends Player{
 		other.acceptInteraction(handler);
         }
 	
-	/*public void interactWith(CollectableAreaEntity collectable) {
-		collectable.acceptInteraction(handler);
-	}*/
 		
 	private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
 		/**
@@ -165,7 +162,7 @@ public class SuperPacmanPlayer extends Player{
 	    }
 	    
 	    public void interactWith(AutomaticallyCollectableAreaEntity collectable) {
-	    	collectable.setIsWalkedOn(true);
+	    	 collectable.setIsWalkedOn(true);
 
 	    	 if(!collectable.isCollected() && collectable.isWalkedOn()) {
 	       	  collectable.collect();
