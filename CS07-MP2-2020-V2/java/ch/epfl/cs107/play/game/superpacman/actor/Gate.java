@@ -17,16 +17,33 @@ import ch.epfl.cs107.play.window.Canvas;
 public class Gate extends AreaEntity {
 
 	Sprite sprite;
-	Logic signal;
+	Logic signal1;
+	Logic signal2;
+	
 	public Gate(Area area, Orientation orientation, DiscreteCoordinates position, Logic signal) {
 		super(area, orientation, position);
-		this.signal = signal;
+		this.signal1 = signal;
+		this.signal2 = signal;
 		if (orientation == Orientation.DOWN || orientation == Orientation.UP ) 
 	        sprite = new Sprite("superpacman/gate",  1, 1, this, new RegionOfInterest(0,0,64,64));
 		 else 
 			 sprite = new Sprite("superpacman/gate",  1, 1, this, new RegionOfInterest(0,64,64,64));
 		
 	}
+	
+	public Gate(Area area, Orientation orientation, DiscreteCoordinates position, Logic signal1,Logic signal2) {
+		
+		super(area, orientation, position);
+		this.signal1 = signal1;
+		this.signal2 = signal2;
+		if (orientation == Orientation.DOWN || orientation == Orientation.UP ) 
+	        sprite = new Sprite("superpacman/gate",  1, 1, this, new RegionOfInterest(0,0,64,64));
+		 else 
+			 sprite = new Sprite("superpacman/gate",  1, 1, this, new RegionOfInterest(0,64,64,64));
+		
+		
+	}
+
 
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
@@ -35,7 +52,7 @@ public class Gate extends AreaEntity {
 
 	@Override
 	public boolean takeCellSpace() {
-		if (signal.isOn()) return false;
+		if (signal1.isOn() && signal2.isOn()) return false;
 		else return true;
 		
 	}
@@ -57,7 +74,7 @@ public class Gate extends AreaEntity {
 
 	@Override
 	public void draw(Canvas canvas) {
-		if (signal.isOff()) sprite.draw(canvas);
+		if (signal1.isOff() || signal2.isOff()) sprite.draw(canvas);
 	}
 
 }
