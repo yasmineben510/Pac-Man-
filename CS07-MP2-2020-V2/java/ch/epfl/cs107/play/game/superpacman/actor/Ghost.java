@@ -41,9 +41,6 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
         
         spriteAfraid = RPGSprite.extractSprites("superpacman/coin", 4, 1, 1, this, 16, 16);
 		animationAfraid = new Animation(ANIMATION_DURATION_GHOST,spriteAfraid);
-		for (int i=0; i<4; ++i) {
-			spriteAfraid[i].setDepth(-100.f);
-		}
         
     }
 	
