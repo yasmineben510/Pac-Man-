@@ -3,6 +3,7 @@ package ch.epfl.cs107.play.game.superpacman;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.rpg.RPG;
+import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
 import ch.epfl.cs107.play.game.superpacman.actor.SuperPacmanPlayer;
 import ch.epfl.cs107.play.game.superpacman.area.Level0;
 import ch.epfl.cs107.play.game.superpacman.area.Level1;
@@ -33,6 +34,16 @@ public class SuperPacman extends RPG {
 		addArea(new Level1());
 		addArea(new Level2());
 	}
+	
+	
+	private void frightenGhosts() {
+		Ghost.setIsAfraid(true);
+		if (Ghost.getTimer()<=0) {
+			player.resetVulnerable();
+			Ghost.setIsAfraid(false);
+		}
+		
+	}
 
 	/// SuperPacman implements playable
 	
@@ -40,7 +51,7 @@ public class SuperPacman extends RPG {
 	public boolean begin(Window window, FileSystem fileSystem) {
 		if (super.begin(window, fileSystem)) {
 			createAreas();
-			areaIndex = 2;
+			areaIndex = 1;
 			Area area = setCurrentArea(areas[areaIndex], true);
 			player = new SuperPacmanPlayer(area, Orientation.RIGHT, ((SuperPacmanArea)area).getPlayerSpawnPosition(),"superpacman/bonus");
 			initPlayer(player);
@@ -52,13 +63,6 @@ public class SuperPacman extends RPG {
 	@Override
 	public void end() {
 	}
-
-	protected void switchArea() {
-		player.leaveArea();
-		areaIndex = (areaIndex==0) ? 1 : 0;
-		Area currentArea = setCurrentArea(areas[areaIndex], false);
-		player.enterArea(currentArea, startingPositions[areaIndex]);
-	}
 	
 	// Returns the title of the game
 	
@@ -69,6 +73,11 @@ public class SuperPacman extends RPG {
 	
 	@Override
 	public void update(float deltaTime) {
+		if(!player.isVulnerable()) {
+			frightenGhosts();
+			
+		}
+		
 		super.update(deltaTime);
 	}
 }

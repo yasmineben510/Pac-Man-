@@ -22,6 +22,7 @@ import ch.epfl.cs107.play.window.Canvas;
 public class Bonus extends AutomaticallyCollectableAreaEntity{
 	
     private final static int ANIMATION_DURATION = 6;
+    private final static int BONUS_TIMER = 10;
     private Sprite[] sprites;
 	Animation animation;
 	
@@ -33,7 +34,17 @@ public class Bonus extends AutomaticallyCollectableAreaEntity{
 			sprites[i].setDepth(-100.f);
 		}
 	}
+	
 
+	/**
+	 * @return the bonusTimer
+	 */
+	public static int getBonusTimer() {
+		return BONUS_TIMER;
+	}
+	
+	
+	/// Bonus extends Entity
 	
 	@Override
 	public void update(float deltaTime) {
@@ -45,6 +56,9 @@ public class Bonus extends AutomaticallyCollectableAreaEntity{
 	public void draw(Canvas canvas) {
 		animation.draw(canvas);
 	}
+
+
+	
 
 
 }

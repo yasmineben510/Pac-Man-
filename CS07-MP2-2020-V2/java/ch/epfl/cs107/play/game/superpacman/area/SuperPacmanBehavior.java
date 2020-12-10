@@ -9,6 +9,7 @@ import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.superpacman.actor.Blinky;
 import ch.epfl.cs107.play.game.superpacman.actor.Bonus;
 import ch.epfl.cs107.play.game.superpacman.actor.Cherry;
 import ch.epfl.cs107.play.game.superpacman.actor.Diamond;
@@ -88,6 +89,22 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		
 		registerCollectable(area);
 		
+		registerGhosts(area);
+	}
+	
+	/**
+	 * Register the ghosts
+	 * @param area
+	 */
+	private void registerGhosts(Area area) {
+		for (int x = 0; x<getWidth(); ++x) {
+			for (int y =0; y<getHeight(); ++y) {
+		   	  DiscreteCoordinates position = new DiscreteCoordinates(x, y);
+			  if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_BLINKY)) {
+			  area.registerActor(new Blinky(area,position,position));
+			  }
+			}
+		}	
 	}
 	
 	
@@ -192,6 +209,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	protected List<Diamond> getDiamonds() {
 		return diamonds;
 	}
+	
 
 
 
@@ -228,7 +246,6 @@ public class SuperPacmanBehavior extends AreaBehavior{
 
 		@Override
 		public boolean isViewInteractable() {
-			// TODO Auto-generated method stub
 			return false;
 		}
 

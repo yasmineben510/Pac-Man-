@@ -21,6 +21,9 @@ public abstract class SuperPacmanArea extends Area implements Logic{
      */
 	public abstract DiscreteCoordinates getPlayerSpawnPosition();
 	
+	
+	
+	
 	/** 
 	 * @return collected (boolean): true if all the diamonds are collected, false if not 
 	 */
@@ -67,7 +70,7 @@ public abstract class SuperPacmanArea extends Area implements Logic{
 	       setBehavior(behavior);
 	       createArea();
 	       return true;
-	        }
+	    }
 	    return false;
 	}
     

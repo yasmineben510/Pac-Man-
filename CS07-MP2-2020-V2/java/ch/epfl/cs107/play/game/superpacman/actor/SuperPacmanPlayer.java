@@ -3,6 +3,7 @@ package ch.epfl.cs107.play.game.superpacman.actor;
 
 import java.awt.Color;
 
+
 import java.util.Collections;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
+import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
@@ -36,6 +38,7 @@ public class SuperPacmanPlayer extends Player{
     private static int hp = 3;
     private int score = 0;
     private SuperPacmanPlayerStatusGUI statusGUI;
+    private boolean isVulnerable = true;
    
 	/**
 	 * Demo actor
@@ -56,6 +59,26 @@ public class SuperPacmanPlayer extends Player{
 
 	}
 	
+	public boolean isVulnerable() {
+		return isVulnerable;
+	}
+	
+	public void resetVulnerable() {
+		isVulnerable=true;
+	}
+
+	private void isEaten() {
+		hp-=1;
+		getOwnerArea().leaveAreaCells(this , getEnteredCells());
+		DiscreteCoordinates position = ((SuperPacmanArea)getOwnerArea()).getPlayerSpawnPosition();
+		setCurrentPosition(position.toVector());
+		getOwnerArea().enterAreaCells(this , getCurrentCells());
+		resetMotion();
+	}
+	
+	
+	/// extends Entity
+	
 	 @Override
 	 public void update(float deltaTime) {
      	
@@ -70,11 +93,13 @@ public class SuperPacmanPlayer extends Player{
 		if (keyboard.get(Keyboard.DOWN).isDown()) desiredOrientation = Orientation.DOWN;
 		
 		List <DiscreteCoordinates> nextCells = Collections.singletonList(getCurrentMainCellCoordinates().jump(desiredOrientation.toVector()));			
-        if (!isDisplacementOccurs()) {
+       
+		if (!isDisplacementOccurs()) {
             if(getOwnerArea().canEnterAreaCells(this, nextCells)) {
 				  orientate(desiredOrientation);
 			    } 
             move(ANIMATION_DURATION/2);
+ 
         }
 	    
 	    if(isDisplacementOccurs()) {
@@ -94,7 +119,7 @@ public class SuperPacmanPlayer extends Player{
 	    } 
 	    
 	    else {
-	    	resetMotion();
+            resetMotion();
 	    	currentAnimation.reset();
 	    }
 	    super.update(deltaTime);
@@ -106,6 +131,8 @@ public class SuperPacmanPlayer extends Player{
 		currentAnimation.draw(canvas);
 		statusGUI.draw(canvas);
 	}
+	
+	/// implements Interactable
 
 	@Override
 	public boolean takeCellSpace() {
@@ -130,6 +157,8 @@ public class SuperPacmanPlayer extends Player{
 	public void acceptInteraction(AreaInteractionVisitor v) {
 		((SuperPacmanInteractionVisitor)v).interactWith(this);
 	}
+	
+	/// implements Interactor
 
 	@Override
 	public List<DiscreteCoordinates> getFieldOfViewCells() {
@@ -151,6 +180,7 @@ public class SuperPacmanPlayer extends Player{
 		other.acceptInteraction(handler);
         }
 	
+	
 		
 	private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
 		/**
@@ -170,11 +200,27 @@ public class SuperPacmanPlayer extends Player{
 	    	 collectable.setIsWalkedOn(true);
 
 	    	 if(!collectable.isCollected() && collectable.isWalkedOn()) {
-	       	  collectable.collect();
-	       	  score += collectable.getPoints();
-	       	  
-	          }
+	       	    collectable.collect();
+	       	    score += collectable.getPoints();
+	       	    if (collectable instanceof Bonus) {
+	       	    	isVulnerable=false;
+	       	    	Ghost.setTimer(Bonus.getBonusTimer());
+	       	    }
+	         }
 	    }
-	   
+	    
+	    /**
+	     * Simulate an interaction between SuperPacmanPlayer and a Ghost
+	     * @param ghost (Ghost), not null
+	     */
+	    public void interactWith(Ghost ghost){
+
+	    	if(isVulnerable) {
+	    		isEaten();
+	    	} else {
+	    		score+=ghost.getGHOST_SCORE();
+	    		ghost.isEaten();
+	    	}
+	    }
 	}
 }
