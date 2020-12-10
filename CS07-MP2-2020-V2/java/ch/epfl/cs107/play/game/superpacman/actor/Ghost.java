@@ -1,5 +1,6 @@
 package ch.epfl.cs107.play.game.superpacman.actor;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,6 +16,8 @@ import ch.epfl.cs107.play.window.Canvas;
 public class Ghost extends MovableAreaEntity implements Interactor{
 	
 	private final int GHOST_SCORE = 500; // static or not ? 
+	private final static int RADIUS = 5;
+	private SuperPacmanPlayer player = null;
 
 	public Ghost(Area area, Orientation orientation, DiscreteCoordinates position, DiscreteCoordinates shelter) {
 		super(area, orientation, position);
@@ -57,8 +60,15 @@ public class Ghost extends MovableAreaEntity implements Interactor{
 	/// implements Interactor
 	@Override
 	public List<DiscreteCoordinates> getFieldOfViewCells() {
-		// TODO Auto-generated method stub
-		return null;
+		List<DiscreteCoordinates> neighbor = new ArrayList<DiscreteCoordinates>();
+		int x = getCurrentMainCellCoordinates().x;
+		int y = getCurrentMainCellCoordinates().y;
+		for(int i = x - RADIUS; i <= x + RADIUS ; ++i) { 
+			for (int j = y - RADIUS; j <= y + RADIUS; ++i) {
+				neighbor.add(new DiscreteCoordinates(i,j));
+			}
+		}
+		return neighbor;
 	}
 
 	@Override
