@@ -5,23 +5,50 @@ import java.util.Collections;
 import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.areagame.actor.Animation;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.game.areagame.actor.MovableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class Ghost extends MovableAreaEntity implements Interactor{
+public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	
 	private final int GHOST_SCORE = 500; // static or not ? 
 	private final static int RADIUS = 5;
-	private SuperPacmanPlayer player = null;
+	private Sprite[][] sprites;
+	private Animation[] animations;
+	private Animation currentAnimation;
+	private Sprite[] spriteAfraid;
+	private Animation animationAfraid;
+	private final int ANIMATION_DURATION_GHOST = 18;
+	private SuperPacmanPlayer player;
+	private boolean isAfraid;
 
-	public Ghost(Area area, Orientation orientation, DiscreteCoordinates position, DiscreteCoordinates shelter) {
+	public Ghost(Area area, Orientation orientation, DiscreteCoordinates position, DiscreteCoordinates shelter, String spriteName) {
 		super(area, orientation, position);
-		// TODO Auto-generated constructor stub
+		
+		player = null;
+		isAfraid = false;
+		
+		sprites = RPGSprite.extractSprites(spriteName, 4, 1, 1, this, 64, 64, new Orientation[] {Orientation.DOWN, Orientation.LEFT, Orientation.UP, Orientation.RIGHT});
+        animations = Animation.createAnimations(ANIMATION_DURATION_GHOST / 3, sprites);
+        currentAnimation = animations[Orientation.RIGHT.ordinal()];
+        
+        spriteAfraid = RPGSprite.extractSprites("superpacman/coin", 4, 1, 1, this, 16, 16);
+		animationAfraid = new Animation(ANIMATION_DURATION_GHOST,spriteAfraid);
+		for (int i=0; i<4; ++i) {
+			spriteAfraid[i].setDepth(-100.f);
+		}
+        
+    }
+	
+	public boolean isAfraid() {
+		return isAfraid;
 	}
 
 	/// implements Interactable
