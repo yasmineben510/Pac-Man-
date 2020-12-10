@@ -33,15 +33,9 @@ public class Gate extends AreaEntity {
 	
 	public Gate(Area area, Orientation orientation, DiscreteCoordinates position, Logic signal1,Logic signal2) {
 		
-		super(area, orientation, position);
-		this.signal1 = signal1;
+		this(area, orientation, position, signal1);
 		this.signal2 = signal2;
-		if (orientation == Orientation.DOWN || orientation == Orientation.UP ) 
-	        sprite = new Sprite("superpacman/gate",  1, 1, this, new RegionOfInterest(0,0,64,64));
-		 else 
-			 sprite = new Sprite("superpacman/gate",  1, 1, this, new RegionOfInterest(0,64,64,64));
-		
-		
+				
 	}
 
 
