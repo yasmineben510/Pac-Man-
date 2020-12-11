@@ -23,7 +23,6 @@ public abstract class SuperPacmanArea extends Area implements Logic{
 	
 	
 	
-	
 	/** 
 	 * @return collected (boolean): true if all the diamonds are collected, false if not 
 	 */

@@ -38,26 +38,26 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	private static int timer;
 
 	public Ghost(Area area, DiscreteCoordinates position, DiscreteCoordinates shelter, String spriteName) {
-		super(area, Orientation.RIGHT, position);
+		super(area, Orientation.LEFT, position);
 		
 		this.shelter=shelter;
 				
-		sprites = RPGSprite.extractSprites(spriteName, 4, 1, 1, this, 64, 64, new Orientation[] {Orientation.DOWN, Orientation.LEFT, Orientation.UP, Orientation.RIGHT});
-        animations = Animation.createAnimations(ANIMATION_DURATION_GHOST / 3, sprites);
+		sprites = RPGSprite.extractSprites(spriteName, 2, 1, 1, this, 16, 16, new Orientation[] {Orientation.UP, Orientation.RIGHT, Orientation.DOWN, Orientation.LEFT});
+        animations = Animation.createAnimations(ANIMATION_DURATION_GHOST, sprites);
         
-        spriteAfraid = RPGSprite.extractSprites("superpacman/coin", 4, 1, 1, this, 16, 16);
+        spriteAfraid = RPGSprite.extractSprites("superpacman/ghost.afraid",2, 1, 1, this, 16, 16);
 		animationAfraid = new Animation(ANIMATION_DURATION_GHOST,spriteAfraid);
         
-		currentAnimation = animations[Orientation.RIGHT.ordinal()];
+		currentAnimation = animations[Orientation.LEFT.ordinal()];
     }
 	
 	public static void setIsAfraid(boolean afraid) {
 		isAfraid = afraid;
 	}
 	
+	
 	public static void setTimer(int bonusTimer){   
-	    timer = bonusTimer;
-		
+	    timer=bonusTimer;
 	}
 	
 	public static int getTimer() {
@@ -118,9 +118,11 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	@Override
 	public void update(float deltaTime) {
 		
+		
 		if(isAfraid) {
 			timer-=deltaTime;
-		}
+			currentAnimation = animationAfraid;
+		} 
 		
 		
 		Orientation nextOrientation = getNextOrientation();
@@ -133,8 +135,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
             move(ANIMATION_DURATION_GHOST);
 		}
 		
-		
-		if(isDisplacementOccurs()) {
+		  if(!isAfraid) {
 			if(getOrientation().equals(Orientation.LEFT)) {
 	    	     currentAnimation = animations[Orientation.LEFT.ordinal()];
 	        }
@@ -147,12 +148,11 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	    	if(getOrientation().equals(Orientation.DOWN)) {
 	    	     currentAnimation = animations[Orientation.DOWN.ordinal()];
 	        }
-	    	if(isAfraid) {
-				currentAnimation=animationAfraid;
-	    	}
-	    	
+	      }
+		  
+	    if(isDisplacementOccurs()) {
 			currentAnimation.update(deltaTime);
-		}
+	    }
 		
 		else {
 			 resetMotion();
@@ -175,7 +175,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 		int x = getCurrentMainCellCoordinates().x;
 		int y = getCurrentMainCellCoordinates().y;
 		for(int i = x - RADIUS; i <= x + RADIUS ; ++i) { 
-			for (int j = y - RADIUS; j <= y + RADIUS; ++i) {
+			for (int j = y - RADIUS; j <= y + RADIUS; ++j) {
 				neighbor.add(new DiscreteCoordinates(i,j));
 			}
 		}

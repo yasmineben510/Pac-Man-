@@ -44,6 +44,7 @@ public class SuperPacman extends RPG {
 		}
 		
 	}
+	
 
 	/// SuperPacman implements playable
 	
@@ -75,8 +76,9 @@ public class SuperPacman extends RPG {
 	public void update(float deltaTime) {
 		if(!player.isVulnerable()) {
 			frightenGhosts();
-			
 		}
+		
+		
 		
 		super.update(deltaTime);
 	}

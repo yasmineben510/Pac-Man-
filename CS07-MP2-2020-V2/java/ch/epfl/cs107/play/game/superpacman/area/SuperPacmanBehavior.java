@@ -13,6 +13,7 @@ import ch.epfl.cs107.play.game.superpacman.actor.Blinky;
 import ch.epfl.cs107.play.game.superpacman.actor.Bonus;
 import ch.epfl.cs107.play.game.superpacman.actor.Cherry;
 import ch.epfl.cs107.play.game.superpacman.actor.Diamond;
+import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
 import ch.epfl.cs107.play.game.superpacman.actor.Key;
 import ch.epfl.cs107.play.game.superpacman.actor.Wall;
 import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior.Tuto2CellType;
@@ -25,6 +26,8 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	
 	
 	private List<Diamond> diamonds = new ArrayList<Diamond>();
+	private List<Ghost> ghosts = new ArrayList<Ghost>();
+
 	
 	
 	
@@ -101,7 +104,9 @@ public class SuperPacmanBehavior extends AreaBehavior{
 			for (int y =0; y<getHeight(); ++y) {
 		   	  DiscreteCoordinates position = new DiscreteCoordinates(x, y);
 			  if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_BLINKY)) {
-			  area.registerActor(new Blinky(area,position,position));
+			  Ghost ghost = new Blinky(area,position,position);
+			  area.registerActor(ghost);
+			  ghosts.add(ghost);
 			  }
 			}
 		}	
@@ -211,8 +216,6 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	}
 	
 
-
-
 	/**
 	 * Class SuperPacmanCell extends AreaBehavior.Cell
 	 * Instance for the SuperPacmanCellType of the SuperPacmanBehavior
@@ -261,4 +264,9 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		}
 		
 	}
+
+
+
+
+	
 }
