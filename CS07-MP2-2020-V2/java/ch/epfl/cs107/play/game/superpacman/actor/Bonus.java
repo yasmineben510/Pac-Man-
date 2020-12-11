@@ -22,7 +22,7 @@ import ch.epfl.cs107.play.window.Canvas;
 public class Bonus extends AutomaticallyCollectableAreaEntity{
 	
     private final static int ANIMATION_DURATION = 6;
-    private final static int BONUS_TIMER = 200;
+    private final static int BONUS_TIMER = 10;
     private Sprite[] sprites;
 	Animation animation;
 	
@@ -58,6 +58,12 @@ public class Bonus extends AutomaticallyCollectableAreaEntity{
 	}
 
 
+	/// Bonus implements Interactable
+	
+	@Override
+	public void acceptInteraction(AreaInteractionVisitor v) {
+		((SuperPacmanInteractionVisitor)v).interactWith(this);
+	}
 	
 
 

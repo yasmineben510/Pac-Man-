@@ -24,7 +24,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	GhostHandler handler = new GhostHandler();
 	
 	
-	private final int GHOST_SCORE = 500; // static or not ? 
+	private final int GHOST_SCORE = 500;  
 	private final int RADIUS = 5;
 	private Sprite[][] sprites;
 	private Animation[] animations;
@@ -33,12 +33,15 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	private Animation animationAfraid;
 	private DiscreteCoordinates shelter;
 	private final int ANIMATION_DURATION_GHOST = 18;
-	private SuperPacmanPlayer SuperPacman = null;
-	private static boolean isAfraid = false;
-	private static int timer;
+	private SuperPacmanPlayer SuperPacman;
+	private static boolean isAfraid;
+	private static float timer;
 
 	public Ghost(Area area, DiscreteCoordinates position, DiscreteCoordinates shelter, String spriteName) {
 		super(area, Orientation.LEFT, position);
+		
+		SuperPacman=null;
+		isAfraid=false;
 		
 		this.shelter=shelter;
 				
@@ -60,7 +63,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	    timer=bonusTimer;
 	}
 	
-	public static int getTimer() {
+	public static float getTimer() {
 		return timer;
 	}
 
@@ -74,12 +77,16 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	
 	protected abstract Orientation getNextOrientation();
 	
-	
-	protected void isEaten() {
+	public void resetGhostPosition() {
 		getOwnerArea().leaveAreaCells(this , getEnteredCells());
 		setCurrentPosition(shelter.toVector());
 		getOwnerArea().enterAreaCells(this , getCurrentCells());
 		resetMotion();
+	}
+	
+	
+	protected void isEaten() {
+		resetGhostPosition();
 		SuperPacman = null;
 	}
 	
@@ -118,9 +125,10 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	@Override
 	public void update(float deltaTime) {
 		
+
 		
 		if(isAfraid) {
-			timer-=deltaTime;
+			timer -= deltaTime;
 			currentAnimation = animationAfraid;
 		} 
 		
@@ -176,7 +184,9 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 		int y = getCurrentMainCellCoordinates().y;
 		for(int i = x - RADIUS; i <= x + RADIUS ; ++i) { 
 			for (int j = y - RADIUS; j <= y + RADIUS; ++j) {
+				if(i>=0 && i<getOwnerArea().getWidth() && j>=0 && j<getOwnerArea().getHeight()) {
 				neighbor.add(new DiscreteCoordinates(i,j));
+				}
 			}
 		}
 		return neighbor;

@@ -19,7 +19,7 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class Cherry extends AutomaticallyCollectableAreaEntity{
 	
-	private final int points = 200;
+	private final int POINTS = 200;
     Sprite sprite;
 	
 	public Cherry(Area area, DiscreteCoordinates position) {
@@ -35,7 +35,7 @@ public class Cherry extends AutomaticallyCollectableAreaEntity{
 	
 	@Override
 	public int getPoints() {
-		return points;
+		return POINTS;
 	}
 
 }

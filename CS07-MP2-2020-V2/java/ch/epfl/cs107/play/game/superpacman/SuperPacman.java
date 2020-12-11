@@ -54,7 +54,7 @@ public class SuperPacman extends RPG {
 			createAreas();
 			areaIndex = 1;
 			Area area = setCurrentArea(areas[areaIndex], true);
-			player = new SuperPacmanPlayer(area, Orientation.RIGHT, ((SuperPacmanArea)area).getPlayerSpawnPosition(),"superpacman/bonus");
+			player = new SuperPacmanPlayer(area, Orientation.DOWN, ((SuperPacmanArea)area).getPlayerSpawnPosition(),"superpacman/bonus");
 			initPlayer(player);
 			return true;
 		}
@@ -76,6 +76,11 @@ public class SuperPacman extends RPG {
 	public void update(float deltaTime) {
 		if(!player.isVulnerable()) {
 			frightenGhosts();
+		} 
+		
+		if(player.isEaten()) {
+			((SuperPacmanArea)getCurrentArea()).resetAllGhostsPosition();
+			player.setEaten(false);
 		}
 		
 		

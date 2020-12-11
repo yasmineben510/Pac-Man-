@@ -13,7 +13,7 @@ public class Blinky extends Ghost {
 
 	@Override
 	protected Orientation getNextOrientation() {
-		int randomInt = RandomGenerator.getInstance().nextInt(3);
+		int randomInt = RandomGenerator.getInstance().nextInt(4);
 		return Orientation.fromInt(randomInt);
 	}
 

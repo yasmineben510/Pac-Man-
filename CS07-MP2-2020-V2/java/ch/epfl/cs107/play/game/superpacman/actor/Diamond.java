@@ -17,7 +17,7 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class Diamond extends AutomaticallyCollectableAreaEntity{
 	
-	final int points = 10;
+	final int POINTS = 10;
 	
     Sprite sprite;
 	
@@ -34,7 +34,7 @@ public class Diamond extends AutomaticallyCollectableAreaEntity{
 	
 	@Override
 	public int getPoints() {
-		return points;
+		return POINTS;
 	}
 
 }

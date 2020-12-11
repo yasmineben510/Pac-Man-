@@ -21,7 +21,9 @@ public abstract class SuperPacmanArea extends Area implements Logic{
      */
 	public abstract DiscreteCoordinates getPlayerSpawnPosition();
 	
-	
+	public void resetAllGhostsPosition() {
+		behavior.resetAllGhostsPosition();
+	}
 	
 	/** 
 	 * @return collected (boolean): true if all the diamonds are collected, false if not 

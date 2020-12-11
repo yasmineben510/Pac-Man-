@@ -28,7 +28,7 @@ import ch.epfl.cs107.play.window.Keyboard;
 
 public class SuperPacmanPlayer extends Player{
 	
-	SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
+	SuperPacmanPlayerHandler handler;
 	 
 	/// Animation duration in frame number
     private final static int ANIMATION_DURATION = 6;
@@ -36,9 +36,10 @@ public class SuperPacmanPlayer extends Player{
     private Animation[] animations;
     private Animation currentAnimation;
     private static int hp = 3;
-    private int score = 0;
+    private int score;
     private SuperPacmanPlayerStatusGUI statusGUI;
-    private boolean isVulnerable = true;
+    private boolean isVulnerable;
+    private boolean isEaten;
    
 	/**
 	 * Demo actor
@@ -46,9 +47,13 @@ public class SuperPacmanPlayer extends Player{
 	 */
 	public SuperPacmanPlayer(Area owner, Orientation orientation, DiscreteCoordinates coordinates, String spriteName) {
 		super(owner, orientation, coordinates);
+		
 		desiredOrientation=orientation;
 		statusGUI = new SuperPacmanPlayerStatusGUI(this.score,hp);
-		
+		handler = new SuperPacmanPlayerHandler();	
+		score=0;
+		isVulnerable=true;
+		setEaten(false);
 		
 		Sprite[][] sprites = RPGSprite.extractSprites("superpacman/pacman", 4, 1, 1, this, 64, 64,
                 new Orientation[] {Orientation.DOWN, Orientation.LEFT, Orientation.UP, Orientation.RIGHT});
@@ -67,19 +72,34 @@ public class SuperPacmanPlayer extends Player{
 		isVulnerable=true;
 	}
 
-	private void isEaten() {
+	private void eatsPlayer() {
 		hp-=1;
 		getOwnerArea().leaveAreaCells(this , getEnteredCells());
 		DiscreteCoordinates position = ((SuperPacmanArea)getOwnerArea()).getPlayerSpawnPosition();
 		setCurrentPosition(position.toVector());
 		getOwnerArea().enterAreaCells(this , getCurrentCells());
 		resetMotion();
+		setEaten(true);
 	}
 	
 	
 	/// extends Entity
 	
-	 @Override
+	 /**
+	 * @return the isEaten
+	 */
+	public boolean isEaten() {
+		return isEaten;
+	}
+
+	/**
+	 * @param isEaten the isEaten to set
+	 */
+	public void setEaten(boolean isEaten) {
+		this.isEaten = isEaten;
+	}
+
+	@Override
 	 public void update(float deltaTime) {
      	
 		if (hp > 5) hp = 5;
@@ -202,11 +222,16 @@ public class SuperPacmanPlayer extends Player{
 	    	 if(!collectable.isCollected() && collectable.isWalkedOn()) {
 	       	    collectable.collect();
 	       	    score += collectable.getPoints();
-	       	    if (collectable instanceof Bonus) {
-	       	    	isVulnerable=false;
-	       	    	Ghost.setTimer(Bonus.getBonusTimer());
-	       	    }
 	         }
+	    }
+	    
+	    public void interactWith(Bonus bonus) {
+	    	interactWith((AutomaticallyCollectableAreaEntity)bonus);
+	    	if(bonus.isCollected()) {
+	    		isVulnerable=false;
+       	    	Ghost.setTimer(Bonus.getBonusTimer());
+	    	}
+	    	
 	    }
 	    
 	    /**
@@ -216,7 +241,9 @@ public class SuperPacmanPlayer extends Player{
 	    public void interactWith(Ghost ghost){
 
 	    	if(isVulnerable) {
-	    		isEaten();
+	    		eatsPlayer();
+	    		ghost.resetGhostPosition();
+	    		
 	    	} else {
 	    		score+=ghost.getGHOST_SCORE();
 	    		ghost.isEaten();

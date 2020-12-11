@@ -1,10 +1,13 @@
 package ch.epfl.cs107.play.game.superpacman.area;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.areagame.AreaGraph;
+
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
@@ -16,7 +19,6 @@ import ch.epfl.cs107.play.game.superpacman.actor.Diamond;
 import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
 import ch.epfl.cs107.play.game.superpacman.actor.Key;
 import ch.epfl.cs107.play.game.superpacman.actor.Wall;
-import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior.Tuto2CellType;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Positionable;
 import ch.epfl.cs107.play.math.Vector;
@@ -27,8 +29,9 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	
 	private List<Diamond> diamonds = new ArrayList<Diamond>();
 	private List<Ghost> ghosts = new ArrayList<Ghost>();
+	private SuperPacmanCell cell;
+	private AreaGraph graph;
 
-	
 	
 	
 	/**
@@ -38,14 +41,46 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	 */
 	public SuperPacmanBehavior(Window window, String name) {
 		super(window, name);
-		SuperPacmanCell cell;
+		graph = new AreaGraph();		
 		for (int x = 0; x<getWidth(); ++x) {
 			for (int y =0; y<getHeight(); ++y) {
 				cell = new SuperPacmanCell(x,y,SuperPacmanCellType.toType(getRGB(getHeight()-1-y, x)));
 				setCell(x, y, cell);
 			}
-	  }
+	    }
+		createNodes();
 	}
+	
+	private void createNodes() {
+		boolean[] edges;
+		for (int x = 0; x<getWidth(); ++x) {
+			for (int y =0; y<getHeight(); ++y) {
+			  if (!(getCellType(x,y).equals(SuperPacmanCellType.WALL))) {
+				  DiscreteCoordinates position = new DiscreteCoordinates(x, y);
+			      edges = getEdges(x, y);
+			      graph.addNode(position, edges[0], edges[1], edges[2], edges[3]);
+			  }
+		   }
+		}
+	}
+	
+	 private boolean[] getEdges(int x, int y) {
+			boolean [] edges = new boolean[4];
+			if(!getCellType(x-1,y).equals(SuperPacmanCellType.WALL)) {
+				edges[0]=true;
+			}
+			if(!getCellType(x,y+1).equals(SuperPacmanCellType.WALL)) {
+				edges[1]=true;
+			}
+			if(!getCellType(x+1,y).equals(SuperPacmanCellType.WALL)) {
+				edges[2]=true;
+			}
+			if(!getCellType(x,y-1).equals(SuperPacmanCellType.WALL)) {
+				edges[3]=true;
+			}
+			return edges;
+		}
+	
 	
 	/**
 	 * Enum type SuperPacmanCellType
@@ -102,8 +137,8 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	private void registerGhosts(Area area) {
 		for (int x = 0; x<getWidth(); ++x) {
 			for (int y =0; y<getHeight(); ++y) {
-		   	  DiscreteCoordinates position = new DiscreteCoordinates(x, y);
 			  if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_BLINKY)) {
+			  DiscreteCoordinates position = new DiscreteCoordinates(x, y);
 			  Ghost ghost = new Blinky(area,position,position);
 			  area.registerActor(ghost);
 			  ghosts.add(ghost);
@@ -111,6 +146,9 @@ public class SuperPacmanBehavior extends AreaBehavior{
 			}
 		}	
 	}
+	
+	
+
 	
 	
 	/**
@@ -121,8 +159,8 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		boolean[][] neighborhood;
 		for (int x = 0; x<getWidth(); ++x) {
 			for (int y =0; y<getHeight(); ++y) {
-			  DiscreteCoordinates position = new DiscreteCoordinates(x, y);
 			  if (getCellType(x,y).equals(SuperPacmanCellType.WALL)) {
+				  DiscreteCoordinates position = new DiscreteCoordinates(x, y);
 				  neighborhood = getNeighborhood(x, y);
 				  area.registerActor(new Wall(area,position,neighborhood));
 			  }
@@ -156,6 +194,8 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		}
 	}
 	
+   
+	
 	/**
 	 * Construct the neighborhood of an actor WALL
 	 * Indicate if it contains an actor of the type WALL in his neighborhood
@@ -165,7 +205,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	 */
 	private boolean[][] getNeighborhood(int x, int y){
 	    
-		boolean[] [] neighborhood = new boolean[3] [3];
+		boolean[][] neighborhood = new boolean[3] [3];
 		neighborhood [1][1]=true;
 		
 		if (getCellType(x-1,y).equals(SuperPacmanCellType.WALL) ) {
@@ -215,6 +255,13 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		return diamonds;
 	}
 	
+	
+	
+	public void resetAllGhostsPosition() {
+		for(Ghost ghost : ghosts) {
+			ghost.resetGhostPosition();
+		}
+	}
 
 	/**
 	 * Class SuperPacmanCell extends AreaBehavior.Cell
@@ -264,6 +311,8 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		}
 		
 	}
+
+
 
 
 
