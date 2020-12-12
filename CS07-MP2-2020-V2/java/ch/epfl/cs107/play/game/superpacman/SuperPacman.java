@@ -35,7 +35,7 @@ public class SuperPacman extends RPG {
 		addArea(new Level2());
 	}
 	
-	
+	// idea decaler uniquement effrayer ghosts a la behavior au moyen de l'aire comme pour le resetpositions
 	private void frightenGhosts() {
 		Ghost.setIsAfraid(true);
 		if (Ghost.getTimer()<=0) {

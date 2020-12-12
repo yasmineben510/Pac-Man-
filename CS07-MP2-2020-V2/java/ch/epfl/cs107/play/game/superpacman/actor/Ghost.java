@@ -25,17 +25,19 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	
 	
 	private final int GHOST_SCORE = 500;  
+	private final int ANIMATION_DURATION_GHOST = 18;
 	private final int RADIUS = 5;
 	private Sprite[][] sprites;
 	private Animation[] animations;
 	private Animation currentAnimation;
 	private Sprite[] spriteAfraid;
 	private Animation animationAfraid;
+	
 	private DiscreteCoordinates shelter;
-	private final int ANIMATION_DURATION_GHOST = 18;
 	private SuperPacmanPlayer SuperPacman;
 	private static boolean isAfraid;
 	private static float timer;
+	private boolean isStateChanged;
 
 	public Ghost(Area area, DiscreteCoordinates position, DiscreteCoordinates shelter, String spriteName) {
 		super(area, Orientation.LEFT, position);
@@ -53,10 +55,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
         
 		currentAnimation = animations[Orientation.LEFT.ordinal()];
     }
-	
-	public static void setIsAfraid(boolean afraid) {
-		isAfraid = afraid;
-	}
+
 	
 	
 	public static void setTimer(int bonusTimer){   
@@ -75,6 +74,45 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	}
 	
 	
+	protected DiscreteCoordinates getShelter() {
+		return shelter;
+	}
+
+	protected SuperPacmanPlayer getSuperPacman() {
+		return SuperPacman;
+	}
+
+	protected void setSuperPacman(SuperPacmanPlayer superPacman) {
+		if(superPacman != this.SuperPacman) {
+			isStateChanged = true;
+		}
+		this.SuperPacman = superPacman;
+		
+	}
+
+	public static void setIsAfraid(boolean afraid) {
+		if(isAfraid != afraid) {
+			//isStateChanged = true;
+		}
+		isAfraid = afraid;
+	}
+	
+	protected static boolean isAfraid() {
+		return isAfraid;
+	}
+	
+	protected boolean isStateChanged() {
+		return isStateChanged;
+	}
+
+	protected void setStateChanged(boolean isStateChanged) {
+		this.isStateChanged = isStateChanged;
+	}
+
+	/**
+	 * note: needs to be override
+	 * @return the next orientation of the ghost
+	 */
 	protected abstract Orientation getNextOrientation();
 	
 	public void resetGhostPosition() {
@@ -87,7 +125,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	
 	protected void isEaten() {
 		resetGhostPosition();
-		SuperPacman = null;
+		setSuperPacman(null);
 	}
 	
 	/// implements Interactable

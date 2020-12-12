@@ -3,6 +3,7 @@ package ch.epfl.cs107.play.game.superpacman.area;
 import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.areagame.AreaGraph;
 import ch.epfl.cs107.play.game.superpacman.actor.Diamond;
 import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior;
 import ch.epfl.cs107.play.io.FileSystem;
@@ -48,6 +49,10 @@ public abstract class SuperPacmanArea extends Area implements Logic{
     protected void createArea() {
     	behavior.registerActors(this);
     }
+    
+	public AreaGraph getGraph() {
+		return behavior.getGraph();
+	}
 	
     /// SuperPacmanArea extends Area
     

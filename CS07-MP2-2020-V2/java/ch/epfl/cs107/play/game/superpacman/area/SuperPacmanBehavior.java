@@ -262,6 +262,14 @@ public class SuperPacmanBehavior extends AreaBehavior{
 			ghost.resetGhostPosition();
 		}
 	}
+	
+	
+
+	protected AreaGraph getGraph() {
+		return graph;
+	}
+
+
 
 	/**
 	 * Class SuperPacmanCell extends AreaBehavior.Cell
