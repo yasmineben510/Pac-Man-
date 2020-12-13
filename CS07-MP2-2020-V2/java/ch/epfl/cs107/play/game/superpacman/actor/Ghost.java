@@ -90,7 +90,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 		
 	}
 
-	public static void setIsAfraid(boolean afraid) {
+	public void setIsAfraid(boolean afraid) {
 		if(isAfraid != afraid) {
 			//isStateChanged = true;
 		}

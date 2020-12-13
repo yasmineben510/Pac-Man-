@@ -28,7 +28,9 @@ import ch.epfl.cs107.play.window.Keyboard;
 
 public class SuperPacmanPlayer extends Player{
 	
-	SuperPacmanPlayerHandler handler;
+	private SuperPacmanPlayerHandler handler;
+    private SuperPacmanPlayerStatusGUI statusGUI;
+
 	 
 	/// Animation duration in frame number
     private final static int ANIMATION_DURATION = 6;
@@ -37,7 +39,6 @@ public class SuperPacmanPlayer extends Player{
     private Animation currentAnimation;
     private static int hp = 3;
     private int score;
-    private SuperPacmanPlayerStatusGUI statusGUI;
     private boolean isVulnerable;
     private boolean isEaten;
    
