@@ -10,9 +10,8 @@ public class Pinky extends SuperGhost {
     final static int MAX_RANDOM_ATTEMPT =200;
 
 
-	public Pinky(Area area, DiscreteCoordinates position, DiscreteCoordinates shelter, String spriteName) {
-		super(area, position, shelter, spriteName);
-		// TODO Auto-generated constructor stub
+	public Pinky(Area area, DiscreteCoordinates position, DiscreteCoordinates shelter) {
+		super(area, position, shelter, "superpacman/ghost.pinky");
 	}
 
 	@Override

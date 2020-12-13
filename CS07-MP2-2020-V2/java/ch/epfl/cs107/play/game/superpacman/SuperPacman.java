@@ -37,12 +37,7 @@ public class SuperPacman extends RPG {
 	
 	// idea decaler uniquement effrayer ghosts a la behavior au moyen de l'aire comme pour le resetpositions
 	private void frightenGhosts() {
-		Ghost.setIsAfraid(true);
-		if (Ghost.getTimer()<=0) {
-			player.resetVulnerable();
-			Ghost.setIsAfraid(false);
-		}
-		
+		((SuperPacmanArea)getCurrentArea()).frightenGhosts();	
 	}
 	
 
@@ -75,7 +70,12 @@ public class SuperPacman extends RPG {
 	@Override
 	public void update(float deltaTime) {
 		if(!player.isVulnerable()) {
+			
 			frightenGhosts();
+			
+			if (Ghost.getTimer()<=0) {
+				player.resetVulnerable();
+			}
 		} 
 		
 		if(player.isEaten()) {

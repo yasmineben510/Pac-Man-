@@ -17,7 +17,9 @@ import ch.epfl.cs107.play.game.superpacman.actor.Bonus;
 import ch.epfl.cs107.play.game.superpacman.actor.Cherry;
 import ch.epfl.cs107.play.game.superpacman.actor.Diamond;
 import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
+import ch.epfl.cs107.play.game.superpacman.actor.Inky;
 import ch.epfl.cs107.play.game.superpacman.actor.Key;
+import ch.epfl.cs107.play.game.superpacman.actor.Pinky;
 import ch.epfl.cs107.play.game.superpacman.actor.Wall;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Positionable;
@@ -137,11 +139,24 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	private void registerGhosts(Area area) {
 		for (int x = 0; x<getWidth(); ++x) {
 			for (int y =0; y<getHeight(); ++y) {
+		   	  DiscreteCoordinates position = new DiscreteCoordinates(x, y);
+			   
 			  if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_BLINKY)) {
-			  DiscreteCoordinates position = new DiscreteCoordinates(x, y);
-			  Ghost ghost = new Blinky(area,position,position);
-			  area.registerActor(ghost);
-			  ghosts.add(ghost);
+				  Blinky ghost = new Blinky(area,position,position);
+				  area.registerActor(ghost);
+				  ghosts.add(ghost);
+			  }
+			  
+			  if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_INKY)) {
+				  Inky ghost = new Inky(area,position,position);
+				  area.registerActor(ghost);
+				  ghosts.add(ghost);
+			  }
+			  
+			  if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_PINKY)) {
+				  Pinky ghost = new Pinky(area,position,position);
+				  area.registerActor(ghost);
+				  ghosts.add(ghost);
 			  }
 			}
 		}	
@@ -263,6 +278,19 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		}
 	}
 	
+	public void frightenGhosts() {
+		
+		for(Ghost ghost : ghosts) {
+			ghost.setIsAfraid(true);
+		}
+		
+		if (Ghost.getTimer()<=0) {
+			for(Ghost ghost : ghosts) {
+				ghost.setIsAfraid(false);
+			}
+	    }
+	}
+
 	
 
 	protected AreaGraph getGraph() {
@@ -319,6 +347,9 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		}
 		
 	}
+
+
+
 
 
 

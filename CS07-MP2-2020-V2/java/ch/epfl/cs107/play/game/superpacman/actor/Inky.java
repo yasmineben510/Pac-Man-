@@ -12,9 +12,8 @@ public class Inky extends SuperGhost {
 	final static int MAX_DISTANCE_WHEN_SCARED = 5;
 
 
-	public Inky(Area area, DiscreteCoordinates position, DiscreteCoordinates shelter, String spriteName) {
-		super(area, position, shelter, spriteName);
-		// TODO Auto-generated constructor stub
+	public Inky(Area area, DiscreteCoordinates position, DiscreteCoordinates shelter) {
+		super(area, position, shelter, "superpacman/ghost.inky");
 	}
 
 	@Override

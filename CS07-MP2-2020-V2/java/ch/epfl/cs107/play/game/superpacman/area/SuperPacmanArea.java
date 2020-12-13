@@ -22,6 +22,13 @@ public abstract class SuperPacmanArea extends Area implements Logic{
      */
 	public abstract DiscreteCoordinates getPlayerSpawnPosition();
 	
+	
+	
+	public void frightenGhosts(){
+		behavior.frightenGhosts();
+	}
+	
+	
 	public void resetAllGhostsPosition() {
 		behavior.resetAllGhostsPosition();
 	}

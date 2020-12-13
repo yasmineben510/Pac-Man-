@@ -92,7 +92,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 
 	public void setIsAfraid(boolean afraid) {
 		if(isAfraid != afraid) {
-			//isStateChanged = true;
+			isStateChanged = true;
 		}
 		isAfraid = afraid;
 	}
@@ -105,9 +105,18 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 		return isStateChanged;
 	}
 
+	
+	// setter maybe not necessary check later
 	protected void setStateChanged(boolean isStateChanged) {
 		this.isStateChanged = isStateChanged;
 	}
+	
+	protected int getAnimationDurationGhost() {
+		return  ANIMATION_DURATION_GHOST;
+	}
+	
+	
+	
 
 	/**
 	 * note: needs to be override
