@@ -32,8 +32,9 @@ public abstract class SuperGhost extends Ghost {
 			do {	
 			 targetPos= getSuperPacman().getCurrentCells().get(0);
 			 path = ((SuperPacmanArea)getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(),targetPos);
-			 graphicPath= new Path(this.getPosition(), new LinkedList <Orientation >(path));
 			} while (path == null );
+			
+			graphicPath= new Path(this.getPosition(), new LinkedList <Orientation >(path));
 		
 		return path.poll();
 	}
@@ -46,8 +47,9 @@ public abstract class SuperGhost extends Ghost {
 		do {
 			targetPos = new DiscreteCoordinates(RandomGenerator.getInstance().nextInt(getOwnerArea().getWidth()), RandomGenerator.getInstance().nextInt(getOwnerArea().getHeight()));
 			path = ((SuperPacmanArea)getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(),targetPos);
-			graphicPath= new Path(this.getPosition(), new LinkedList <Orientation >(path));
 			} while (path == null );
+		
+		graphicPath= new Path(this.getPosition(), new LinkedList <Orientation >(path));
 		return path.poll();
 	}
 	
