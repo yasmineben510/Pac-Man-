@@ -153,7 +153,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 				  ghosts.add(ghost);
 			  }
 			  
-			  if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_PINKY)) {
+			 if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_PINKY)) {
 				  Pinky ghost = new Pinky(area,position,position);
 				  area.registerActor(ghost);
 				  ghosts.add(ghost);
@@ -281,14 +281,18 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	public void frightenGhosts() {
 		
 		for(Ghost ghost : ghosts) {
+		    System.out.println("afraid = true");
 			ghost.setIsAfraid(true);
 		}
 		
 		if (Ghost.getTimer()<=0) {
 			for(Ghost ghost : ghosts) {
+			    System.out.println("afraid = false");
 				ghost.setIsAfraid(false);
 			}
 	    }
+		
+		
 	}
 
 	

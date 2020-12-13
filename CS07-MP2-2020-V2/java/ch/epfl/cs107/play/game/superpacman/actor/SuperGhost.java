@@ -25,7 +25,7 @@ public abstract class SuperGhost extends Ghost {
 	public SuperGhost(Area area, DiscreteCoordinates position, DiscreteCoordinates shelter, String spriteName) {
 		super(area, position, shelter, spriteName);
 		generatePath();
-		nextOrientation = getNextOrientation();
+		//nextOrientation = getNextOrientation();
 	}
 
 	/**
@@ -33,7 +33,10 @@ public abstract class SuperGhost extends Ghost {
 	 * @return the orientation for the shortest path
 	 */
 	protected void followPlayer() {
-			do {	
+		
+		System.out.println("followp");
+		
+		do {
 			 targetPos= getSuperPacman().getCurrentCells().get(0);
 			 path = ((SuperPacmanArea)getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(),targetPos);
 			} while (path == null );
@@ -50,17 +53,17 @@ public abstract class SuperGhost extends Ghost {
 		do {
 			targetPos = new DiscreteCoordinates(RandomGenerator.getInstance().nextInt(getOwnerArea().getWidth()), RandomGenerator.getInstance().nextInt(getOwnerArea().getHeight()));
 			path = ((SuperPacmanArea)getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(),targetPos);
+			
 			} while (path == null );
 		
 		graphicPath= new Path(this.getPosition(), new LinkedList <Orientation >(path));
-		
+				
 			
 	}
 	
 	
 	@Override
 	protected Orientation getNextOrientation() {		
-		//generatePath();
 		return path.poll();
 	}
 
@@ -72,22 +75,25 @@ public abstract class SuperGhost extends Ghost {
 	@Override
 	public void update (float deltaTime) {
 		
-		//nextOrientation = this.getNextOrientation();
-		List <DiscreteCoordinates> nextCells = Collections.singletonList(getCurrentMainCellCoordinates().jump(nextOrientation.toVector()));			
+		
 		
 		if (!isDisplacementOccurs()) {
-			nextOrientation = this.getNextOrientation();
-			if (this.getCurrentMainCellCoordinates()==targetPos || isStateChanged()) {
-				generatePath();
+			
+		
+			nextOrientation = getNextOrientation();  
+			
+			if (this.getCurrentMainCellCoordinates().equals(targetPos) || isStateChanged() ) {
+				this.generatePath();
 				nextOrientation = this.getNextOrientation();
 				setStateChanged(false);
-			} 
+			}  
 			
-			
-			if(getOwnerArea().canEnterAreaCells(this, nextCells)) {
-				 nextOrientation = getNextOrientation();
-				 System.out.println("is called orientation");
-				  orientate(nextOrientation);
+			List <DiscreteCoordinates> nextCells = Collections.singletonList(getCurrentMainCellCoordinates().jump(nextOrientation.toVector()));	
+
+
+			if(getOwnerArea().canEnterAreaCells(this, nextCells)) {				 
+				orientate(nextOrientation);
+				  
 			    } 
 			
 			if (isAfraid()) {
@@ -96,9 +102,7 @@ public abstract class SuperGhost extends Ghost {
 				move(getAnimationDurationGhost());
 			}
 		}
-		
-		System.out.println(nextOrientation);
-		
+				
 		super.update(deltaTime);
 	}
 	

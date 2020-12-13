@@ -19,7 +19,10 @@ public class Inky extends SuperGhost {
 	@Override
 	protected void generatePath() {
 		// non effraye et ne connait pas player
-				if(!isAfraid() && getSuperPacman()==null ) {
+		System.out.println("called ");
+		
+		
+		if(!isAfraid() && getSuperPacman()==null ) {
 				   do {
 					    super.generatePath();
 				    }
@@ -36,6 +39,7 @@ public class Inky extends SuperGhost {
 				
 				//non effraye et connait player (suit player)
 				if(!isAfraid() && getSuperPacman()!=null ) {
+					
 					followPlayer();
 				}
 	}

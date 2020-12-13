@@ -96,6 +96,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 			isStateChanged = true;
 		}
 		isAfraid = afraid;
+		System.out.println(isStateChanged);
 	}
 	
 	protected static boolean isAfraid() {
@@ -126,6 +127,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	protected abstract Orientation getNextOrientation();
 	
 	public void resetGhostPosition() {
+		isStateChanged=true;
 		getOwnerArea().leaveAreaCells(this , getEnteredCells());
 		setCurrentPosition(shelter.toVector());
 		getOwnerArea().enterAreaCells(this , getCurrentCells());
@@ -256,13 +258,13 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 
 	private class GhostHandler implements SuperPacmanInteractionVisitor {
 		 public void interactWith(SuperPacmanPlayer player){
-			 for (DiscreteCoordinates viewCells : getFieldOfViewCells()) {
-				 for(DiscreteCoordinates playerCells : player.getCurrentCells()) {
-					 if(playerCells==viewCells) {
-						 SuperPacman=player;
-					 }
-				 }
-			 }
+			 //for (DiscreteCoordinates viewCells : getFieldOfViewCells()) {
+				// for(DiscreteCoordinates playerCells : player.getCurrentCells()) {
+				//	 if(playerCells.equals(viewCells)) {
+						 setSuperPacman(player);
+				//	 }
+				 //}
+			 //}
 
 		 }
 	}

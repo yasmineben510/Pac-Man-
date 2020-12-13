@@ -157,7 +157,7 @@ public class SuperPacmanPlayer extends Player{
 
 	@Override
 	public boolean takeCellSpace() {
-		return true;
+		return false;
 	}
 
 	@Override

@@ -22,7 +22,7 @@ import ch.epfl.cs107.play.window.Canvas;
 public class Bonus extends AutomaticallyCollectableAreaEntity{
 	
     private final static int ANIMATION_DURATION = 6;
-    private final static int BONUS_TIMER = 10;
+    private final static int BONUS_TIMER = 100;
     private Sprite[] sprites;
 	Animation animation;
 	
