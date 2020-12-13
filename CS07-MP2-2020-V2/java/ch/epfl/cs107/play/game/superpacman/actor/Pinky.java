@@ -14,21 +14,19 @@ public class Pinky extends SuperGhost {
 		super(area, position, shelter, "superpacman/ghost.pinky");
 	}
 
+	
 	@Override
-	protected Orientation getNextOrientation() {
-		 
-		Orientation nextOrientation = null;
-		
+	protected void generatePath() {
 		// ne connait pas player (effraye ou pas)
 		if(getSuperPacman()==null ) {
-			nextOrientation = super.getNextOrientation();
+			super.generatePath();
 		}
 		
 		// effraye et connait player
 		if(isAfraid() && getSuperPacman()!=null ) {
 			int attempts = 0; 
 			do {
-				nextOrientation = super.getNextOrientation();
+				super.generatePath();
 				++ attempts;
 			    }
 			    while(DiscreteCoordinates.distanceBetween(getSuperPacman().getCurrentCells().get(0), getTargetPos())<MIN_AFRAID_DISTANCE && attempts<MAX_RANDOM_ATTEMPT);
@@ -37,9 +35,17 @@ public class Pinky extends SuperGhost {
 		// non effraye et connait player (suit player)
 		
 		if(!isAfraid() && getSuperPacman()!=null ) {
-			nextOrientation = followPlayer();
+			followPlayer();
 		}
 		
-		return nextOrientation;
+		
+		System.out.println("pinky gp");
+	}
+	
+	
+	
+	@Override
+	protected Orientation getNextOrientation() {
+		return super.getNextOrientation();
 	}
 }

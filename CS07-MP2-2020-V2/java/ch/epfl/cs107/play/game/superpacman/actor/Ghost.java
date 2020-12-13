@@ -44,6 +44,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 		
 		SuperPacman=null;
 		isAfraid=false;
+		isStateChanged= false;
 		
 		this.shelter=shelter;
 				
@@ -180,15 +181,14 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 		} 
 		
 		
-		Orientation nextOrientation = getNextOrientation();
-		List <DiscreteCoordinates> nextCells = Collections.singletonList(getCurrentMainCellCoordinates().jump(nextOrientation.toVector()));			
+		
 
-		if (!isDisplacementOccurs()) {
+		/*if (!isDisplacementOccurs()) {
             if(getOwnerArea().canEnterAreaCells(this, nextCells)) {
 				  orientate(nextOrientation);
 			    } 
             move(ANIMATION_DURATION_GHOST);
-		}
+		}*/
 		
 		  if(!isAfraid) {
 			if(getOrientation().equals(Orientation.LEFT)) {

@@ -17,31 +17,33 @@ public class Inky extends SuperGhost {
 	}
 
 	@Override
-	protected Orientation getNextOrientation() {
-		Orientation nextOrientation = null;
-		
+	protected void generatePath() {
 		// non effraye et ne connait pas player
-		if(!isAfraid() && getSuperPacman()==null ) {
-		   do {
-			    nextOrientation = super.getNextOrientation();
-		    }
-		    while(DiscreteCoordinates.distanceBetween(getShelter(), getTargetPos())>MAX_DISTANCE_WHEN_NOT_SCARED);
-	    }
-		
-		// effraye et peu importe player
-		if(isAfraid()) {
-			 do {
-				 nextOrientation = super.getNextOrientation();
-		     }
-		     while(DiscreteCoordinates.distanceBetween(getShelter(), getTargetPos())>MAX_DISTANCE_WHEN_SCARED);
-		}
-		
-		//non effraye et connait player (suit player)
-		if(!isAfraid() && getSuperPacman()!=null ) {
-			nextOrientation = followPlayer();
-		}
-		
-		return nextOrientation;
+				if(!isAfraid() && getSuperPacman()==null ) {
+				   do {
+					    super.generatePath();
+				    }
+				    while(DiscreteCoordinates.distanceBetween(getShelter(), getTargetPos())>MAX_DISTANCE_WHEN_NOT_SCARED);
+			    }
+				
+				// effraye et peu importe player
+				if(isAfraid()) {
+					 do {
+						 super.generatePath();
+				     }
+				     while(DiscreteCoordinates.distanceBetween(getShelter(), getTargetPos())>MAX_DISTANCE_WHEN_SCARED);
+				}
+				
+				//non effraye et connait player (suit player)
+				if(!isAfraid() && getSuperPacman()!=null ) {
+					followPlayer();
+				}
+	}
+	
+	
+	@Override
+	protected Orientation getNextOrientation() {
+		return super.getNextOrientation();
 	}
 
 }
