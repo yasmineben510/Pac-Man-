@@ -17,6 +17,7 @@ import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.RandomGenerator;
 import ch.epfl.cs107.play.window.Canvas;
 
 public abstract class Ghost extends MovableAreaEntity implements Interactor{
@@ -35,7 +36,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	
 	private DiscreteCoordinates shelter;
 	private SuperPacmanPlayer SuperPacman;
-	private static boolean isAfraid;
+	private boolean isAfraid;
 	private static float timer;
 	private boolean isStateChanged;
 
@@ -99,7 +100,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 		System.out.println(isStateChanged);
 	}
 	
-	protected static boolean isAfraid() {
+	protected boolean isAfraid() {
 		return isAfraid;
 	}
 	
@@ -124,7 +125,11 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	 * note: needs to be override
 	 * @return the next orientation of the ghost
 	 */
-	protected abstract Orientation getNextOrientation();
+	protected  Orientation getNextOrientation() {
+		int randomInt = RandomGenerator.getInstance().nextInt(4);
+		return Orientation.fromInt(randomInt);
+		
+	}
 	
 	public void resetGhostPosition() {
 		isStateChanged=true;
@@ -182,15 +187,6 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 			currentAnimation = animationAfraid;
 		} 
 		
-		
-		
-
-		/*if (!isDisplacementOccurs()) {
-            if(getOwnerArea().canEnterAreaCells(this, nextCells)) {
-				  orientate(nextOrientation);
-			    } 
-            move(ANIMATION_DURATION_GHOST);
-		}*/
 		
 		  if(!isAfraid) {
 			if(getOrientation().equals(Orientation.LEFT)) {

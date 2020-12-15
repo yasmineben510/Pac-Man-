@@ -8,8 +8,8 @@ import ch.epfl.cs107.play.math.RandomGenerator;
 
 public class Inky extends SuperGhost {
 	
-	final static int MAX_DISTANCE_WHEN_NOT_SCARED = 10;
-	final static int MAX_DISTANCE_WHEN_SCARED = 5;
+	private final static int MAX_DISTANCE_WHEN_NOT_SCARED = 10;
+	private final static int MAX_DISTANCE_WHEN_SCARED = 5;
 
 
 	public Inky(Area area, DiscreteCoordinates position, DiscreteCoordinates shelter) {
@@ -18,36 +18,26 @@ public class Inky extends SuperGhost {
 
 	@Override
 	protected void generatePath() {
-		// non effraye et ne connait pas player
-		System.out.println("called ");
 		
-		
+		// non effraye et ne connait pas player		
 		if(!isAfraid() && getSuperPacman()==null ) {
-				   do {
-					    super.generatePath();
-				    }
-				    while(DiscreteCoordinates.distanceBetween(getShelter(), getTargetPos())>MAX_DISTANCE_WHEN_NOT_SCARED);
-			    }
+		   do {
+		       super.generatePath();
+		   }
+		   while(DiscreteCoordinates.distanceBetween(getShelter(), getTargetPos())>MAX_DISTANCE_WHEN_NOT_SCARED);
+	    }
 				
-				// effraye et peu importe player
-				if(isAfraid()) {
-					 do {
-						 super.generatePath();
-				     }
-				     while(DiscreteCoordinates.distanceBetween(getShelter(), getTargetPos())>MAX_DISTANCE_WHEN_SCARED);
-				}
-				
-				//non effraye et connait player (suit player)
-				if(!isAfraid() && getSuperPacman()!=null ) {
-					
-					followPlayer();
-				}
+		// effraye et peu importe player
+		if(isAfraid()) {
+			do {
+				super.generatePath();
+		    }
+		    while(DiscreteCoordinates.distanceBetween(getShelter(), getTargetPos())>MAX_DISTANCE_WHEN_SCARED);
+		}
+								
 	}
 	
 	
-	@Override
-	protected Orientation getNextOrientation() {
-		return super.getNextOrientation();
-	}
+
 
 }

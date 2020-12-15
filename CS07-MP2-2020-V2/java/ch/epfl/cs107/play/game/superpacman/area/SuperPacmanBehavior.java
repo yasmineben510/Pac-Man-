@@ -24,6 +24,7 @@ import ch.epfl.cs107.play.game.superpacman.actor.Wall;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Positionable;
 import ch.epfl.cs107.play.math.Vector;
+import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Window;
 
 public class SuperPacmanBehavior extends AreaBehavior{
@@ -83,6 +84,10 @@ public class SuperPacmanBehavior extends AreaBehavior{
 			return edges;
 		}
 	
+	 
+	 protected void setAreaGraphSignal(DiscreteCoordinates coordinates, Logic signal) {
+		 graph.setSignal(coordinates, signal);
+	 }
 	
 	/**
 	 * Enum type SuperPacmanCellType

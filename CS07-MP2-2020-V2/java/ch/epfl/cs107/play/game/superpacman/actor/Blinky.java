@@ -14,11 +14,6 @@ public class Blinky extends Ghost {
 		super(area, position, shelter, "superpacman/ghost.blinky");
 	}
 
-	@Override
-	protected Orientation getNextOrientation() {
-		int randomInt = RandomGenerator.getInstance().nextInt(4);
-		return Orientation.fromInt(randomInt);
-	}
 	
 	@Override
 	public void update (float deltaTime) {

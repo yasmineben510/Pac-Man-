@@ -31,6 +31,7 @@ public class Key extends AutomaticallyCollectableAreaEntity implements Logic{
 		sprite.draw(canvas);
 	}
 
+	/// implements signal - signal is On if key is collected
 
 	@Override
 	public boolean isOn() {
@@ -48,7 +49,10 @@ public class Key extends AutomaticallyCollectableAreaEntity implements Logic{
 
 	@Override
 	public float getIntensity() {
-		return 0;
+		if (isOn()) {
+			return 1;
+		}
+		else return 0;
 	}
 
 }

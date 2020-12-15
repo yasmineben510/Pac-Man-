@@ -24,6 +24,11 @@ public abstract class SuperPacmanArea extends Area implements Logic{
 	
 	
 	
+	public void setAreaGraphSignal (DiscreteCoordinates coordinates, Logic signal) {
+		behavior.setAreaGraphSignal(coordinates,signal);
+	}
+	
+	
 	public void frightenGhosts(){
 		behavior.frightenGhosts();
 	}

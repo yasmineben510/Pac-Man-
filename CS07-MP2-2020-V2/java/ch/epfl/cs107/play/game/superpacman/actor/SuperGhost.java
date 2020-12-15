@@ -15,17 +15,18 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public abstract class SuperGhost extends Ghost {
 
+	
+	private final int MAX_RANDOM_ATTEMPT=200;
 	private DiscreteCoordinates targetPos;
 	
 	private Queue<Orientation> path;
-	private Path graphicPath;
+	//private Path graphicPath;
 	private Orientation nextOrientation;
 	
 	
 	public SuperGhost(Area area, DiscreteCoordinates position, DiscreteCoordinates shelter, String spriteName) {
 		super(area, position, shelter, spriteName);
 		generatePath();
-		//nextOrientation = getNextOrientation();
 	}
 
 	/**
@@ -34,15 +35,18 @@ public abstract class SuperGhost extends Ghost {
 	 */
 	protected void followPlayer() {
 		
-		System.out.println("followp");
-		
+		int attempts=0;
+
 		do {
 			 targetPos= getSuperPacman().getCurrentCells().get(0);
 			 path = ((SuperPacmanArea)getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(),targetPos);
-			} while (path == null );
-			
+			 ++attempts;
+		} while (path == null && attempts<MAX_RANDOM_ATTEMPT) ;
+							
+	/*	if (path!=null) {
 			graphicPath= new Path(this.getPosition(), new LinkedList <Orientation >(path));
-		
+		}*/
+
 	}
 	
 	/**
@@ -50,13 +54,18 @@ public abstract class SuperGhost extends Ghost {
 	 * @return the orientation for a random path
 	 */
 	protected void generatePath() {
-		do {
+		
+		if(!isAfraid() && getSuperPacman()!=null ) {
+			followPlayer();
+		}
+		
+		else do {
 			targetPos = new DiscreteCoordinates(RandomGenerator.getInstance().nextInt(getOwnerArea().getWidth()), RandomGenerator.getInstance().nextInt(getOwnerArea().getHeight()));
 			path = ((SuperPacmanArea)getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(),targetPos);
 			
 			} while (path == null );
 		
-		graphicPath= new Path(this.getPosition(), new LinkedList <Orientation >(path));
+		//graphicPath= new Path(this.getPosition(), new LinkedList <Orientation >(path));
 				
 			
 	}
@@ -64,6 +73,10 @@ public abstract class SuperGhost extends Ghost {
 	
 	@Override
 	protected Orientation getNextOrientation() {		
+		if (path==null) {
+            return super.getNextOrientation();
+		}
+		
 		return path.poll();
 	}
 
@@ -72,21 +85,28 @@ public abstract class SuperGhost extends Ghost {
 	}
 	
 	
+	
 	@Override
 	public void update (float deltaTime) {
 		
 		
-		
 		if (!isDisplacementOccurs()) {
-			
 		
 			nextOrientation = getNextOrientation();  
 			
-			if (this.getCurrentMainCellCoordinates().equals(targetPos) || isStateChanged() ) {
+			if (this.getCurrentMainCellCoordinates().equals(targetPos) || isStateChanged()||nextOrientation==null) {
 				this.generatePath();
 				nextOrientation = this.getNextOrientation();
 				setStateChanged(false);
 			}  
+			
+			//as an extension
+			if (getSuperPacman()!=null && !isAfraid()) {
+				this.followPlayer();
+				nextOrientation = this.getNextOrientation();
+			}
+			
+			
 			
 			List <DiscreteCoordinates> nextCells = Collections.singletonList(getCurrentMainCellCoordinates().jump(nextOrientation.toVector()));	
 
@@ -109,7 +129,7 @@ public abstract class SuperGhost extends Ghost {
 	@Override
 	public void draw(Canvas canvas) {
 		super.draw(canvas);
-		graphicPath.draw(canvas);
+		//graphicPath.draw(canvas);
 	}
 	
 }
