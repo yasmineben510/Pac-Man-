@@ -46,23 +46,13 @@ public class SuperPacmanPlayerStatusGUI implements Graphics{
 		this.hp = hp;
 	}
 
-	@Override
-	public void draw(Canvas canvas) {
-		
-		float width = canvas.getScaledWidth();
-		float height = canvas.getScaledHeight();
-		Vector anchor = canvas.getTransform().getOrigin().sub(new Vector(width/2, height/2));
-		ImageGraphics[] hpGraphic = getHpGraphic(anchor, height);
-		
-		for(int i = 0; i < hpGraphic.length; ++i) {
-			hpGraphic[i].draw(canvas);
-		}
-		
-		TextGraphics scoreText = new TextGraphics("SCORE: "+Integer.toString(score), 1.1f, Color.YELLOW, Color.BLACK, 0.05f, true, false, anchor.add(new Vector(8f, height- 1.375f))); 
-		scoreText.draw(canvas);
-
-	}
 	
+	/**
+	 * Constructor for the ImageGraphic of the Health Points (hp) of the SuperPacmanPlayer
+	 * @param anchor (Vector) :
+	 * @param height (float) : height of the canvas
+	 * @return the ImageGraphic of the hp of the player
+	 */
 	private ImageGraphics[] getHpGraphic(Vector anchor, float height) {
 		
 		ImageGraphics[] hpGraphic = new ImageGraphics[5];
@@ -76,4 +66,23 @@ public class SuperPacmanPlayerStatusGUI implements Graphics{
 		
 		return hpGraphic;
 	}
+	
+	/// implements Graphics
+	
+		@Override
+		public void draw(Canvas canvas) {
+			
+			float width = canvas.getScaledWidth();
+			float height = canvas.getScaledHeight();
+			Vector anchor = canvas.getTransform().getOrigin().sub(new Vector(width/2, height/2));
+			ImageGraphics[] hpGraphic = getHpGraphic(anchor, height);
+			
+			for(int i = 0; i < hpGraphic.length; ++i) {
+				hpGraphic[i].draw(canvas);
+			}
+			
+			TextGraphics scoreText = new TextGraphics("SCORE: "+Integer.toString(score), 1.1f, Color.YELLOW, Color.BLACK, 0.05f, true, false, anchor.add(new Vector(8f, height- 1.375f))); 
+			scoreText.draw(canvas);
+
+		}
 }

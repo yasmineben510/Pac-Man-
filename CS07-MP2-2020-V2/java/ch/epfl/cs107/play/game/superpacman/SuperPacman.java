@@ -26,6 +26,7 @@ public class SuperPacman extends RPG {
 															 new DiscreteCoordinates(5,15)};
 
 	private int areaIndex;
+	
 	/**
 	 * Add all the areas
 	 */
@@ -35,7 +36,9 @@ public class SuperPacman extends RPG {
 		addArea(new Level2());
 	}
 	
-	// idea decaler uniquement effrayer ghosts a la behavior au moyen de l'aire comme pour le resetpositions
+	/**
+	 * asks the area to frighten its Ghost actors
+	 */
 	private void frightenGhosts() {
 		((SuperPacmanArea)getCurrentArea()).frightenGhosts();	
 	}

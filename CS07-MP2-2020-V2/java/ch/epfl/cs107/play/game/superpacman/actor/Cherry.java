@@ -26,6 +26,7 @@ public class Cherry extends AutomaticallyCollectableAreaEntity{
 	
     /**
      * Constructor for Cherry
+     * @param position (DiscreteCoordinate): Initial position of the entity in the Area. Not null
      */
 	public Cherry(Area area, DiscreteCoordinates position) {
 		super(area,Orientation.DOWN,position);
@@ -34,13 +35,16 @@ public class Cherry extends AutomaticallyCollectableAreaEntity{
 	}
 
 	@Override
-	public void draw(Canvas canvas) {
-		sprite.draw(canvas);
-	}
-	
-	@Override
 	public int getPoints() {
 		return POINTS;
 	}
 
+	/// implements Graphics
+	
+	@Override
+	public void draw(Canvas canvas) {
+		sprite.draw(canvas);
+	}
+	
+	
 }

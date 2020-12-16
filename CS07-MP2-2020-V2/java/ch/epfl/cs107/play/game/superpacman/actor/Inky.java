@@ -15,6 +15,9 @@ public class Inky extends SuperGhost {
 
 	/**
 	 * Constructor for Inky
+	 * @param area (Area): Owner area. Not null
+     * @param position (DiscreteCoordinates): Initial position of the entity. Not null
+	 * @param shelter (DiscreteCoordinates) : Ghost's shelter. Not null.
 	 */
 	public Inky(Area area, DiscreteCoordinates position, DiscreteCoordinates shelter) {
 		super(area, position, shelter, "superpacman/ghost.inky");
@@ -22,15 +25,19 @@ public class Inky extends SuperGhost {
 
 	@Override
 	protected void generatePath() {
-		/// creates a path when not scared and doesn't know the SuperPacmanPlayer
-		/// The path can not be further than MAX_DISTANCE_WHEN_NOT_SCARED from the shelter.
+		
+		// Creates a path when not scared and doesn't know the SuperPacmanPlayer
+		// The path can not be further than MAX_DISTANCE_WHEN_NOT_SCARED from the shelter.
+		
 		if (!isAfraid() && getSuperPacman()==null ) {
 		   do {
 		       super.generatePath();
 		   } while(DiscreteCoordinates.distanceBetween(getShelter(), getTargetPos())>MAX_DISTANCE_WHEN_NOT_SCARED);
 	    }
-		/// creates a path when scared no matter if the ghost knows the SuperPacmanPlayer or not.
-		/// The path can not be further than MAX_DISTANCE_WHEN_SCARED from the shelter.
+		
+		// creates a path when scared no matter if the ghost knows the SuperPacmanPlayer or not.
+		// The path can not be further than MAX_DISTANCE_WHEN_SCARED from the shelter.
+		
 		if(isAfraid()) {
 			do {
 				super.generatePath();

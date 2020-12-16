@@ -35,6 +35,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	private DiscreteCoordinates shelter;
 	private SuperPacmanPlayer SuperPacman;
 	private boolean isAfraid;
+	
 	///The timer is common to every ghost. If begun, all the ghosts must be scared, if finished, they come back to their normal state.
 	private static float timer;
 	private boolean isStateChanged;
@@ -209,7 +210,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 		((SuperPacmanInteractionVisitor)v).interactWith(this);
 	}
 
-	/// extends Entity
+	/// implements Actor
 	
 	@Override
 	public void update(float deltaTime) {
@@ -244,6 +245,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	   super.update(deltaTime);	
 	}
 	
+	/// implements Graphics
 	
 	@Override
 	public void draw(Canvas canvas) {
@@ -282,11 +284,22 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 		other.acceptInteraction(handler);
 	}
 
+	
 	/**
-	 * The ghost remembers the SuperPacmanPlayer if he sees him.
+	 * Nested class of Ghost
+	 * Handles the interactions between the Ghost and the other Interactables 
 	 */
 	private class GhostHandler implements SuperPacmanInteractionVisitor {
-		 public void interactWith(SuperPacmanPlayer player){
+	   /**
+	    * The ghost remembers the SuperPacmanPlayer if he sees him.
+	    */ 
+		
+		/**
+	     * Simulates an interaction between Ghost and the SuperPacmanPlayer
+	     * The ghost remembers the SuperPacmanPlayer if he sees him.
+	     * @param player (SuperPacmanPlayer), not null
+	     */
+		public void interactWith(SuperPacmanPlayer player){
 						 setSuperPacman(player);
 		 }
 	}

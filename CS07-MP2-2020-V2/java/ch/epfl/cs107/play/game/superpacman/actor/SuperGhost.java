@@ -15,14 +15,17 @@ public abstract class SuperGhost extends Ghost {
 
 	/// Maximum attempts allowed to find a random path.
 	private final int MAX_RANDOM_ATTEMPT=200;
-	private DiscreteCoordinates targetPos;
 	
+	private DiscreteCoordinates targetPos;
 	private Queue<Orientation> path;
-	//private Path graphicPath;
 	private Orientation nextOrientation;
 	
 	/**
 	 * Constructor for a SuperGhost
+	 * @param area (Area): Owner area. Not null
+     * @param position (DiscreteCoordinates): Initial position of the entity. Not null
+	 * @param shelter (DiscreteCoordinates) : Ghost's shelter. Not null.
+	 * @param spriteName (String) : SuperGhost's name.
 	 */
 	public SuperGhost(Area area, DiscreteCoordinates position, DiscreteCoordinates shelter, String spriteName) {
 		super(area, position, shelter, spriteName);
@@ -31,7 +34,6 @@ public abstract class SuperGhost extends Ghost {
 
 	/**
 	 * generate the shortest path to follow the player if known
-	 * @return the orientation for the shortest path
 	 */
 	protected void followPlayer() {
 		
@@ -43,27 +45,22 @@ public abstract class SuperGhost extends Ghost {
 			 ++attempts;
 		} while (path == null && attempts<MAX_RANDOM_ATTEMPT) ;
 							
-	/*	if (path!=null) {
-			graphicPath= new Path(this.getPosition(), new LinkedList <Orientation >(path));
-		}*/
 	}
 	
 	/**
 	 * generates a random path or follows the player if mesmerized 
-	 * @return the orientation for a random path
 	 */
 	protected void generatePath() {
 		
 		if(!isAfraid() && getSuperPacman()!=null ) {
 			followPlayer();
 		}
-		else 
-			do {
+		 
+		else do {
 			   targetPos = new DiscreteCoordinates(RandomGenerator.getInstance().nextInt(getOwnerArea().getWidth()), RandomGenerator.getInstance().nextInt(getOwnerArea().getHeight()));
 			   path = ((SuperPacmanArea)getOwnerArea()).getGraph().shortestPath(getCurrentMainCellCoordinates(),targetPos);
 			} while (path == null );
 		
-		//graphicPath= new Path(this.getPosition(), new LinkedList <Orientation >(path));
 	}
 	
 	@Override
@@ -80,6 +77,8 @@ public abstract class SuperGhost extends Ghost {
 	protected DiscreteCoordinates getTargetPos() {
 		return targetPos;
 	}
+	
+	/// implements Actor
 	
 	@Override
 	public void update (float deltaTime) {
@@ -115,9 +114,10 @@ public abstract class SuperGhost extends Ghost {
 		super.update(deltaTime);
 	}
 	
+	/// implements Graphics
+
 	@Override
 	public void draw(Canvas canvas) {
 		super.draw(canvas);
-		//graphicPath.draw(canvas);
 	}
 }

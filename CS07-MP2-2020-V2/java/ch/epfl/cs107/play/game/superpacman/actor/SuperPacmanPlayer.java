@@ -95,9 +95,7 @@ public class SuperPacmanPlayer extends Player{
 		setEaten(true);
 	}
 	
-	
-	/// extends Entity
-	
+		
 	 /**
 	 * @return (boolean) true if SuperPacmanPlayer is eaten, false is not.
 	 */
@@ -112,6 +110,8 @@ public class SuperPacmanPlayer extends Player{
 		this.isEaten = isEaten;
 	}
 
+	/// implements Actor
+	
 	@Override
 	 public void update(float deltaTime) {
      	
@@ -158,7 +158,8 @@ public class SuperPacmanPlayer extends Player{
 	    super.update(deltaTime);
 	    }
 	    
-    
+    /// implements Graphics
+	
 	@Override
 	public void draw(Canvas canvas) {
 		currentAnimation.draw(canvas);
@@ -214,10 +215,13 @@ public class SuperPacmanPlayer extends Player{
         }
 	
 	
-		
+	/**
+	 * Nested class of SuperPacmanPlayer
+	 * Handles the interactions between the SuperPacmanPlayer and the other Interactables 
+	 */	
 	private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
 		/**
-	     * Simulate an interaction between SuperPacmanPlayer and a Door
+	     * Simulates an interaction between SuperPacmanPlayer and a Door
 	     * @param door (Door), not null
 	     */
 	    public void interactWith(Door door){
@@ -226,7 +230,7 @@ public class SuperPacmanPlayer extends Player{
 	    
 	    
 	    /**
-	     * Simulate an interaction between SuperPacmanPlayer and an AutomaticallyCollectableAreaEntity
+	     * Simulates an interaction between SuperPacmanPlayer and an AutomaticallyCollectableAreaEntity
 	     * @param  collectable (AutomaticallyCollectableAreaEntity) : the AutomaticallyCollectableAreaEntity to collect, not null
 	     */
 	    public void interactWith(AutomaticallyCollectableAreaEntity collectable) {
@@ -239,7 +243,7 @@ public class SuperPacmanPlayer extends Player{
 	    }
 	    
 	    /**
-	     * Simulate an interaction between SuperPacmanPlayet and a Bonus
+	     * Simulates an interaction between SuperPacmanPlayet and a Bonus
 	     * @param bonus (Bonus) : the Bonus to collect, not null 
 	     */
 	    public void interactWith(Bonus bonus) {

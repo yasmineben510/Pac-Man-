@@ -21,6 +21,8 @@ public class Key extends AutomaticallyCollectableAreaEntity implements Logic{
 
 	/**
 	 * Constructor for Key
+	 * @param area (Area): Owner area. Not null
+     * @param position (DiscreteCoordinates): Initial position of the entity. Not null
 	 */
 	public Key(Area area, DiscreteCoordinates position) {
 		super(area, Orientation.DOWN, position);
@@ -28,7 +30,8 @@ public class Key extends AutomaticallyCollectableAreaEntity implements Logic{
 		sprite.setDepth(-100.f);
 	}
 
-
+	/// implements Graphics
+	
 	@Override
 	public void draw(Canvas canvas) {
 		sprite.draw(canvas);

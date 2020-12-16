@@ -24,6 +24,7 @@ public class Diamond extends AutomaticallyCollectableAreaEntity{
 	
     /**
      * Constructor for Diamond
+     * @param position (DiscreteCoordinate): Initial position of the entity in the Area. Not null
      */
 	public Diamond(Area area, DiscreteCoordinates position) {
 		super(area,Orientation.DOWN,position);
@@ -32,12 +33,16 @@ public class Diamond extends AutomaticallyCollectableAreaEntity{
 	}
 
 	@Override
+	public int getPoints() {
+		return POINTS;
+	}
+	
+	/// implements Graphics
+	
+	@Override
 	public void draw(Canvas canvas) {
 		sprite.draw(canvas);
 	}
 	
-	@Override
-	public int getPoints() {
-		return POINTS;
-	}
+	
 }

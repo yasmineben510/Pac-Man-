@@ -44,12 +44,14 @@ public class Gate extends AreaEntity {
 	}
 	
 	/**
-	 * Constructor of a gate that needs two signals on to be opened.
+	 * Constructor of a gate that depends on two signals 
 	 */
 	public Gate(Area area, Orientation orientation, DiscreteCoordinates position, Logic signal1,Logic signal2) {
 		this(area, orientation, position, new And(signal1,signal2));	
 	}
 
+	/// Gate implements Interactable
+	
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
 		return Collections.singletonList(getCurrentMainCellCoordinates());
@@ -75,6 +77,9 @@ public class Gate extends AreaEntity {
 	public void acceptInteraction(AreaInteractionVisitor v) {
 	}
 
+	
+	/// Gate implements Graphics
+	
 	@Override
 	public void draw(Canvas canvas) {
 		if (isOpen.isOff()) sprite.draw(canvas);

@@ -30,6 +30,7 @@ public class Bonus extends AutomaticallyCollectableAreaEntity{
 	
 	/**
 	 * Constructor for Bonus
+     * @param position (DiscreteCoordinate): Initial position of the entity in the Area. Not null
 	 */
 	public Bonus(Area area,DiscreteCoordinates position) {
 		super(area,Orientation.DOWN,position);
@@ -47,7 +48,7 @@ public class Bonus extends AutomaticallyCollectableAreaEntity{
 		return BONUS_TIMER;
 	}
 	
-	/// Bonus extends Entity
+	/// Bonus implements Actor
 	
 	@Override
 	public void update(float deltaTime) {
@@ -55,6 +56,8 @@ public class Bonus extends AutomaticallyCollectableAreaEntity{
 		super.update(deltaTime);
 	}
 
+	/// Bonus implements Graphics
+	
 	@Override
 	public void draw(Canvas canvas) {
 		animation.draw(canvas);

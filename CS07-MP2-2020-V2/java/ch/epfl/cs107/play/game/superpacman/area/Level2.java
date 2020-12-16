@@ -28,9 +28,7 @@ public class Level2 extends SuperPacmanArea {
 		return "superpacman/Level2";
 	}
 	
-	/**
-     * Registers the specific entities present in the area.
-     */
+	@Override
     protected void createArea() {
     	
     	super.createArea();

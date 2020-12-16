@@ -18,7 +18,10 @@ public class Pinky extends SuperGhost {
 
     /**
      * Constructor for Pinky
-     */
+     * @param area (Area): Owner area. Not null
+     * @param position (DiscreteCoordinates): Initial position of the entity. Not null
+	 * @param shelter (DiscreteCoordinates) : Ghost's shelter. Not null.
+	 */
 	public Pinky(Area area, DiscreteCoordinates position, DiscreteCoordinates shelter) {
 		super(area, position, shelter, "superpacman/ghost.pinky");
 	}
@@ -26,13 +29,18 @@ public class Pinky extends SuperGhost {
 	@Override
 	protected void generatePath() {
 		
-		/// generates a random path if pinky doesn't know the SuperPacmanPlayer.
+		// generates a random path if pinky doesn't know the SuperPacmanPlayer.
+		
 		if(getSuperPacman()==null ) {
 			super.generatePath();
 		}
-		/// generates a random path if pinky is afraid and knows the SuperPacmanPlayer. 
-		/// The path can not be generated if the maximum attempts allowed to find it is surpassed.
-		/// The path has to be further than MIN_AFRAID_DISTANCE from the SuperPacmanPlayer.
+		
+		
+		// generates a random path if pinky is afraid and knows the SuperPacmanPlayer. 
+		
+		// The target postition has to be further than MIN_AFRAID_DISTANCE from the SuperPacmanPlayer.
+		// if the MAX_RANDOM_ATTEMPT is surpassed, it chooses a random path
+		
 		if(isAfraid() && getSuperPacman()!=null ) {
 			int attempts = 0; 
 			do {

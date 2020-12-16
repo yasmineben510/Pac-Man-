@@ -16,14 +16,17 @@ public abstract class SuperPacmanArea extends Area implements Logic{
 	private SuperPacmanBehavior behavior;
 	
     /**
-     * Default getter for the final DiscreteCoordinates of the sub_areas
-     * @return null
+     * Default getter for the final DiscreteCoordinates of the spawn position of the player in the sub_areas
      * Note: Needs to be override
      */
 	public abstract DiscreteCoordinates getPlayerSpawnPosition();
 	
 	
-	
+	/**
+	 * calls its behavior to set a signal on its graph
+	 * @param coordinates (DiscreteCoordinates): position of the node associated to the signal
+	 * @param signal (Logic): the logic signal to set
+	 */
 	public void setAreaGraphSignal (DiscreteCoordinates coordinates, Logic signal) {
 		behavior.setAreaGraphSignal(coordinates,signal);
 	}
@@ -87,7 +90,7 @@ public abstract class SuperPacmanArea extends Area implements Logic{
 		return 20.f;
 	}
 	
-	/// SuperPacmanArea implements playable
+	/// SuperPacmanArea implements Playable
 	
     @Override
 	public boolean begin(Window window, FileSystem fileSystem) {
@@ -100,6 +103,10 @@ public abstract class SuperPacmanArea extends Area implements Logic{
 	    }
 	    return false;
 	}
+    
+    /// SuperPacmanArea implements Logic
+    
+    // The logic signal of the area is on if all diamonds are collected
     
 	@Override
 	public boolean isOn() {

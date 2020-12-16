@@ -12,11 +12,15 @@ public class Blinky extends Ghost {
 
 	/**
 	 * Constructor of Blinky
+	 * @param area (Area): Owner area. Not null
+     * @param position (DiscreteCoordinates): Initial position of the entity. Not null
+	 * @param shelter (DiscreteCoordinates) : Ghost's shelter. Not null.
 	 */
 	public Blinky(Area area, DiscreteCoordinates position, DiscreteCoordinates shelter) {
 		super(area, position, shelter, "superpacman/ghost.blinky");
 	}
 
+	///imlements Actor
 	
 	@Override
 	public void update (float deltaTime) {

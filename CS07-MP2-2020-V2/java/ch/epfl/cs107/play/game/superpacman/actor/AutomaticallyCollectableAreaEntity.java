@@ -13,7 +13,8 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class AutomaticallyCollectableAreaEntity extends CollectableAreaEntity {
 
-	private boolean isWalkedOn;
+	
+	private boolean isWalkedOn; // true if a player entered its cell 
 	
 	/**
      * AutomaticallyCollectableAreaEntity constructor
@@ -33,41 +34,17 @@ public class AutomaticallyCollectableAreaEntity extends CollectableAreaEntity {
 		this.getOwnerArea().unregisterActor(this);
 		this.setIsCollected(true);
 	}
-
-	@Override
-	public List<DiscreteCoordinates> getCurrentCells() {
-		return Collections.singletonList(getCurrentMainCellCoordinates());
-	}
-
-	@Override
-	public void acceptInteraction(AreaInteractionVisitor v) {
-		((SuperPacmanInteractionVisitor)v).interactWith(this);
-	}
-
-	@Override
-	public void draw(Canvas canvas) {
-		
-	}
-
-	@Override
-	public boolean takeCellSpace() {
-		return false;
-	}
-
-	@Override
-	public boolean isViewInteractable() {
-		return false;
-	}
-
+	
 	/**
-	 * @return the isWalkedOn
+	 * Getter for the boolean isWalkedOn
+	 * @return isWalkedOn
 	 */
 	public boolean isWalkedOn() {
 		return isWalkedOn;
 	}
 
 	/**
-	 * @param isWalkedOn the isWalkedOn to set
+	 * @param isWalkedOn (boolean): the isWalkedOn to set
 	 */
 	public void setIsWalkedOn(boolean isWalkedOn) {
 		this.isWalkedOn = isWalkedOn;
@@ -80,5 +57,33 @@ public class AutomaticallyCollectableAreaEntity extends CollectableAreaEntity {
 	public int getPoints() {
 		return 0;
 	}
+	
+	/// implements Interactable
 
+	@Override
+	public List<DiscreteCoordinates> getCurrentCells() {
+		return Collections.singletonList(getCurrentMainCellCoordinates());
+	}
+
+	@Override
+	public void acceptInteraction(AreaInteractionVisitor v) {
+		((SuperPacmanInteractionVisitor)v).interactWith(this);
+	}
+
+	@Override
+	public boolean takeCellSpace() {
+		return false;
+	}
+
+	@Override
+	public boolean isViewInteractable() {
+		return false;
+	}
+
+	/// implements Graphics
+
+	@Override
+	public void draw(Canvas canvas) {
+		
+	}
 }

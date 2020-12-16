@@ -28,10 +28,9 @@ public class Level0 extends SuperPacmanArea {
 		return PLAYER_SPAWN_POSITION;
 	}
     
-    /**
-     * Registers the specific entities present in the area.
-     */
-	protected void createArea() {
+   
+	@Override
+    protected void createArea() {
 		
     	super.createArea();
     	

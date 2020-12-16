@@ -20,14 +20,26 @@ public interface SuperPacmanInteractionVisitor extends RPGInteractionVisitor {
         // by default the interaction is empty
     }
     
+    /**
+     * Simulate an interaction between RPG Interactor and an AutomaticallyCollectableAreaEntity
+     * @param collectable (AutomaticallyCollectableAreaEntity), not null
+     */
     default void interactWith(AutomaticallyCollectableAreaEntity collectable){
         // by default the interaction is empty
     }
     
+    /**
+     * Simulate an interaction between RPG Interactor and a Bonus
+     * @param bonus (Bonus), not null
+     */
     default void interactWith(Bonus bonus){
     	// by default the interaction is empty
     }    
 
+    /**
+     * Simulate an interaction between RPG Interactor and a Ghost
+     * @param ghost (Ghost), not null
+     */
     default void interactWith(Ghost ghost){
         // by default the interaction is empty
     }
