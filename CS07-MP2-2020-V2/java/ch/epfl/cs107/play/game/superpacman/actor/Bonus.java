@@ -21,11 +21,16 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class Bonus extends AutomaticallyCollectableAreaEntity{
 	
+	/// Animation duration in frame number
     private final static int ANIMATION_DURATION = 6;
-    private final static int BONUS_TIMER = 100;
+    /// Timer for which the SuperPacmanPlayer will be invulnerable if it collects a bonus
+    private final static float BONUS_TIMER = 10;
     private Sprite[] sprites;
-	Animation animation;
+	private Animation animation;
 	
+	/**
+	 * Constructor for Bonus
+	 */
 	public Bonus(Area area,DiscreteCoordinates position) {
 		super(area,Orientation.DOWN,position);
 		sprites = RPGSprite.extractSprites("superpacman/coin", 4, 1, 1,this , 16, 16);
@@ -35,14 +40,12 @@ public class Bonus extends AutomaticallyCollectableAreaEntity{
 		}
 	}
 	
-
 	/**
 	 * @return the bonusTimer
 	 */
-	public static int getBonusTimer() {
+	public static float getBonusTimer() {
 		return BONUS_TIMER;
 	}
-	
 	
 	/// Bonus extends Entity
 	
@@ -57,14 +60,10 @@ public class Bonus extends AutomaticallyCollectableAreaEntity{
 		animation.draw(canvas);
 	}
 
-
 	/// Bonus implements Interactable
 	
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
 		((SuperPacmanInteractionVisitor)v).interactWith(this);
 	}
-	
-
-
 }

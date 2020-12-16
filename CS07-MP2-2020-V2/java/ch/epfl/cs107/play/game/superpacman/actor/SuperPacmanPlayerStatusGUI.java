@@ -13,10 +13,16 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class SuperPacmanPlayerStatusGUI implements Graphics{
 	
+	/// Depth of the image 
 	private final float DEPTH = 1.f;
 	private int score;
 	private int hp;
 	
+	/**
+	 * Constructor for the SuperPacmanPlayer's status
+	 * @param score (int) : The SuperPacmanPlayer's score. 
+	 * @param hp (int) : The SuperPacmanPlayer's points of life.
+	 */
 	public SuperPacmanPlayerStatusGUI(int score, int hp) {
 		this.score = score;
 		this.hp = hp;
@@ -43,7 +49,6 @@ public class SuperPacmanPlayerStatusGUI implements Graphics{
 	@Override
 	public void draw(Canvas canvas) {
 		
-		
 		float width = canvas.getScaledWidth();
 		float height = canvas.getScaledHeight();
 		Vector anchor = canvas.getTransform().getOrigin().sub(new Vector(width/2, height/2));
@@ -56,7 +61,6 @@ public class SuperPacmanPlayerStatusGUI implements Graphics{
 		TextGraphics scoreText = new TextGraphics("SCORE: "+Integer.toString(score), 1.1f, Color.YELLOW, Color.BLACK, 0.05f, true, false, anchor.add(new Vector(8f, height- 1.375f))); 
 		scoreText.draw(canvas);
 
-		
 	}
 	
 	private ImageGraphics[] getHpGraphic(Vector anchor, float height) {
@@ -68,10 +72,8 @@ public class SuperPacmanPlayerStatusGUI implements Graphics{
 			if(i<hp) j = 0;
 			else j = 64;
 			hpGraphic[i] = new ImageGraphics(ResourcePath.getSprite("superpacman/lifeDisplay"),1, 1, new RegionOfInterest(j, 0, 64, 64),anchor.add(new Vector(i+1, height - 1.375f)), 1, DEPTH);
-			
 		}
 		
 		return hpGraphic;
 	}
-
 }

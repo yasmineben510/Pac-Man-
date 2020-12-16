@@ -22,27 +22,35 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	
-	GhostHandler handler = new GhostHandler();
-	
-	
 	private final int GHOST_SCORE = 500;  
 	private final int ANIMATION_DURATION_GHOST = 18;
 	private final int RADIUS = 5;
+	
 	private Sprite[][] sprites;
 	private Animation[] animations;
 	private Animation currentAnimation;
 	private Sprite[] spriteAfraid;
 	private Animation animationAfraid;
-	
+	private GhostHandler handler;
 	private DiscreteCoordinates shelter;
 	private SuperPacmanPlayer SuperPacman;
 	private boolean isAfraid;
+	///The timer is common to every ghost. If begun, all the ghosts must be scared, if finished, they come back to their normal state.
 	private static float timer;
 	private boolean isStateChanged;
+	
+	/**
+	 * Constructor of Ghost
+	 * @param area (Area): Owner area. Not null
+     * @param position (DiscreteCoordinates): Initial position of the entity. Not null
+	 * @param shelter (DiscreteCoordinates) : Ghost's shelter. Not null.
+	 * @param spriteName (String) : Ghost's name.
+	 */
 
 	public Ghost(Area area, DiscreteCoordinates position, DiscreteCoordinates shelter, String spriteName) {
 		super(area, Orientation.LEFT, position);
 		
+		handler = new GhostHandler();
 		SuperPacman=null;
 		isAfraid=false;
 		isStateChanged= false;
@@ -59,39 +67,57 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
     }
 
 	
-	
-	public static void setTimer(int bonusTimer){   
-	    timer=bonusTimer;
+	/**
+	 * sets the timer
+	 * @param (float) bonusTimer : the new value of the timer
+	 */
+	public static void setTimer(float bonusTimer){   
+	    timer = bonusTimer;
 	}
 	
+	/**
+	 * @return the timer 
+	 */
 	public static float getTimer() {
 		return timer;
 	}
 
 	/**
-	 * @return the gHOST_SCORE
+	 * @return the GHOST_SCORE
 	 */
 	protected int getGHOST_SCORE() {
 		return GHOST_SCORE;
 	}
 	
-	
+	/**
+	 * @return the ghost's shelter
+	 */
 	protected DiscreteCoordinates getShelter() {
 		return shelter;
 	}
-
+	
+	/**
+	 * @return the SuperPacmanPlayer, may be null
+	 */
 	protected SuperPacmanPlayer getSuperPacman() {
 		return SuperPacman;
 	}
 
+	/**
+	 * sets the SuperPacmanPlayer
+	 * @param (SuperPacmanPlayer) superPacman : initialized once it is seen, null if forgotten
+	 */
 	protected void setSuperPacman(SuperPacmanPlayer superPacman) {
 		if(superPacman != this.SuperPacman) {
 			isStateChanged = true;
 		}
 		this.SuperPacman = superPacman;
-		
 	}
 
+	/**
+	 * sets the ghost's state 
+	 * @param (boolean) afraid : true if SuperPacmanPlayer is invulnerable, false if not
+	 */
 	public void setIsAfraid(boolean afraid) {
 		if(isAfraid != afraid) {
 			isStateChanged = true;
@@ -100,37 +126,46 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 		System.out.println(isStateChanged);
 	}
 	
+	/**
+	 * @return (boolean) true if the ghost is afraid, false if not
+	 */
 	protected boolean isAfraid() {
 		return isAfraid;
 	}
 	
+	/**
+	 * @return (boolean) true, if the ghost's state has changed, false if not
+	 */
 	protected boolean isStateChanged() {
 		return isStateChanged;
 	}
 
-	
-	// setter maybe not necessary check later
+	/**
+	 * Sets the ghost's state
+	 * @param (boolean) isStateChanged : true if the state has changed, false if not 
+	 */
 	protected void setStateChanged(boolean isStateChanged) {
 		this.isStateChanged = isStateChanged;
 	}
 	
+	/**
+	 * @return (int) the ghost's animation duration
+	 */
 	protected int getAnimationDurationGhost() {
-		return  ANIMATION_DURATION_GHOST;
+		return ANIMATION_DURATION_GHOST;
 	}
 	
-	
-	
-
 	/**
-	 * note: needs to be override
 	 * @return the next orientation of the ghost
 	 */
-	protected  Orientation getNextOrientation() {
+	protected Orientation getNextOrientation() {
 		int randomInt = RandomGenerator.getInstance().nextInt(4);
 		return Orientation.fromInt(randomInt);
-		
 	}
 	
+	/**
+	 * Unregister the ghost from his current position and register him back to his shelter
+	 */
 	public void resetGhostPosition() {
 		isStateChanged=true;
 		getOwnerArea().leaveAreaCells(this , getEnteredCells());
@@ -139,7 +174,9 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 		resetMotion();
 	}
 	
-	
+	/**
+	 * Reset the ghost's position and forgets the SuperPacmanPlayer
+	 */
 	protected void isEaten() {
 		resetGhostPosition();
 		setSuperPacman(null);
@@ -147,8 +184,6 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	
 	/// implements Interactable
 	
-
-
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
 		return Collections.singletonList(getCurrentMainCellCoordinates());
@@ -172,7 +207,6 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
 		((SuperPacmanInteractionVisitor)v).interactWith(this);
-		
 	}
 
 	/// extends Entity
@@ -180,13 +214,10 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	@Override
 	public void update(float deltaTime) {
 		
-
-		
 		if(isAfraid) {
 			timer -= deltaTime;
 			currentAnimation = animationAfraid;
 		} 
-		
 		
 		  if(!isAfraid) {
 			if(getOrientation().equals(Orientation.LEFT)) {
@@ -206,7 +237,6 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	    if(isDisplacementOccurs()) {
 			currentAnimation.update(deltaTime);
 	    }
-		
 		else {
 			 resetMotion();
 		     currentAnimation.reset();
@@ -252,17 +282,12 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 		other.acceptInteraction(handler);
 	}
 
+	/**
+	 * The ghost remembers the SuperPacmanPlayer if he sees him.
+	 */
 	private class GhostHandler implements SuperPacmanInteractionVisitor {
 		 public void interactWith(SuperPacmanPlayer player){
-			 //for (DiscreteCoordinates viewCells : getFieldOfViewCells()) {
-				// for(DiscreteCoordinates playerCells : player.getCurrentCells()) {
-				//	 if(playerCells.equals(viewCells)) {
 						 setSuperPacman(player);
-				//	 }
-				 //}
-			 //}
-
 		 }
 	}
 }
-

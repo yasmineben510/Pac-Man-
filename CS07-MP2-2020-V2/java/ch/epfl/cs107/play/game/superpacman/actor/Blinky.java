@@ -10,6 +10,9 @@ import ch.epfl.cs107.play.math.RandomGenerator;
 
 public class Blinky extends Ghost {
 
+	/**
+	 * Constructor of Blinky
+	 */
 	public Blinky(Area area, DiscreteCoordinates position, DiscreteCoordinates shelter) {
 		super(area, position, shelter, "superpacman/ghost.blinky");
 	}
@@ -26,8 +29,6 @@ public class Blinky extends Ghost {
 			    } 
             move(getAnimationDurationGhost());
 		}
-		
 		super.update(deltaTime);
 	}
-
 }

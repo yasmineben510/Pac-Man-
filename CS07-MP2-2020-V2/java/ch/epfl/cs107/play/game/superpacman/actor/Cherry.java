@@ -19,9 +19,14 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class Cherry extends AutomaticallyCollectableAreaEntity{
 	
+	///Points added if a Cherry is collected
 	private final int POINTS = 200;
-    Sprite sprite;
 	
+    private Sprite sprite;
+	
+    /**
+     * Constructor for Cherry
+     */
 	public Cherry(Area area, DiscreteCoordinates position) {
 		super(area,Orientation.DOWN,position);
 		sprite = new Sprite("superpacman/cherry", 1,1, this);

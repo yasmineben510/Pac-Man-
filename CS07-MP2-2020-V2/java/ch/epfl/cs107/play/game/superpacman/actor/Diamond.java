@@ -17,10 +17,14 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class Diamond extends AutomaticallyCollectableAreaEntity{
 	
+	///Points added if collected
 	final int POINTS = 10;
 	
-    Sprite sprite;
+    private Sprite sprite;
 	
+    /**
+     * Constructor for Diamond
+     */
 	public Diamond(Area area, DiscreteCoordinates position) {
 		super(area,Orientation.DOWN,position);
 		sprite = new Sprite("superpacman/diamond", 1,1, this);
@@ -36,5 +40,4 @@ public class Diamond extends AutomaticallyCollectableAreaEntity{
 	public int getPoints() {
 		return POINTS;
 	}
-
 }

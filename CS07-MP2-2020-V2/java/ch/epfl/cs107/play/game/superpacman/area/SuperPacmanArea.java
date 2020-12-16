@@ -28,12 +28,18 @@ public abstract class SuperPacmanArea extends Area implements Logic{
 		behavior.setAreaGraphSignal(coordinates,signal);
 	}
 	
-	
+	/**
+	 * frighten all the ghosts
+	 * calls the method frightenGhosts() in SuperPacmanBehavior
+	 */
 	public void frightenGhosts(){
 		behavior.frightenGhosts();
 	}
 	
-	
+	/**
+	 * reset all the ghosts's position
+	 * calls the method resetAllGhostsPosition() in SuperPacmanBehavior
+	 */
 	public void resetAllGhostsPosition() {
 		behavior.resetAllGhostsPosition();
 	}
@@ -52,16 +58,19 @@ public abstract class SuperPacmanArea extends Area implements Logic{
 		return collected;
 	}
 	 
-	 
 	 /**
      * Create the area by adding it all actors
      * called by begin method
-     * Note it set the Behavior as needed !
+     * Note : it set the Behavior as needed !
      */
     protected void createArea() {
     	behavior.registerActors(this);
     }
     
+    /**
+     * calls the method getGraph in SuperPacmanBehavior
+     * @return the graph corresponding to the area
+	 */
 	public AreaGraph getGraph() {
 		return behavior.getGraph();
 	}

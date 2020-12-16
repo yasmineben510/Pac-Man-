@@ -15,33 +15,38 @@ import ch.epfl.cs107.play.signal.logic.Logic;
 
 public class Level1 extends SuperPacmanArea {
 	
-	private DiscreteCoordinates PLAYER_SPAWN_POSITION = new DiscreteCoordinates(15, 6);
-	
 	/// SuperPacman's initial position
-	
+	private DiscreteCoordinates PLAYER_SPAWN_POSITION = new DiscreteCoordinates(15, 6);
 	
 	@Override
 	public DiscreteCoordinates getPlayerSpawnPosition() {
 		return PLAYER_SPAWN_POSITION;
 	}
 
+	/**
+	 * @return (String) name of the area.
+	 */
 	public String getTitle() {
 		return "superpacman/Level1";
 	}
 
+	/**
+     * Registers the specific entities present in the area.
+     */
 	protected void createArea() {
+		
     	super.createArea();
+    	
     	DiscreteCoordinates position = new DiscreteCoordinates(14,0);
     	DiscreteCoordinates otherCells = new DiscreteCoordinates(15,0);
     	DiscreteCoordinates pos = new DiscreteCoordinates(15,29);
+    	
     	Door door = new Door("superpacman/Level2",pos,Logic.TRUE,this,Orientation.DOWN,position,otherCells);
     	registerActor(door);
 
     	registerActor(new Gate(this,Orientation.RIGHT,new DiscreteCoordinates(14, 3),this));
+    	
     	registerActor(new Gate(this,Orientation.RIGHT,new DiscreteCoordinates(15, 3),this));
     	
 	}
-	
-
-
 }

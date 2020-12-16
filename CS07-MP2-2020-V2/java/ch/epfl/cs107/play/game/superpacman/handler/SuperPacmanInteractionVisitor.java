@@ -13,7 +13,7 @@ public interface SuperPacmanInteractionVisitor extends RPGInteractionVisitor {
 
 	
     /**
-     * Simulate and interaction between RPG Interactor and a SuperPacmanPlayer
+     * Simulate an interaction between RPG Interactor and a SuperPacmanPlayer
      * @param player (SuperPacmanPlayer), not null
      */
     default void interactWith(SuperPacmanPlayer player){

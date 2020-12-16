@@ -10,25 +10,29 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 public class Pinky extends SuperGhost {
 	
+	/// Minimum Distance that must be between pinky and the SuperPacmanPlayer.
     private final static int MIN_AFRAID_DISTANCE =5;
+    /// Maximum attempts allowed to find a random path.
     private final static int MAX_RANDOM_ATTEMPT =200;
     
 
+    /**
+     * Constructor for Pinky
+     */
 	public Pinky(Area area, DiscreteCoordinates position, DiscreteCoordinates shelter) {
 		super(area, position, shelter, "superpacman/ghost.pinky");
 	}
 	
-	
 	@Override
 	protected void generatePath() {
 		
-		
-		// ne connait pas player (effraye ou pas)
+		/// generates a random path if pinky doesn't know the SuperPacmanPlayer.
 		if(getSuperPacman()==null ) {
 			super.generatePath();
 		}
-		
-		// effraye et connait player
+		/// generates a random path if pinky is afraid and knows the SuperPacmanPlayer. 
+		/// The path can not be generated if the maximum attempts allowed to find it is surpassed.
+		/// The path has to be further than MIN_AFRAID_DISTANCE from the SuperPacmanPlayer.
 		if(isAfraid() && getSuperPacman()!=null ) {
 			int attempts = 0; 
 			do {
@@ -38,5 +42,4 @@ public class Pinky extends SuperGhost {
 			    while(DiscreteCoordinates.distanceBetween(getSuperPacman().getCurrentCells().get(0), getTargetPos())<MIN_AFRAID_DISTANCE && attempts<MAX_RANDOM_ATTEMPT);
 		    }
 	}
-	
 }

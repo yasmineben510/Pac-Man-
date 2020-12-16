@@ -13,20 +13,26 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 public class Level2 extends SuperPacmanArea {
 	
-	private final DiscreteCoordinates PLAYER_SPAWN_POSITION = new DiscreteCoordinates(15, 29);
 	/// SuperPacman's initial position
-	
+	private final DiscreteCoordinates PLAYER_SPAWN_POSITION = new DiscreteCoordinates(15, 29);	
 	
 	@Override
 	public DiscreteCoordinates getPlayerSpawnPosition() {
 		return PLAYER_SPAWN_POSITION;
 	}
 	
+	/**
+	 * @return (String) name of the area.
+	 */
 	public String getTitle() {
 		return "superpacman/Level2";
 	}
 	
+	/**
+     * Registers the specific entities present in the area.
+     */
     protected void createArea() {
+    	
     	super.createArea();
     	
     	Key key1 = new Key(this,new DiscreteCoordinates(3,16));
@@ -40,13 +46,15 @@ public class Level2 extends SuperPacmanArea {
     	registerActor(key4);
     	
     	createGates(key1,key2,key3,key4);
-
-    	
 	}
     
-    
+    /**
+     * create gates for the area.
+     */
     private void createGates(Key key1, Key key2, Key key3, Key key4) {
+    	
 		List<Gate> gates = new ArrayList<Gate>();
+		
 		gates.add(new Gate(this,Orientation.RIGHT,new DiscreteCoordinates(8, 14),key1));
 		gates.add(new Gate(this,Orientation.DOWN,new DiscreteCoordinates(5, 12),key1));
 		gates.add(new Gate(this,Orientation.RIGHT,new DiscreteCoordinates(8, 10),key1));
@@ -65,7 +73,5 @@ public class Level2 extends SuperPacmanArea {
 		for (int i=0; i< gates.size(); ++i) {
 	    	registerActor(gates.get(i));
 		}
-
 	}
-
 }

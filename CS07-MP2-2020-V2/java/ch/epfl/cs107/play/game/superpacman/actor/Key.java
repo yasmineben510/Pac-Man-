@@ -17,8 +17,11 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class Key extends AutomaticallyCollectableAreaEntity implements Logic{
 	
-	Sprite sprite;
+	private Sprite sprite;
 
+	/**
+	 * Constructor for Key
+	 */
 	public Key(Area area, DiscreteCoordinates position) {
 		super(area, Orientation.DOWN, position);
 		sprite = new Sprite("superpacman/key", 1,1, this);
@@ -54,5 +57,4 @@ public class Key extends AutomaticallyCollectableAreaEntity implements Logic{
 		}
 		else return 0;
 	}
-
 }

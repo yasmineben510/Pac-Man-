@@ -13,13 +13,22 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class AutomaticallyCollectableAreaEntity extends CollectableAreaEntity {
 
-	private boolean isWalkedOn = false;
+	private boolean isWalkedOn;
 	
-	
+	/**
+     * AutomaticallyCollectableAreaEntity constructor
+     * @param area (Area): Owner area. Not null
+     * @param orientation (Orientation): Initial orientation of the entity in the Area. Not null
+     * @param position (DiscreteCoordinate): Initial position of the entity in the Area. Not null
+     */
 	public AutomaticallyCollectableAreaEntity(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
+		isWalkedOn = false;
 	}
 	
+	/**
+	 * Simulates that the CollectableAreaEntity is collected
+	 */
 	public void collect() {
 		this.getOwnerArea().unregisterActor(this);
 		this.setIsCollected(true);
@@ -65,7 +74,7 @@ public class AutomaticallyCollectableAreaEntity extends CollectableAreaEntity {
 	}
 
 	/**
-	 * returns the score value of the collectable entity
+	 * returns the score value of the collectible entity
 	 * Note: needs to be override
 	 */
 	public int getPoints() {

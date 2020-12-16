@@ -29,12 +29,10 @@ import ch.epfl.cs107.play.window.Window;
 
 public class SuperPacmanBehavior extends AreaBehavior{
 	
-	
 	private List<Diamond> diamonds = new ArrayList<Diamond>();
 	private List<Ghost> ghosts = new ArrayList<Ghost>();
 	private SuperPacmanCell cell;
 	private AreaGraph graph;
-
 	
 	
 	/**
@@ -54,6 +52,9 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		createNodes();
 	}
 	
+	/**
+	 * Create nodes whenever the cell type is not a wall.
+	 */
 	private void createNodes() {
 		boolean[] edges;
 		for (int x = 0; x<getWidth(); ++x) {
@@ -67,8 +68,16 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		}
 	}
 	
+	/**
+	 * Indicate if the surroundings of the current cell contain an actor of the type WALL.
+	 * @param (int) x : x-coordinate of the cell.
+	 * @param (int) y : y-coordinate of the cell.
+	 * @return (boolean[]): case true if the cell doesn't contain an actor of type WALL, false if not.
+	 */
 	 private boolean[] getEdges(int x, int y) {
+		 
 			boolean [] edges = new boolean[4];
+			
 			if(!getCellType(x-1,y).equals(SuperPacmanCellType.WALL)) {
 				edges[0]=true;
 			}
@@ -84,7 +93,11 @@ public class SuperPacmanBehavior extends AreaBehavior{
 			return edges;
 		}
 	
-	 
+	 /**
+	  * Sets the area graph's signal.
+	  * @param coordinates (DiscreteCoordinates) : the cell's coordinates.
+	  * @param signal (Logic) : state of the signal in the cell.
+	  */
 	 protected void setAreaGraphSignal(DiscreteCoordinates coordinates, Logic signal) {
 		 graph.setSignal(coordinates, signal);
 	 }
@@ -105,19 +118,20 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		FREE_WITH_BONUS (-16478723), //light blue
 		FREE_EMPTY (-6118750); // sort of gray
 		
-		final int type;
+		/// type of the cell
+		private final int TYPE;
 		
 		/**
 		 * Default constructor for the enum type SuperPacmanCellType
 		 * @param type (int) the RGB color of the cell that will be associated to a SuperPacmanCellType
 		 */
 		SuperPacmanCellType(int type){
-			this.type = type;
+			this.TYPE = type;
 		}
 		
 		public static SuperPacmanCellType toType(int type){
 			for(SuperPacmanCellType ict : SuperPacmanCellType.values()){
-				if(ict.type == type)
+				if(ict.TYPE == type)
 				return ict;
 			}
 			return NONE;
@@ -125,8 +139,8 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	}
 	
     /**
-	 * Register an actor depending on the SuperPacmanCell cell's type in the area
-     * @param area (Area) : the area in which the actor will be registered
+	 * Register an actor depending on the SuperPacmanCell cell's type in the area.
+     * @param area (Area) : the area in which the actor will be registered.
      */
 	protected void registerActors(Area area) {
 	
@@ -138,8 +152,8 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	}
 	
 	/**
-	 * Register the ghosts
-	 * @param area
+	 * Register the ghosts in the area.
+	 * @param area (Area) : the current area.
 	 */
 	private void registerGhosts(Area area) {
 		for (int x = 0; x<getWidth(); ++x) {
@@ -167,13 +181,9 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		}	
 	}
 	
-	
-
-	
-	
 	/**
-	 * Register the walls
-	 * @param area
+	 * Register the walls in the area.
+	 * @param area (Area) : the current area.
 	 */
 	private void registerWall (Area area) {
 		boolean[][] neighborhood;
@@ -188,10 +198,9 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		}
 	}
 	
-	
 	/**
-	 * Register the collectable entities
-	 * @param area
+	 * Register the collectible entities.
+	 * @param area (Area) : The current area.
 	 */
 	private void registerCollectable(Area area) {
 		for (int x = 0; x<getWidth(); ++x) {
@@ -213,8 +222,6 @@ public class SuperPacmanBehavior extends AreaBehavior{
 			}
 		}
 	}
-	
-   
 	
 	/**
 	 * Construct the neighborhood of an actor WALL
@@ -270,43 +277,44 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	}
 	
 	
-	
+	/**
+	 * @return (List<Diamond>) all the diamonds registered in the current area.
+	 */
 	protected List<Diamond> getDiamonds() {
 		return diamonds;
 	}
 	
-	
-	
+	/**
+	 * Reset all the ghosts' position.
+	 */
 	public void resetAllGhostsPosition() {
 		for(Ghost ghost : ghosts) {
 			ghost.resetGhostPosition();
 		}
 	}
 	
+	/**
+	 * All the ghosts become afraid when called. Their state goes back to normal if the timer is up.
+	 */
 	public void frightenGhosts() {
 		
 		for(Ghost ghost : ghosts) {
-		    System.out.println("afraid = true");
 			ghost.setIsAfraid(true);
 		}
 		
 		if (Ghost.getTimer()<=0) {
 			for(Ghost ghost : ghosts) {
-			    System.out.println("afraid = false");
 				ghost.setIsAfraid(false);
 			}
 	    }
-		
-		
 	}
-
 	
-
+	/**
+	 * @return the graph corresponding to the area.
+	 */
 	protected AreaGraph getGraph() {
 		return graph;
 	}
-
-
 
 	/**
 	 * Class SuperPacmanCell extends AreaBehavior.Cell
@@ -327,7 +335,6 @@ public class SuperPacmanBehavior extends AreaBehavior{
 			this.type=type;
 		}
         
-
 		@Override
 		public boolean canEnter(Interactable entity) { 
 			return !this.hasNonTraversableContent();
@@ -335,7 +342,6 @@ public class SuperPacmanBehavior extends AreaBehavior{
 
 		@Override
 		public boolean isCellInteractable() {
-			// TODO Auto-generated method stub
 			return false;
 		}
 
@@ -345,25 +351,12 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		}
 
 		@Override
-		public void acceptInteraction(AreaInteractionVisitor v) {
-			// TODO Auto-generated method stub
-			
+		public void acceptInteraction(AreaInteractionVisitor v) {			
 		}
 
 		@Override
 		protected boolean canLeave(Interactable entity) {
 			return true;
 		}
-		
 	}
-
-
-
-
-
-
-
-
-
-	
 }

@@ -20,7 +20,6 @@ public class SimpleGhost extends Entity {
 	     * @param text (String): initial text moving with the ghost
 	     */
 	 public SimpleGhost(Vector position, String spriteName) {
-		 //super(position, new ImageGraphics(ResourcePath.getSprite(spriteName),  1.0f,1.0f, null, Vector.ZERO, 1.0f, -Float.MAX_VALUE));
 		 super(position);
 		 this.hp = 10;
 		 sprite = new Sprite(spriteName, 1.f, 1.f,this);

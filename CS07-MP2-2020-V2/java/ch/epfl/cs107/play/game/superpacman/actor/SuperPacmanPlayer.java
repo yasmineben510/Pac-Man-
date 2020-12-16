@@ -28,12 +28,11 @@ import ch.epfl.cs107.play.window.Keyboard;
 
 public class SuperPacmanPlayer extends Player{
 	
-	private SuperPacmanPlayerHandler handler;
-    private SuperPacmanPlayerStatusGUI statusGUI;
-
-	 
 	/// Animation duration in frame number
     private final static int ANIMATION_DURATION = 6;
+	
+	private SuperPacmanPlayerHandler handler;
+    private SuperPacmanPlayerStatusGUI statusGUI;
     private Orientation desiredOrientation;
     private Animation[] animations;
     private Animation currentAnimation;
@@ -43,8 +42,11 @@ public class SuperPacmanPlayer extends Player{
     private boolean isEaten;
    
 	/**
-	 * Demo actor
-	 * 
+	 * Constructor for SuperPacmanPlayer
+	 * @param owner (area) : Owner area. Not null
+	 * @param orientation (Orientation) : Initial orientation of the entity in the Area. Not null
+	 * @param coordinates (DiscreteCoordinates) : Initial position of the entity in the Area. Not null
+	 * @param spriteName (String) : Sprite's name.
 	 */
 	public SuperPacmanPlayer(Area owner, Orientation orientation, DiscreteCoordinates coordinates, String spriteName) {
 		super(owner, orientation, coordinates);
@@ -65,14 +67,24 @@ public class SuperPacmanPlayer extends Player{
 
 	}
 	
+	/**
+	 * @return (boolean) : true if SuperPacmanPlayer is vulnerable, false if not.
+	 */
 	public boolean isVulnerable() {
 		return isVulnerable;
 	}
-	
+	/**
+	 * sets the boolean isVulnerable to true
+	 */
 	public void resetVulnerable() {
-		isVulnerable=true;
+		isVulnerable = true;
 	}
 
+	/**
+	 * Simulates that SuperPacmanPlayer is eaten.
+	 * SuperPacmanPlayer loses 1 hp.
+	 */
+	
 	private void eatsPlayer() {
 		hp-=1;
 		getOwnerArea().leaveAreaCells(this , getEnteredCells());
@@ -87,14 +99,14 @@ public class SuperPacmanPlayer extends Player{
 	/// extends Entity
 	
 	 /**
-	 * @return the isEaten
+	 * @return (boolean) true if SuperPacmanPlayer is eaten, false is not.
 	 */
 	public boolean isEaten() {
 		return isEaten;
 	}
 
 	/**
-	 * @param isEaten the isEaten to set
+	 * @param (boolean) : true if SuperPacmanPlayer is eaten, false is not.
 	 */
 	public void setEaten(boolean isEaten) {
 		this.isEaten = isEaten;
@@ -226,6 +238,10 @@ public class SuperPacmanPlayer extends Player{
 	         }
 	    }
 	    
+	    /**
+	     * Simulate an interaction between SuperPacmanPlayet and a Bonus
+	     * @param bonus (Bonus) : the Bonus to collect, not null 
+	     */
 	    public void interactWith(Bonus bonus) {
 	    	interactWith((AutomaticallyCollectableAreaEntity)bonus);
 	    	if(bonus.isCollected()) {
