@@ -1,12 +1,11 @@
 package ch.epfl.cs107.play.game.superpacman.handler;
 
-import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
-import ch.epfl.cs107.play.game.areagame.actor.Interactable;
-import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.handler.RPGInteractionVisitor;
 import ch.epfl.cs107.play.game.superpacman.actor.AutomaticallyCollectableAreaEntity;
 import ch.epfl.cs107.play.game.superpacman.actor.Bonus;
+import ch.epfl.cs107.play.game.superpacman.actor.Flake;
 import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
+import ch.epfl.cs107.play.game.superpacman.actor.Heart;
 import ch.epfl.cs107.play.game.superpacman.actor.SuperPacmanPlayer;
 
 public interface SuperPacmanInteractionVisitor extends RPGInteractionVisitor {
@@ -43,5 +42,22 @@ public interface SuperPacmanInteractionVisitor extends RPGInteractionVisitor {
     default void interactWith(Ghost ghost){
         // by default the interaction is empty
     }
+    
+    /**
+     * Simulate an interaction between RPG Interactor and a Heart
+     * @param heart (Heart), not null
+     */
+    default void interactWith(Heart heart) {
+        // by default the interaction is empty
+    }
+    
+    /**
+     * Simulate an interaction between RPG Interactor and a Flake
+     * @param flake (Flake), not null
+     */
+    default void interactWith(Flake flake) {
+        // by default the interaction is empty
+    }
+
 
 }

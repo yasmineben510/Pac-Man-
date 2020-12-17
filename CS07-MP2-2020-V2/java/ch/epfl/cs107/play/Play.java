@@ -1,16 +1,11 @@
 package ch.epfl.cs107.play;
 
-import java.awt.GraphicsEnvironment;
-
-
 import ch.epfl.cs107.play.game.Game;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
-import ch.epfl.cs107.play.game.superpacman.SuperPacman;
-import ch.epfl.cs107.play.game.tutosSolution.Tuto2;
+import ch.epfl.cs107.play.game.superpacman.extSuperPacman;
 import ch.epfl.cs107.play.io.DefaultFileSystem;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.io.ResourceFileSystem;
-import ch.epfl.cs107.play.io.XMLTexts;
 import ch.epfl.cs107.play.recorder.RecordReplayer;
 import ch.epfl.cs107.play.recorder.Recorder;
 import ch.epfl.cs107.play.window.Window;
@@ -36,7 +31,11 @@ public class Play {
         // Create a demo game :
 		// (it is expected that at the beginning, the provided file does not compile)
        
-        final Game game = new SuperPacman();
+        //final Game game = new SuperPacman(); //required version of the game without the new areas
+
+		
+		final Game game = new extSuperPacman(); //extended version of the game with new areas
+
 		
 
 		// Use Swing display

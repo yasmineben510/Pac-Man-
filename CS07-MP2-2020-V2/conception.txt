@@ -1,0 +1,92 @@
+                    *** CONCEPTION ***
+
+1.	Modifications to the provided code
+2.	Added classes and interfaces (includes extension descriptions [Extension])
+3.	Deviations from the project description
+4.	List of all extensions 
+
+
+1. Modifications to the provided code: None.
+
+
+2. Added classes and interfaces:
+
+2a. In ch.epfl.cs107.play.game.superpacman :
+This package contains the game and the next packages documented in the sections 2b, 2c and 2d.
+
+- Classes:
+o SuperPacman extends RPG : the SuperPacman game
+o [Extension] extSuperPacman extends RPG : the extended version of the SuperPacman game containing the new extended areas.
+
+2b. In ch.epfl.cs107.play.game.superpacman.actor :
+
+- Classes:
+
+o SuperPacmanPlayer extends Player : main player of the game SuperPacman. 
+        (Nested class) SuperPacmanHandler implements SuperPacmanInteractionVisitor: Simulate an interaction between an RPG Interactor and a SuperPacmanPlayer
+o AutomaticallyCollectableAreaEntity extends CollectableAreaEntity: is extended by all the actors that the SuperPacmanPlayer can interact with by collecting them.
+o Bonus extends AutomaticallyCollectableAreaEntity: makes the SuperPacmanPlayer invulnerable against the ghosts for a certain time if collected.
+o Cherry extends AutomaticallyCollectableAreaEntity: adds 200 points to the SuperPacmanPlayer if collected.
+o Diamond extends AutomaticallyCollectableAreaEntity: adds 10 points to the SuperPacmanPlayer if collected.
+o Key extends AutomaticallyCollectableAreaEntity: can open a gate if collected.
+o Ghost extends MovableAreaEntity and implements Interactor: Entities that can eat the player.
+        (Nested Class) GhostHandler implements SuperPacmanInteractionVisitor : Simulate and interaction between a ghost and SuperPacmanPlayer
+o Gate extends AreaEntity: locked by default, opens if signal is on.
+o Blinky extends Ghost: ghost moving randomly in the area.
+o SuperGhost extends Ghost: Smart entities that can generate a random path and follow it during the game under multiple conditions. 
+  [Extension] They can track the SuperPacmanPlayer if they’re not scared by creating a new path each time the SuperPacmanPlayer moves.
+o Inky extends SuperGhost: Entity that doesn’t go over a certain distance, that depends of its state, from its shelter.
+o Pinky extends SuperGhost: Entity capable of fleeing the SuperPacmanPlayer when scared.
+o SuperPacmanPlayerStatusGUI implements Graphics: draws and sets the score and points of life of the SuperPacmanPlayer.
+o [Extension]Flake extends AutomaticallyCollectableAreaEntity : freezes the ghosts for a certain time if collected.
+o [Extension]Heart extends AutomaticallyCollectableAreaEntity : adds one point of life if collected.
+
+
+These classes were added to this package because they, either represent RPG entities or they characterize them.
+
+
+2c. In ch.epfl.cs107.play.game.superpacman.area  :
+
+- Classes:
+
+o SuperPacmanBehavior extends AreaBehavior: Characterizes the behavior of an area. This is where the actors are registered depending on the cell type.
+      - (Nested class) SuperPacmanCell extends AreaBehavior.Cell: It’s an instance for the SuperPacmanCellType of the SuperPacmanBehavior.
+      - [Extension] two new types added in the enum type SuperPacmanCellType  : FREE_WITH_FLAKE (-13828220) corresponding to light green and FREE_WITH_HEART(-26368) corresponding to orange.
+o SuperPacmanArea extends Area and implements Logic: abstract class that characterizes an area of the SuperPacman game.
+o Level0 extends SuperPacmanArea: Simple area. One key is needed to pass to the next level. A cherry, a bonus and multiple diamonds are present in the area. Presence of a ghost.
+o Level1 extends SuperPacmanArea: Multiple cherries, bonusses and diamonds present in the area. All the diamonds must be collected to open the gate, and therefore to pass to the next level. Presence of multiple ghosts.
+o Level2 extends SuperPacmanArea: Multiple cherries, bonusses and diamonds present in the area. Multiple gates can be opened either by collecting keys or by collecting all the diamonds. Presence of multiple ghosts. Last level of the game.
+o [Extension] GameOverArea extends SuperPacmanArea: contains the background displayed when the superpacman loses all his life points.
+o [Extension] extLevel0, extLevel1, extLevel2 extend SuperPacmanArea :new areas corresponding to the extended levels of the extended game.
+
+These classes were added in this package because they are either areas of the game or are directly related to an area and defines its behavior. 
+
+2d. In ch.epfl.cs107.play.game.superpacman.handler :
+
+We created this package containing the handlers of the interactions of the actors of the game.
+It had to be on a different package since it couldn’t fit in any of the existing packages.
+
+- Interfaces:
+
+o SuperPacmanInteractionVisitor extends RPGInteractionVisitor : Simulates an interaction between an RPG Interactor and SuperPacmanPlayer. It is implemented by SuperPacmanHandler and GhostHandler.
+
+
+3. Deviations from the project description: 
+- We put the value for which the ghosts are afraid to 30 instead of 10.
+
+
+4.Justifications:
+- In the abstract class SuperPacmanArea, we decided to create a public abstract method getPlayerSpawnPosition because it is a position which is common to all the areas of SuperPacman that could only be initialized in specific areas only. 
+- In all areas, we declared the player spawn position as final because it represents the position where the SuperPacman appears once in the area, therefore its value is not supposed to change.
+- In SuperPacmanPlayer, we declared the points of life hp as static because it is common to all the instances.
+
+5.List of all extensions :
+- Ghosts creating new random path each time the SuperPacmanPlayer moves when he is vulnerable.
+- New Area containing a Background actor displaying when the SuperPacman loses all his points of life.
+- Flake (with its own sprite superpacman/flake)
+- Heart (with its own sprite superpacman/heart)
+- New cellType FREE_WITH_FLAKE 
+- New cellType FREE_WITH_HEART
+- New behaviors extLevel1 (superpacman/extLevel1) and extLevel2 (superpacman/extLevel2) containing the ancient and new CellTypes to automatically create the new actors added (Flake and Heart)
+
+

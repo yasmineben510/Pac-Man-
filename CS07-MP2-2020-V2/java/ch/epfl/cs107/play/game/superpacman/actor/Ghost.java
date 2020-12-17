@@ -1,6 +1,7 @@
 package ch.epfl.cs107.play.game.superpacman.actor;
 
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -14,7 +15,6 @@ import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 
-import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RandomGenerator;
@@ -35,9 +35,11 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	private DiscreteCoordinates shelter;
 	private SuperPacmanPlayer SuperPacman;
 	private boolean isAfraid;
+	private boolean isFrozen;
 	
-	///The timer is common to every ghost. If begun, all the ghosts must be scared, if finished, they come back to their normal state.
+	///The timer (set if a bonus is collected by the player) is common to every ghost. If begun, all the ghosts must be scared, if finished, they come back to their normal state.
 	private static float timer;
+	private static float frozenTimer;
 	private boolean isStateChanged;
 	
 	/**
@@ -124,7 +126,6 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 			isStateChanged = true;
 		}
 		isAfraid = afraid;
-		System.out.println(isStateChanged);
 	}
 	
 	/**
@@ -183,6 +184,43 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 		setSuperPacman(null);
 	}
 	
+	
+	/**
+	 * Getter for the boolean isFrozen
+	 * @return isFrozen (boolean): true if the Ghost is frozen, false if not 
+	 */
+	public boolean isFrozen() {
+		return isFrozen;
+	}
+
+
+	/**
+	 * setter for the boolean isFrozen
+	 * @param isFrozen (boolean): true if the Ghost is frozen, false if not 
+	 */
+	public void setFrozen(boolean isFrozen) {
+		this.isFrozen = isFrozen;
+	}
+
+
+	/**
+	 * Getter for frozenTimer
+	 * @return the frozenTimer
+	 */
+	public static float getFrozenTimer() {
+		return frozenTimer;
+	}
+
+
+	/**
+	 * setter for the frozenTimer
+	 * @param frozenTimer (float): value for the frozenTimer to set
+	 */
+	public static void setFrozenTimer(float frozenTimer) {
+		Ghost.frozenTimer = frozenTimer;
+	}
+
+	
 	/// implements Interactable
 	
 	@Override
@@ -214,6 +252,14 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	
 	@Override
 	public void update(float deltaTime) {
+		
+		if(isFrozen) {
+			frozenTimer-=deltaTime;
+			if(frozenTimer<=0) {
+				setFrozen(false);
+			}
+		}
+		
 		
 		if(isAfraid) {
 			timer -= deltaTime;
@@ -300,7 +346,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor{
 	     * @param player (SuperPacmanPlayer), not null
 	     */
 		public void interactWith(SuperPacmanPlayer player){
-						 setSuperPacman(player);
+		  setSuperPacman(player);
 		 }
 	}
 }

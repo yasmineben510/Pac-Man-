@@ -83,7 +83,7 @@ public abstract class SuperGhost extends Ghost {
 	@Override
 	public void update (float deltaTime) {
 		
-		if (!isDisplacementOccurs()) {
+		if (!isDisplacementOccurs() && !isFrozen()) {
 		
 			nextOrientation = getNextOrientation();  
 			

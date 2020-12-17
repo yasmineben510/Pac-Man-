@@ -1,16 +1,11 @@
 package ch.epfl.cs107.play.game.superpacman.actor;
 
 
-import java.awt.Color;
-
-
 import java.util.Collections;
 import java.util.List;
 
-import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Animation;
-import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
@@ -21,8 +16,6 @@ import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.math.Vector;
-import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
 
@@ -48,7 +41,7 @@ public class SuperPacmanPlayer extends Player{
 	 * @param coordinates (DiscreteCoordinates) : Initial position of the entity in the Area. Not null
 	 * @param spriteName (String) : Sprite's name.
 	 */
-	public SuperPacmanPlayer(Area owner, Orientation orientation, DiscreteCoordinates coordinates, String spriteName) {
+	public SuperPacmanPlayer(Area owner, Orientation orientation, DiscreteCoordinates coordinates) {
 		super(owner, orientation, coordinates);
 		
 		desiredOrientation=orientation;
@@ -64,7 +57,6 @@ public class SuperPacmanPlayer extends Player{
         
         currentAnimation = animations[Orientation.RIGHT.ordinal()];
         
-
 	}
 	
 	/**
@@ -157,6 +149,13 @@ public class SuperPacmanPlayer extends Player{
 	    }
 	    super.update(deltaTime);
 	    }
+	
+	public boolean isWeak() {
+		if (hp<=0) {
+			return true;
+		}
+		else return false;
+	}
 	    
     /// implements Graphics
 	
@@ -270,5 +269,33 @@ public class SuperPacmanPlayer extends Player{
 	    		ghost.isEaten();
 	    	}
 	    }
+	    
+	    
+	    /**
+	     * Simulate an interaction between SuperPacmanPlayer and a Heart
+	     * @param heart (Heart), not null
+	     */
+	    public void interactWith(Heart heart) {
+	    	interactWith((AutomaticallyCollectableAreaEntity)heart);
+
+	    	if(heart.isCollected()) {
+       	    	hp+=1;
+	    	} 
+	    	
+	    }
+	    
+	    /**
+	     * Simulate an interaction between SuperPacmanPlayer and a Flake
+	     * @param flake (Flake), not null
+	     */
+	    public void interactWith(Flake flake) {
+	    	interactWith((AutomaticallyCollectableAreaEntity)flake);
+	    	if(flake.isCollected()) {
+	    		((SuperPacmanArea)getOwnerArea()).frozenGhosts();
+       	    	Ghost.setFrozenTimer(Flake.getFlakeTimer());
+	    	}
+	    	
+	    }
+	    
 	}
 }

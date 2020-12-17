@@ -1,22 +1,15 @@
 package ch.epfl.cs107.play.game.superpacman.actor;
 
-import java.util.Collections;
-import java.util.List;
+
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Animation;
-import ch.epfl.cs107.play.game.areagame.actor.AreaEntity;
-import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
-import ch.epfl.cs107.play.game.rpg.handler.RPGInteractionVisitor;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.math.Positionable;
-import ch.epfl.cs107.play.math.RegionOfInterest;
-import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
 public class Bonus extends AutomaticallyCollectableAreaEntity{
@@ -24,7 +17,7 @@ public class Bonus extends AutomaticallyCollectableAreaEntity{
 	/// Animation duration in frame number
     private final static int ANIMATION_DURATION = 6;
     /// Timer for which the SuperPacmanPlayer will be invulnerable if it collects a bonus
-    private final static float BONUS_TIMER = 10;
+    private final static float BONUS_TIMER = 30;
     private Sprite[] sprites;
 	private Animation animation;
 	

@@ -2,10 +2,9 @@ package ch.epfl.cs107.play.game.superpacman.area;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 
-import ch.epfl.cs107.play.game.areagame.actor.Background;
-import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.superpacman.actor.Gate;
 import ch.epfl.cs107.play.game.superpacman.actor.Key;

@@ -2,10 +2,10 @@ package ch.epfl.cs107.play.game.superpacman.area;
 
 import java.util.List;
 
+
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaGraph;
 import ch.epfl.cs107.play.game.superpacman.actor.Diamond;
-import ch.epfl.cs107.play.game.tutosSolution.Tuto2Behavior;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
@@ -45,6 +45,14 @@ public abstract class SuperPacmanArea extends Area implements Logic{
 	 */
 	public void resetAllGhostsPosition() {
 		behavior.resetAllGhostsPosition();
+	}
+	
+	/**
+	 * freezes all the ghosts
+	 * calls the method frozenGhosts() in SuperPacmanBehavior
+	 */
+	public void frozenGhosts() {
+		behavior.frozenGhosts();
 	}
 	
 	/** 

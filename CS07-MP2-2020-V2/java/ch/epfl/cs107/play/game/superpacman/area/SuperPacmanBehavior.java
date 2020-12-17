@@ -2,6 +2,7 @@ package ch.epfl.cs107.play.game.superpacman.area;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 
 
@@ -10,20 +11,18 @@ import ch.epfl.cs107.play.game.areagame.AreaGraph;
 
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
-import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.superpacman.actor.Blinky;
 import ch.epfl.cs107.play.game.superpacman.actor.Bonus;
 import ch.epfl.cs107.play.game.superpacman.actor.Cherry;
 import ch.epfl.cs107.play.game.superpacman.actor.Diamond;
+import ch.epfl.cs107.play.game.superpacman.actor.Flake;
 import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
+import ch.epfl.cs107.play.game.superpacman.actor.Heart;
 import ch.epfl.cs107.play.game.superpacman.actor.Inky;
-import ch.epfl.cs107.play.game.superpacman.actor.Key;
 import ch.epfl.cs107.play.game.superpacman.actor.Pinky;
 import ch.epfl.cs107.play.game.superpacman.actor.Wall;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.math.Positionable;
-import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Window;
 
@@ -48,6 +47,7 @@ public class SuperPacmanBehavior extends AreaBehavior{
 				cell = new SuperPacmanCell(x,y,SuperPacmanCellType.toType(getRGB(getHeight()-1-y, x)));
 				setCell(x, y, cell);
 			}
+				
 	    }
 		createNodes();
 	}
@@ -117,7 +117,9 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		FREE_WITH_INKY (-16724737),  //cyan
 		FREE_WITH_CHERRY (-36752),  //light red
 		FREE_WITH_BONUS (-16478723), //light blue
-		FREE_EMPTY (-6118750); // sort of gray
+		FREE_EMPTY (-6118750), // sort of gray
+		FREE_WITH_FLAKE(-13828220), // light green
+		FREE_WITH_HEART(-26368); // orange
 		
 		/// type of the cell
 		private final int TYPE;
@@ -147,9 +149,10 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	
 		registerWall(area);
 		
+		registerGhosts(area);
+		
 		registerCollectable(area);
 		
-		registerGhosts(area);
 	}
 	
 	/**
@@ -191,7 +194,16 @@ public class SuperPacmanBehavior extends AreaBehavior{
 		for (int x = 0; x<getWidth(); ++x) {
 			for (int y =0; y<getHeight(); ++y) {
 			  DiscreteCoordinates position = new DiscreteCoordinates(x, y);
-		      if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_BONUS)) {
+			  if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_HEART)) {
+		    	  Heart heart = new Heart(area, position);
+			      area.registerActor(heart);
+			  }
+		      if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_FLAKE)) {
+	    	      Flake flake = new Flake(area, position);
+		          area.registerActor(flake);
+		      }
+			  
+			  if (getCellType(x,y).equals(SuperPacmanCellType.FREE_WITH_BONUS)) {
 				  Bonus bonus = new Bonus(area, position);
 			      area.registerActor(bonus);
 		      }
@@ -203,7 +215,8 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	    	      Diamond diamond = new Diamond(area, position);
 		          area.registerActor(diamond);
 		          diamonds.add(diamond);
-		      }
+		     
+		    }
 			}
 		}
 	}
@@ -312,6 +325,17 @@ public class SuperPacmanBehavior extends AreaBehavior{
 	    }
 	}
 	
+	
+	public void frozenGhosts() {
+		
+		for(Ghost ghost : ghosts) {
+			ghost.setFrozen(true);
+		}
+		
+		
+		
+	}
+	
 	/**
 	 * getter for the AreaGraph
 	 * @return the graph corresponding to the area.
@@ -370,4 +394,6 @@ public class SuperPacmanBehavior extends AreaBehavior{
 
 		
 	}
+
+	
 }
